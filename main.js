@@ -12,7 +12,6 @@ var war = require('war');
 var wartrriger = false;
 
 module.exports.loop = function () {
-    console.log(11111);
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];                           //内存清理
