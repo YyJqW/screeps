@@ -2,7 +2,6 @@ var CS = require('container sort');
 var roleTransport ={
     run :function(creep){
         var check=0;
-        var C = true;
         var busy = false;
         var tower = new Array();
         tower = creep.room.find(FIND_MY_STRUCTURES,{
@@ -20,7 +19,7 @@ var roleTransport ={
         mine_c.sort((a,b) => b.store.getUsedCapacity() - a.store.getUsedCapacity());
         if(creep.store.getUsedCapacity() == 0)//收集
         {
-            if (mine_c[0].store.getUsedCapacity()>600&&C)
+            if (mine_c[0].store.getUsedCapacity()>600)
             {
                 check=0;
                 for (var name in mine_c)
