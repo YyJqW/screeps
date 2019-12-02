@@ -29,7 +29,7 @@ var roleTransport ={
                 {
                 if (creep != transporter[name_])
                 {
-                if (transporter[name_].memory.target == mine_c[name].id) {check++; busy=true;break}
+                if (transporter[name_].memory.target == mine_c[name].id&&check<mine_c.length-1) {check++; busy=true;break}
                 else busy=false;
                 }
                 }
@@ -51,7 +51,7 @@ var roleTransport ={
                 {
                 if (creep != transporter[name_])
                 {
-                if (transporter[name_].memory.target == m_c[name].id) {check++; busy=true;break}
+                if (transporter[name_].memory.target == m_c[name].id&&check<m_c.length-1) {check++; busy=true;break}
                 else busy=false;
                 }
                 }
