@@ -1,4 +1,4 @@
-var towers = ['5dce10c0080252ca761c99b2','5dcb80c9b272c27f9ad4889f','5dd0be2aa851cf478471b88b','5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544s'];
+var towers = ['5dce10c0080252ca761c99b2','5dcb80c9b272c27f9ad4889f','5dd0be2aa851cf478471b88b','5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544'];
 var roleRepair = require('role.Repair');
 var TC ={
     run :function()
