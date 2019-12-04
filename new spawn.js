@@ -2,7 +2,7 @@ var CS = require('container sort');
 var Harnum = 0;
 var Transnum = 0;
 var Upnum = 3;
-var buildnum = 0;
+var buildnum = 1;
 var Transnum_i = 1;
 var NS = {
     run: function (spawn) {
@@ -44,7 +44,7 @@ var NS = {
     else if (upers.length < Upnum) {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
-               spawn.spawnCreep([MOVE,CARRY,WORK,WORK,CARRY,CARRY,WORK,WORK], newName, {
+               spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,CARRY,WORK,WORK,CARRY,CARRY,WORK,WORK,WORK], newName, {
                    memory: {
                        role: 'up',home:spawn
                    }
