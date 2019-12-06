@@ -5,6 +5,7 @@ var roleClaim =
     {
         var m_c = new Array();
         CS.run('miner_o',m_c);
+        console.log(m_c);
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
 for (var name in claimer)
         {
