@@ -8,12 +8,12 @@ var Minernum = 1;
 var CAG = {
     run: function (spawn) {
         var mineral = spawn.room.find(FIND_MINERALS);
-        var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine'&&creep.memory.home.name==spawn.name);
+        var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine'&&creep.memory.home.room.name==spawn.room.name);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
-        var upers = _.filter(Game.creeps, (creep) => creep.memory.role == 'up'&&creep.memory.home.name==spawn.name);
+        var upers = _.filter(Game.creeps, (creep) => creep.memory.role == 'up'&&creep.memory.home.room.name==spawn.room.name);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'build');
-        var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.name==spawn.name);
+        var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.room.name==spawn.room.name);
         var s_c = new Array();
         CS.run('storage',s_c);
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
