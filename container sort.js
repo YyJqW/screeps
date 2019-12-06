@@ -13,7 +13,7 @@ var CS=
                 array[name]=Game.getObjectById(miner_container[name]);
             }
         }
-        f (KOC=='miner_o')
+        if (KOC=='miner_o')
         {
             for (var name in miner_container_o)
             {

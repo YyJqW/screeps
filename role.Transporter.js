@@ -18,7 +18,7 @@ var roleTransport ={
         CS.run('miner_o',m_c_o);
         for (var name in m_c_o)
         {
-            push(m_c,m_c_o[name]);
+            m_c.push(m_c_o[name]);
         }
         var dropped_source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
