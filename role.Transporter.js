@@ -14,6 +14,12 @@ var roleTransport ={
         CS.run('storage',s_c);
         var mine_c=new Array();
         CS.run('mineral',mine_c);
+        var m_c_o=new Array();
+        CS.run('miner_o',m_c_o);
+        for (var name in m_c_o)
+        {
+            push(m_c,m_c_o[name]);
+        }
         var dropped_source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         mine_c.sort((a,b) => b.store.getUsedCapacity() - a.store.getUsedCapacity());

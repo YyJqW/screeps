@@ -1,19 +1,23 @@
 var CS = require('container sort');
 var Harnum = 4;
-var Transnum = 4;
+var Transnum = 5;
 var Upnum = 1;
 var buildnum = 2;
 var Transnum_i = 1;
 var Minernum = 1;
+var Harnum_o =1 ;
+var claimernum = 1;
 var CAG = {
     run: function (spawn) {
         var mineral = spawn.room.find(FIND_MINERALS);
         var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine'&&creep.memory.home.room.name==spawn.room.name);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
+        var harvesters_o = _.filter(Game.creeps, (creep) => creep.memory.role == 'O_Har');
         var upers = _.filter(Game.creeps, (creep) => creep.memory.role == 'up'&&creep.memory.home.room.name==spawn.room.name);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'build');
         var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.room.name==spawn.room.name);
+        var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
         var s_c = new Array();
         CS.run('storage',s_c);
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
@@ -81,8 +85,22 @@ var CAG = {
        }
        }
     }
-
-
+    if (harvesters_o.length < Harnum_o){
+        var newName = 'Harvester_o' + spawn.name + Game.time;
+        spawn.spawnCreep([MOVE,MOVE,CARRY,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK], newName, {
+            memory: {
+                role: 'O_Har',home:spawn
+            }
+        });
+    } //自动生成矿工
+    else if (claimer.length < claimernum){
+        var newName = 'claimer' + spawn.name + Game.time;
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,CLAIM], newName, {
+            memory: {
+                role: 'claim',home:spawn
+            }
+        });
+    } //自动生成矿工
         if (spawn.spawning) {
             var spawningCreep = Game.creeps[spawn.spawning.name]; //孵化场工作显示
             spawn.room.visual.text(

@@ -3,6 +3,8 @@ var roleBuild = require('role.Build');
 var roleUp = require('role.Up');
 var roleTransport = require('role.Transporter');
 var roleMine = require('role.Mine');
+var roleOHar = require('role.Outmainer')
+var roleClaim = require('role.Claimer');
 var CAG = require('creep auto generation');
 var TC = require('tower control');
 var LK = require('link control');
@@ -57,6 +59,14 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'build') {
             roleBuild.run(creep);
+        }
+        if(creep.memory.role == 'O_Har')
+        {
+            roleOHar.run(creep);
+        }
+        if (creep.memory.role == 'claim')
+        {
+            roleClaim.run(creep);
         }
     }
     console.log('running');
