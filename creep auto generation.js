@@ -42,7 +42,8 @@ var CAG = {
         else if (transporter.length < Transnum) {
             var newName = 'trans' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter: ' + newName);
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,], newName, {
                 memory: {
                     role: 'transport',home:spawn
                 }
@@ -95,7 +96,7 @@ var CAG = {
     } //自动生成矿工
     else if (claimer.length < claimernum){
         var newName = 'claimer' + spawn.name + Game.time;
-        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM], newName, {
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM,CLAIM,CLAIM], newName, {
             memory: {
                 role: 'claim',home:spawn
             }
