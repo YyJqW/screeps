@@ -1,12 +1,13 @@
 var CS = require('container sort');
 var Harnum = 4;
-var Transnum = 5;
+var Transnum = 4;
 var Upnum = 1;
 var buildnum = 2;
 var Transnum_i = 1;
 var Minernum = 1;
 var Harnum_o =1 ;
 var claimernum = 1;
+var Transnumo = 1;
 var CAG = {
     run: function (spawn) {
         var mineral = spawn.room.find(FIND_MINERALS);
@@ -42,14 +43,25 @@ var CAG = {
         else if (transporter.length < Transnum) {
             var newName = 'trans' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter: ' + newName);
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
-            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,], newName, {
+            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
                 memory: {
                     role: 'transport',home:spawn
                 }
             });//900
          //自动生成搬运工人
     }
+    else if (transporter_o.length < Transnumo) {
+        var newName = 'trans_o' + '['+spawn.name +']'+ Game.time;
+        console.log('Spawning new transporter: ' + newName);
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+        CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+            memory: {
+                role: 'transport',home:spawn
+            }
+        });//900
+     //自动生成搬运工人
+}
         else if (miner.length < Minernum&&mineral[0].mineralAmount>0) {
             var newName = 'Miner' + spawn.name + Game.time;
             spawn.spawnCreep([CARRY,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK], newName, {

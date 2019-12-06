@@ -9,6 +9,7 @@ var CAG = require('creep auto generation');
 var TC = require('tower control');
 var LK = require('link control');
 var roleTransport_i = require('role.transport_i');
+var roleTransport_o = require('role.transport_o');
 var NS = require('new spawn');
 var war = require('war');
 var wartrriger = false;
@@ -64,6 +65,9 @@ module.exports.loop = function () {
         {
             roleOHar.run(creep);
         }
+        if(creep.memory.role == 'transport_o') {
+            roleTransport_o.run(creep);
+         }
         if (creep.memory.role == 'claim')
         {
             roleClaim.run(creep);
