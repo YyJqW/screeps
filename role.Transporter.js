@@ -85,7 +85,7 @@ var roleTransport ={
         {
             for (var name in s_c)
             {
-                if(s_c[name].room.name==creep.room.name&&s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
+                if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
                 creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
                 break;
