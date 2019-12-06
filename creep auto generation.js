@@ -21,7 +21,7 @@ var CAG = {
         var s_c = new Array();
         CS.run('storage',s_c);
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
-        ' M=',miner.length);
+        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length);
         if (transporter_i.length < Transnum_i){
                 var newName = 'trans_i' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter_i: ' + newName);

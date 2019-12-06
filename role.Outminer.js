@@ -37,7 +37,7 @@ var roleOHar = {
             if (container.hits<200000)
             creep.repair(container);
             else
-            creep.transfer(container);
+            creep.transfer(container,RESOURCE_ENERGY);
         }
     }
 };

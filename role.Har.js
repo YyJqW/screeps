@@ -8,7 +8,8 @@ var roleHar = {
         var check = true;
         CS.run('miner',container);
         var closestcontainer = creep.pos.findClosestByRange(FIND_STRUCTURES,{
-            filter:(contain)=> contain.structureType == STRUCTURE_CONTAINER
+            filter:(contain)=> contain.structureType == STRUCTURE_CONTAINER&&
+            contain.id != '5dea6515e52fa56b99d3cae9'
         });
         for (var name in harvesters)
         {

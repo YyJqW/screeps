@@ -18,7 +18,6 @@ var CS=
             for (var name in miner_container_o)
             {
                 array[name]=Game.getObjectById(miner_container_o[name]);
-                console.log(miner_container_o[name],name,array[name]);
             }
         }
         if (KOC=='storage')
