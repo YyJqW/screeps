@@ -1,4 +1,4 @@
-var energylist = ['']
+var energylist = ['5bbcae3a9099fc012e6389a5']
 var energy_num = 1;
 var roleOHar = {
     run: function (creep) {

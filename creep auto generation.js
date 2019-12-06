@@ -95,7 +95,7 @@ var CAG = {
     } //自动生成矿工
     else if (claimer.length < claimernum){
         var newName = 'claimer' + spawn.name + Game.time;
-        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,CLAIM], newName, {
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM], newName, {
             memory: {
                 role: 'claim',home:spawn
             }
