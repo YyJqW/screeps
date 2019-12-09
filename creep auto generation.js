@@ -2,12 +2,13 @@ var CS = require('container sort');
 var Harnum = 4;
 var Transnum = 4;
 var Upnum = 1;
-var buildnum = 2;
+var buildnum = 1;
 var Transnum_i = 1;
 var Minernum = 1;
-var Harnum_o =1 ;
+var Harnum_o =1;
 var claimernum = 1;
 var Transnumo = 1;
+var watchernum = 1;
 var CAG = {
     run: function (spawn) {
         var mineral = spawn.room.find(FIND_MINERALS);
@@ -20,6 +21,7 @@ var CAG = {
         var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.room.name==spawn.room.name);
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
         var transporter_o = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
+        var watcher = _.filter(Game.creeps, (creep) => creep.memory.role == 'watch');
         var s_c = new Array();
         CS.run('storage',s_c);
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
@@ -55,8 +57,8 @@ var CAG = {
     else if (transporter_o.length < Transnumo) {
         var newName = 'trans_o' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter: ' + newName);
-        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
-        CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+        CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
             memory: {
                 role: 'transport_o',home:spawn
             }
@@ -101,7 +103,7 @@ var CAG = {
     }
     if (harvesters_o.length < Harnum_o){
         var newName = 'Harvester_o' + spawn.name + Game.time;
-        spawn.spawnCreep([MOVE,MOVE,CARRY,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK], newName, {
+        spawn.spawnCreep([MOVE,MOVE,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK], newName, {
             memory: {
                 role: 'O_Har',home:spawn
             }
@@ -115,6 +117,14 @@ var CAG = {
             }
         });
     } //自动生成矿工
+    if (watcher.length<watchernum){
+        var newName = 'watcher' + spawn.name + Game.time;
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+            memory: {
+                role: 'watch',home:spawn
+            }
+        });
+    }
         if (spawn.spawning) {
             var spawningCreep = Game.creeps[spawn.spawning.name]; //孵化场工作显示
             spawn.room.visual.text(

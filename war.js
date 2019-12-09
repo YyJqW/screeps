@@ -15,7 +15,7 @@ var war =
         s_c.sort((a,b) => b.store.getUsedCapacity(RESOURCE_ENERGY) - a.store.getUsedCapacity(RESOURCE_ENERGY));
         var healer = _.filter(Game.creeps, (creep) => creep.memory.role == 'heal');
         var attacker = _.filter(Game.creeps, (creep) => creep.memory.role == 'attack');
-        var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
+        var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim_w');
         var waruper = _.filter(Game.creeps, (creep) => creep.memory.role == 'warup');
         console.log('A=',attacker.length,' Heal=',healer.length,' claimer=',claimer.length,' waruper=',waruper.length);
         if (attacker.length < Attackernum) {
@@ -46,7 +46,7 @@ var war =
             console.log('Spawning new claimer: ' + newName);
             spawn.spawnCreep([MOVE,CLAIM], newName, {
                 memory: {
-                    role: 'claim'
+                    role: 'claim_w'
                 }
             });//650
             }

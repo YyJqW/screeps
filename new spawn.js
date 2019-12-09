@@ -44,7 +44,7 @@ var NS = {
     else if (upers.length < Upnum) {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
-               spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,CARRY,WORK,WORK,CARRY,CARRY,WORK,WORK,WORK,WORK,WORK], newName, {
+               spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,CARRY,WORK,WORK,CARRY,CARRY,WORK,WORK,WORK,WORK,WORK,WORK], newName, {
                    memory: {
                        role: 'up',home:spawn
                    }

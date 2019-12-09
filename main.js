@@ -10,6 +10,7 @@ var TC = require('tower control');
 var LK = require('link control');
 var roleTransport_i = require('role.transport_i');
 var roleTransport_o = require('role.transport_o');
+var roleWatch = require('role.watch');
 var NS = require('new spawn');
 var war = require('war');
 var wartrriger = false;
@@ -61,12 +62,16 @@ module.exports.loop = function () {
         if(creep.memory.role == 'build') {
             roleBuild.run(creep);
         }
+        if(creep.memory.role == 'watch')
+        {
+            roleWatch.run(creep);
+        }
         if(creep.memory.role == 'O_Har')
         {
-            roleOHar.run(creep);
+           roleOHar.run(creep);
         }
         if(creep.memory.role == 'transport_o') {
-            roleTransport_o.run(creep);
+           roleTransport_o.run(creep);
          }
         if (creep.memory.role == 'claim')
         {
