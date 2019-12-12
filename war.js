@@ -2,7 +2,6 @@ var container = '5de0d75b9276c577635ded73';
 var Attackernum = 1;
 var Claimnum = 0;
 var Warupmnum = 0;
-var healnum = 0;
 var CS = require('container sort');
 var attacktrriger = true;
 var war =
@@ -13,7 +12,6 @@ var war =
         var s_c = new Array();
         CS.run('storage',s_c);
         s_c.sort((a,b) => b.store.getUsedCapacity(RESOURCE_ENERGY) - a.store.getUsedCapacity(RESOURCE_ENERGY));
-        var healer = _.filter(Game.creeps, (creep) => creep.memory.role == 'heal');
         var attacker = _.filter(Game.creeps, (creep) => creep.memory.role == 'attack');
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim_w');
         var waruper = _.filter(Game.creeps, (creep) => creep.memory.role == 'warup');
@@ -23,6 +21,7 @@ var war =
             console.log('Spawning new attacker: ' + newName);
             spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
             ATTACK,ATTACK,
+            HEAL,HEAL,HEAL,
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'attack'
@@ -30,16 +29,6 @@ var war =
             });//1k6
             
         } //生成近战兵
-        else if (healer.length<healnum)
-            {
-                var newName = 'healer' + Game.time;
-            console.log('Spawning new healer: ' + newName);
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,HEAL,HEAL,HEAL,HEAL], newName, {
-                memory: {
-                    role: 'heal'
-                }
-            });//1k2
-            }
         else if (claimer.length<Claimnum)
             {
                 var newName = 'claimer' + Game.time;
@@ -66,7 +55,19 @@ var war =
         {
             var target_creep = attacker[name].pos.findClosestByRange(FIND_HOSTILE_CREEPS,2);
             var target_structure = attacker[name].pos.findClosestByRange(FIND_HOSTILE_STRUCTURES,2);
-            if (attacktrriger&&target_creep!=null)
+            var target_heal = attacker[name].pos.findClosestByRange(FIND_MY_CREEPS,2);
+            var attack_parts=new Array();
+            for (var name_ in attacker[name].body)
+            {
+                if (attacker[name].body[name_].type==ATTACK) attack_parts[name_]=attacker[name].body[name_]
+            }
+            attack_parts.sort((a,b)=>a.hits-b.hits);
+            if (attack_parts[0].hits!=attack_parts[0].hitsMax)
+            {
+                attacker[name].moveTo(Game.flags.retreat);
+                attacker[name].heal(attacker[name]);
+            }
+            else if (attacktrriger&&target_creep!=null)
             {
                 console.log('target_c',target_creep);
                 if(attacker[name].attack(target_creep)==ERR_NOT_IN_RANGE)
@@ -83,38 +84,23 @@ var war =
                     attacker[name].moveTo(target_structure);
                 }
             }
+            else if (target_heal[0]!=null)
+            {
+                //heal_target.sort((a,b)=>a.hits/a.hitsMax - b.hits/b.hitsMax);
+                if (attacker[name].heal(target_heal[0])==ERR_NOT_IN_RANGE)
+                {
+                if (attacker[name].rangedHeal(target_heal[0])==ERR_NOT_IN_RANGE)
+                {
+                attacker[name].moveTo(target_heal[0]);
+                }
+                }
+            }
             else
             {
                 console.log('attacker :',attacker[name],'moving to position',Game.flags.Flag1.pos);
                 attacker[name].moveTo(Game.flags.Flag1);
             }
 
-        }
-        for (var name in healer)
-        {
-            var heal_target = healer[name].room.find(FIND_MY_CREEPS,
-                {
-                    filter : (target) => target.hits<target.hitsMax&&(
-                    target.memory.role=='attack'||
-                    target.memory.role == 'claim'||
-                    target.memory.role == 'heal')
-                });
-            if (heal_target[0]!=null)
-            {
-                //heal_target.sort((a,b)=>a.hits/a.hitsMax - b.hits/b.hitsMax);
-                if (healer[name].heal(heal_target[0])==ERR_NOT_IN_RANGE)
-                {
-                if (healer[name].rangedHeal(heal_target[0])==ERR_NOT_IN_RANGE)
-                {
-                healer[name].moveTo(heal_target[0]);
-                }
-                }
-            }
-            else
-                {
-                    healer[name].moveTo(Game.flags.Flag1);
-                    console.log('healer:',healer[name],'moving to ',Game.flags.Flag1.pos);
-                }
         }
         for (var name in claimer)
         {
