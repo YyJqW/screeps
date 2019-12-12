@@ -1,5 +1,5 @@
 var container = '5de0d75b9276c577635ded73';
-var Attackernum = 1;
+var Attackernum = 8;
 var Claimnum = 0;
 var Warupmnum = 0;
 var CS = require('container sort');
@@ -61,11 +61,13 @@ var war =
             {
                 if (attacker[name].body[name_].type==ATTACK) attack_parts[name_]=attacker[name].body[name_]
             }
-            attack_parts.sort((a,b)=>a.hits-b.hits);
-            if (attack_parts[0].hits!=attack_parts[0].hitsMax)
+            attack_parts.sort((a,b)=>b.hits-a.hits);
+           console.log(attack_parts[0].hits);
+            if (attack_parts[0].hits<attack_parts[0].hitsMax)
             {
                 attacker[name].moveTo(Game.flags.retreat);
                 attacker[name].heal(attacker[name]);
+                console.log(attacker[name],'retreating');
             }
             else if (attacktrriger&&target_creep!=null)
             {

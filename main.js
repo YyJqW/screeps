@@ -14,7 +14,7 @@ var roleWatch = require('role.watch');
 var roleGuard = require("role.Guardian");
 var NS = require('new spawn');
 var war = require('war');
-var wartrriger = false;
+var wartrriger = true;
 
 module.exports.loop = function () {
     for(var name in Memory.creeps) {
