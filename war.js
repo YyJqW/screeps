@@ -15,7 +15,7 @@ var war =
         var attacker = _.filter(Game.creeps, (creep) => creep.memory.role == 'attack');
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim_w');
         var waruper = _.filter(Game.creeps, (creep) => creep.memory.role == 'warup');
-        console.log('A=',attacker.length,' Heal=',healer.length,' claimer=',claimer.length,' waruper=',waruper.length);
+        console.log('A=',attacker.length,' claimer=',claimer.length,' waruper=',waruper.length);
         if (attacker.length < Attackernum) {
             var newName = 'attacker' + Game.time;
             console.log('Spawning new attacker: ' + newName);

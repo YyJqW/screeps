@@ -11,6 +11,7 @@ var LK = require('link control');
 var roleTransport_i = require('role.transport_i');
 var roleTransport_o = require('role.transport_o');
 var roleWatch = require('role.watch');
+var roleGuard = require("role.Guardian");
 var NS = require('new spawn');
 var war = require('war');
 var wartrriger = true;
@@ -65,6 +66,10 @@ module.exports.loop = function () {
         if(creep.memory.role == 'watch')
         {
             roleWatch.run(creep);
+        }
+        if (creep.memory.role == 'guard')
+        {
+            roleGuard.run(creep);
         }
         if(creep.memory.role == 'O_Har')
         {

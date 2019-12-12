@@ -9,8 +9,10 @@ var Harnum_o =1;
 var claimernum = 1;
 var Transnumo = 1;
 var watchernum = 1;
+var guardiannum = 0;
 var CAG = {
     run: function (spawn) {
+        var invader;
         var mineral = spawn.room.find(FIND_MINERALS);
         var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine'&&creep.memory.home.room.name==spawn.room.name);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
@@ -22,10 +24,31 @@ var CAG = {
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
         var transporter_o = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         var watcher = _.filter(Game.creeps, (creep) => creep.memory.role == 'watch');
+        var guardian = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard');
         var s_c = new Array();
         CS.run('storage',s_c);
+        for (var name in claimer)
+        {
+            if (claimer[name].room.find(FIND_HOSTILE_CREEPS)!=undefined) 
+            {
+                guardiannum++;
+            }
+        }
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
         ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length);
+        if (guardian.length < guardiannum) {
+            var newName = 'guardian' + Game.time;
+            console.log('Spawning new attacker: ' + newName);
+            spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
+            ATTACK,ATTACK,ATTACK,ATTACK,
+            HEAL,HEAL,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+                memory: {
+                    role: 'guard'
+                }
+            });//1k6
+            
+        } //生成近战兵
         if (transporter_i.length < Transnum_i){
                 var newName = 'trans_i' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter_i: ' + newName);
