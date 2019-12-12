@@ -13,7 +13,7 @@ var roleTransport_o = require('role.transport_o');
 var roleWatch = require('role.watch');
 var NS = require('new spawn');
 var war = require('war');
-var wartrriger = false;
+var wartrriger = true;
 
 module.exports.loop = function () {
     for(var name in Memory.creeps) {
@@ -25,7 +25,7 @@ module.exports.loop = function () {
     for (var name in Game.spawns)
     {
         console.log(Game.spawns[name],' working');
-        if(Game.spawns[name].name=='Spawn3')
+        if(Game.spawns[name].name=='')
         {
             NS.run(Game.spawns[name]);
         }

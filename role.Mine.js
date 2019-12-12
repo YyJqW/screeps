@@ -1,4 +1,4 @@
-var minerals_id = ['5bbcb39340062e4259e944fb','5bbcb5c3d867df5e5420719d'];
+var minerals_id = ['5bbcb39340062e4259e944fb','5bbcb5c3d867df5e5420719d','5bbcb5ced867df5e5420720a'];
 var roleMine = {
     run : function(creep)
     {

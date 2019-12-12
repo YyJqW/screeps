@@ -1,5 +1,5 @@
 var container = '5de0d75b9276c577635ded73';
-var Attackernum = 0;
+var Attackernum = 1;
 var Claimnum = 0;
 var Warupmnum = 0;
 var healnum = 0;
@@ -22,7 +22,7 @@ var war =
             var newName = 'attacker' + Game.time;
             console.log('Spawning new attacker: ' + newName);
             spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
-            ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,
+            ATTACK,ATTACK,
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'attack'
