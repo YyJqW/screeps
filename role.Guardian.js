@@ -1,3 +1,4 @@
+var attacktrriger = true;
 var roleGuard=
 {
     run:function(creep)
@@ -10,8 +11,8 @@ var roleGuard=
             {
                 if (creep.body[name_].type==ATTACK) attack_parts[name_]=creep.body[name_]
             }
-            attack_parts.sort((a,b)=>a.hits-b.hits);
-            if (attack_parts[0].hits!=attack_parts[0].hitsMax)
+            attack_parts.sort((a,b)=>b.hits-a.hits);
+            if (attack_parts[0].hits<attack_parts[0].hitsMax)
             {
                 creep.moveTo(Game.flags.retreat);
                 creep.heal(creep);
