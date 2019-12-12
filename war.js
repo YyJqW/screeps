@@ -1,7 +1,10 @@
 var container = '5de0d75b9276c577635ded73';
-var Attackernum = 8;
+var STORAGE = Game.getObjectById('5dc8d0293253f2822f25293b');
+var GOODS = 'O';
+var Attackernum = 3;
 var Claimnum = 0;
 var Warupmnum = 0;
+var reapernum = 3;
 var CS = require('container sort');
 var attacktrriger = true;
 var war =
@@ -15,14 +18,16 @@ var war =
         var attacker = _.filter(Game.creeps, (creep) => creep.memory.role == 'attack');
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim_w');
         var waruper = _.filter(Game.creeps, (creep) => creep.memory.role == 'warup');
-        console.log('A=',attacker.length,' claimer=',claimer.length,' waruper=',waruper.length);
+        var reaper = _.filter(Game.creeps, (creep) => creep.memory.role == 'reap');
+        console.log('A=',attacker.length,' claimer=',claimer.length,' waruper=',waruper.length,' reaper=',reaper.length);
         if (attacker.length < Attackernum) {
             var newName = 'attacker' + Game.time;
             console.log('Spawning new attacker: ' + newName);
-            spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
-            ATTACK,ATTACK,
-            HEAL,HEAL,HEAL,
-            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+            spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
+            TOUGH,TOUGH,
+            ATTACK,ATTACK,ATTACK,ATTACK,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+            HEAL,HEAL,HEAL], newName, {
                 memory: {
                     role: 'attack'
                 }
@@ -51,40 +56,56 @@ var war =
                 }
             });//1k700
             }
+            else if (reaper.length < reapernum) {
+        var newName = 'reap' + '['+spawn.name +']'+ Game.time;
+        console.log('Spawning new reaper: ' + newName);
+        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+        CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+            memory: {
+                role: 'reap',home:spawn
+            }
+        });//900
+     //自动生成搬运工人
+}
         for (var name in attacker)
         {
-            var target_creep = attacker[name].pos.findClosestByRange(FIND_HOSTILE_CREEPS,2);
-            var target_structure = attacker[name].pos.findClosestByRange(FIND_HOSTILE_STRUCTURES,2);
-            var target_heal = attacker[name].pos.findClosestByRange(FIND_MY_CREEPS,2);
+            var target_creep = attacker[name].pos.findInRange(FIND_HOSTILE_CREEPS,1);
+            var target_structure = attacker[name].pos.findInRange(FIND_HOSTILE_STRUCTURES,1);
+           var target_heal = attacker[name].room.find(FIND_MY_CREEPS,{
+            filter:(creep)=>creep.hits<creep.hitsMax
+        });
             var attack_parts=new Array();
             for (var name_ in attacker[name].body)
             {
-                if (attacker[name].body[name_].type==ATTACK) attack_parts[name_]=attacker[name].body[name_]
+                if (attacker[name].body[name_].type==ATTACK) attack_parts[name_]=attacker[name].body[name_];
             }
             attack_parts.sort((a,b)=>b.hits-a.hits);
-           console.log(attack_parts[0].hits);
-            if (attack_parts[0].hits<attack_parts[0].hitsMax)
+            if (attack_parts[0].hits==0)
             {
                 attacker[name].moveTo(Game.flags.retreat);
                 attacker[name].heal(attacker[name]);
                 console.log(attacker[name],'retreating');
             }
-            else if (attacktrriger&&target_creep!=null)
+            else if (attacktrriger&&target_creep[0]!=undefined)
             {
-                console.log('target_c',target_creep);
-                if(attacker[name].attack(target_creep)==ERR_NOT_IN_RANGE)
+                console.log('target_c',target_creep[0]);
+                if(attacker[name].attack(target_creep[0])==ERR_NOT_IN_RANGE)
                 {
-                    attacker[name].moveTo(target_creep);
+                    attacker[name].moveTo(target_creep[0]);
                 }
             }
-            else if (attacktrriger&&target_structure!=null)
+            else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
             {
-                console.log('target_s',target_structure);
-                attacker[name].attack(target_structure);
-                if(attacker[name].attack(target_structure)==ERR_NOT_IN_RANGE)
+                console.log('target_s',target_structure[0]);
+                attacker[name].attack(target_structure[0]);
+                if(attacker[name].attack(target_structure[0])==ERR_NOT_IN_RANGE)
                 {
-                    attacker[name].moveTo(target_structure);
+                    attacker[name].moveTo(target_structure[0]);
                 }
+            }
+                        else if (attacker[name].hits<attacker[name].hitsMax)
+            {
+                attacker[name].heal(attacker[name]);
             }
             else if (target_heal[0]!=null)
             {
@@ -131,6 +152,31 @@ var war =
                    }
                 }
             }
+        }
+        for (var name in reaper)
+        {
+            reaper[name].memory.goods = GOODS;
+            if (reaper[name].store.getFreeCapacity()>0)
+            {
+                if (reaper[name].withdraw(STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
+                reaper[name].moveTo(STORAGE);
+            }
+            else if (reaper[name].room.storage!=undefined&&reaper[name].room.storage.owner=='lijunhaoshaleni')
+        {
+            if (reaper[name].room.storage.store.getFreeCapacity(reaper[name].memory.goods)>0&&reaper[name].transfer(reaper[name].room.storage,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
+            reaper[name].moveTo(reaper[name].room.storage);
+        }
+        else 
+        {
+            for (var name in s_c)
+            {
+                if(s_c[name].store.getFreeCapacity(reaper[name].memory.goods)>0&&reaper[name].transfer(s_c[name],reaper[name].memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
+            {
+                reaper[name].moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
+                break;
+            }//待修改
+            }
+        }
         }
     }
 };

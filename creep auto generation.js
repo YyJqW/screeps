@@ -41,8 +41,8 @@ var CAG = {
             console.log('Spawning new attacker: ' + newName);
             spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
             ATTACK,ATTACK,ATTACK,ATTACK,
-            HEAL,HEAL,
-            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+                        HEAL,HEAL], newName, {
                 memory: {
                     role: 'guard'
                 }

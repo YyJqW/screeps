@@ -35,6 +35,7 @@ module.exports.loop = function () {
     CAG.run(Game.spawns[name]);
     if (wartrriger)
     {
+    if (Game.spawns[name].name!='Spawn3')
     war.run(Game.spawns[name]);
     }
     }

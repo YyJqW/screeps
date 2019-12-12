@@ -10,7 +10,13 @@ var TC ={
         }
         for (var name in tower)
         {
+        var target_heal = tower[name].room.find(FIND_MY_CREEPS,{
+            filter:(creep)=>creep.hits<creep.hitsMax
+        });
         var enemy = tower[name].room.find(FIND_HOSTILE_CREEPS);
+        console.log(tower[name].heal(target_heal[0]));
+        if (target_heal!='')
+        tower[name].heal(target_heal);
         if (enemy.length>0)
         tower[name].attack(enemy[0]);
         else

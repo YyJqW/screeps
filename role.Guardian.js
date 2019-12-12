@@ -5,7 +5,9 @@ var roleGuard=
     {
         var target_creep = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS,2);
             var target_structure = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES,2);
-            var target_heal = creep.pos.findClosestByRange(FIND_MY_CREEPS,2);
+            var target_heal = creep.room.find(FIND_MY_CREEPS,{
+            filter:(creep)=>creep.hits<creep.hitsMax
+        });
             var attack_parts=new Array();
             for (var name_ in creep.body)
             {
@@ -48,7 +50,7 @@ var roleGuard=
             else
             {
                 console.log('guardian :',creep,'moving to position',Game.flags.Flag1.pos);
-                creep.moveTo(Game.flags.Flag1);
+                creep.moveTo(Game.flags.Guard1);
             }
     }
 }
