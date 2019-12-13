@@ -9,7 +9,7 @@ var Harnum_o =1;
 var claimernum = 1;
 var Transnumo = 1;
 var watchernum = 1;
-var guardiannum = 0;
+var guardiannum = 1;
 var CAG = {
     run: function (spawn) {
         var invader;
@@ -32,7 +32,7 @@ var CAG = {
             invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);
             if (invader[0]!=undefined) 
             {
-                guardiannum=name;
+                guardiannum=Number(name)+1;
             }
         }
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
