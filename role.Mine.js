@@ -5,6 +5,7 @@ var roleMine = {
         var busy,goToclosest;
         var closestmineral = creep.pos.findClosestByRange(FIND_MINERALS);
         var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine');
+        if (closestmineral!=null) goToclosest=true;
         for (var name in miner)
         {
             if (closestmineral==miner[name].memory.target&&miner[name]!=creep) goToclosest = false;

@@ -1,8 +1,13 @@
+var FLAG = [Game.flags.Watch1,Game.flags.Watch2];
 var roleWatch=
 {
-    run:function(creep)
+    run:function()
     {
-        creep.moveTo(Game.flags.Flag2);
+        var watchers = _.filter(Game.creeps, (creep) => creep.memory.role == 'watch');
+        for (var name in watchers)
+        {
+        watchers[name].moveTo(FLAG[name]);
+        }
     }
 }
 

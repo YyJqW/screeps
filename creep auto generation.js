@@ -8,8 +8,8 @@ var Minernum = 1;
 var Harnum_o =1;
 var claimernum = 1;
 var Transnumo = 1;
-var watchernum = 1;
-var guardiannum = 1;
+var watchernum = 2;
+var guardiannum = 0;
 var CAG = {
     run: function (spawn) {
         var invader;
@@ -45,7 +45,7 @@ var CAG = {
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
                         HEAL,HEAL], newName, {
                 memory: {
-                    role: 'guard'
+                    role: 'guard',home:spawn,target:-10
                 }
             });//1k6
             
@@ -158,6 +158,17 @@ var CAG = {
                     align: 'left',
                     opacity: 0.8
                 });
+        }
+        if (invader[0]!=undefined)
+        {
+            for (var name in guardian)
+        {
+            invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);
+            if (invader[0]!=undefined) 
+            {
+                guardian[name].memory.target=claimer[name].room.controller;
+            }
+        }
         }
     }
 };

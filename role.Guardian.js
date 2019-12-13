@@ -47,10 +47,10 @@ var roleGuard=
                 }
                 }
             }
-            else
+            else if (creep.memory.target!=-10)
             {
-                console.log('guardian :',creep,'moving to position',Game.flags.Flag1.pos);
-                creep.moveTo(Game.flags.Guard1);
+                console.log('guardian :',creep,'moving to position',creep.memory.target);
+                creep.moveTo(creep.memory.target);
             }
     }
 }

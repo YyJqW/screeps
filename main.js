@@ -64,10 +64,6 @@ module.exports.loop = function () {
         if(creep.memory.role == 'build') {
             roleBuild.run(creep);
         }
-        if(creep.memory.role == 'watch')
-        {
-            roleWatch.run(creep);
-        }
         if (creep.memory.role == 'guard')
         {
             roleGuard.run(creep);
@@ -84,5 +80,6 @@ module.exports.loop = function () {
             roleClaim.run(creep);
         }
     }
+    roleWatch.run();
     console.log('running');
 }
