@@ -40,7 +40,7 @@ var roleTransport ={
                 creep.moveTo(mine_c[check]),{ visualizePathStyle: { stroke: '#FFFF00'}};
             }
         }
-            else
+           /* else
             {
             check=0;
             creep.memory.goods = RESOURCE_ENERGY;
@@ -63,7 +63,7 @@ var roleTransport ={
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
             creep.moveTo(m_c[check]),{ visualizePathStyle: { stroke: '#FFFF00'}};
         }
-    }
+    }*/
 }
         else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name&&tower[0].store.getFreeCapacity(RESOURCE_ENERGY)>=500)
         {

@@ -6,6 +6,7 @@ var roleTransport_i =
 {
     run:function(creep)
     {
+        var transmode = false;
         var s_c=new Array()
         CS.run('storage',s_c);
         var lo=new Array();
@@ -16,12 +17,39 @@ var roleTransport_i =
         {
             lo[name]=Game.getObjectById(link_o[name]);
         }
-        lo.sort((a,b)=>a.store.getCapacity(RESOURCE_ENERGY)-b.store.getCapacity(RESOURCE_ENERGY));
         for (var name in towers)
         {
             tower[name]=Game.getObjectById(towers[name]);
         }
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
+        for (var name in lo)
+        {
+            if (lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getFreeCapacity()==0)
+            {
+            transmode = true;
+            creep.memory.link = lo[name];
+            break;
+            }
+        }
+        if (transmode)
+        {
+            if(creep.store.getUsedCapacity() == 0)//收集
+        {
+            if (creep.memory.link!=undefined)
+            {
+                if (creep.withdraw(creep.memory.link,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+                {
+                    creep.moveTo(creep.memory.link),{ visualizePathStyle: { stroke: '#FFFF00'}};
+                }
+            }
+            else
+            {
+                if(creep.transfer(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+                creep.moveTo(storage_);
+            }
+        }
+    }
+    else{
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             s_c.sort((a,b) => b.store.getUsedCapacity(RESOURCE_ENERGY)/b.store.getCapacity(RESOURCE_ENERGY)*100 - a.store.getUsedCapacity(RESOURCE_ENERGY)/a.store.getCapacity(RESOURCE_ENERGY)*100);
@@ -53,17 +81,7 @@ var roleTransport_i =
             if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
             creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFFF00'}});
         }
-        else 
-        {
-            for (var name in lo)
-            {
-            if (creep.memory.home.room.name==lo[name].room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)<=600)
-        {
-            if(creep.transfer(lo[name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(lo[name],{ visualizePathStyle: { stroke: '#FFFF00'}})
-        }
-            }
-        }
     }
+}
 };
 module.exports = roleTransport_i;

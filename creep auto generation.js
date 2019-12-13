@@ -61,7 +61,7 @@ var CAG = {
         }
         else if (harvesters.length < Harnum) {
             var newName = 'Harvester' + spawn.name + Game.time;
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK], newName, {
+            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,CARRY], newName, {
                 memory: {
                     role: 'Har',home:spawn
                 }

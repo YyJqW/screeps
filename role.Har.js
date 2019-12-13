@@ -2,6 +2,9 @@ var CS = require('container sort');
 var container_energy_num = 4;
 var roleHar = {
     run: function (creep) {
+        var link = creep.pos.findInRange(FIND_STRUCTURES,1,{
+            filter:(struc)=>struc.structureType == STRUCTURE_LINK
+        });
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
         var container = new Array();
         var target;
@@ -44,15 +47,29 @@ var roleHar = {
                 break;
             }
         }
+        creep.memory.container = container[target];
         if (creep.pos.x != container[target].pos.x||creep.pos.y != container[target].pos.y) {
             creep.moveTo(container[target], {
                 visualizePathStyle: {
                     stroke: '#ffaa00'
                 }
             }); //前往箱子
-        } else {
+        } 
+        else if(creep.store.getFreeCapacity()>0)
+            {
+                if (creep.memory.container.store.getUsedCapacity()>0)
+                {
+                creep.withdraw(creep.memory.container,RESOURCE_ENERGY);
+                }
+                else
+                {
             var sources = creep.pos.findClosestByRange(FIND_SOURCES);
             creep.harvest(sources);
+                }
+        }
+        else if (link[0]!=undefined)
+        {
+            creep.transfer(link[0],RESOURCE_ENERGY);
         }
     }
     }
