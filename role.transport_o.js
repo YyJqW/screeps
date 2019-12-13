@@ -52,6 +52,7 @@ var roleTransport_o ={
         {
             for (var name in s_c)
             {
+                s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
                 if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
                 creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
