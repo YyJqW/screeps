@@ -1,7 +1,5 @@
 var container = '5de0d75b9276c577635ded73';
-var STORAGE = Game.getObjectById('5dc8d0293253f2822f25293b');
-var GOODS = 'O';
-var Attackernum = 3;
+var Attackernum = 1;
 var Claimnum = 0;
 var Warupmnum = 0;
 var reapernum = 3;
@@ -11,6 +9,9 @@ var war =
 {
     run: function(spawn)
     {
+        var STORAGE = Game.getObjectById('5dc8d0293253f2822f25293b');
+var M_STORAGE = Game.getObjectById('5dd14b4d8b1d9b586a08b4e6');
+var GOODS = 'O';
         var front_container = Game.getObjectById(container);
         var s_c = new Array();
         CS.run('storage',s_c);
@@ -159,7 +160,10 @@ var war =
             if (reaper[name].store.getFreeCapacity()>0)
             {
                 if (reaper[name].withdraw(STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
+                {
                 reaper[name].moveTo(STORAGE);
+                console.log(reaper[name],'moving to ',STORAGE,'reaping');
+                }
             }
             else if (reaper[name].room.storage!=undefined&&reaper[name].room.storage.owner=='lijunhaoshaleni')
         {
@@ -168,14 +172,12 @@ var war =
         }
         else 
         {
-            for (var name in s_c)
+                if(M_STORAGE.store.getFreeCapacity(reaper[name].memory.goods)>0&&reaper[name].transfer(M_STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
-                if(s_c[name].store.getFreeCapacity(reaper[name].memory.goods)>0&&reaper[name].transfer(s_c[name],reaper[name].memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
-            {
-                reaper[name].moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
+                console.log(reaper[name],'backing');
+                reaper[name].moveTo(M_STORAGE,{ visualizePathStyle: { stroke: '#FFFF00'}});
                 break;
             }//待修改
-            }
         }
         }
     }

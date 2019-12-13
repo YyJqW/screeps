@@ -29,7 +29,8 @@ var CAG = {
         CS.run('storage',s_c);
         for (var name in claimer)
         {
-            if (claimer[name].room.find(FIND_HOSTILE_CREEPS)!='') 
+            invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);
+            if (invader[0]!=undefined) 
             {
                 guardiannum=name;
             }
