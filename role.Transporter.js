@@ -9,7 +9,7 @@ var roleTransport ={
         });
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         var m_c=new Array()
-        CS.run('miner',m_c);
+        CS.run('miner_unlinked',m_c);
         var s_c=new Array()
         CS.run('storage',s_c);
         var mine_c=new Array();

@@ -19,6 +19,7 @@ var roleTransport_i =
         }
         for (var name in towers)
         {
+            if (Game.getObjectById(towers[name]).room.name==creep.memory.home.room.name)
             tower[name]=Game.getObjectById(towers[name]);
         }
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
@@ -45,7 +46,12 @@ var roleTransport_i =
         }
             else
             {
-                if(creep.transfer(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+                if (creep.memory.home.room.name==tower[0].room.name&&tower[0].store.getFreeCapacity(RESOURCE_ENERGY)>300)
+        {
+            if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+            creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFFF00'}});
+        }
+                else if(creep.transfer(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 creep.moveTo(storage_);
             }
     }
