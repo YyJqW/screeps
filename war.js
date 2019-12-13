@@ -176,7 +176,6 @@ var GOODS = 'O';
             {
                 console.log(reaper[name],'backing');
                 reaper[name].moveTo(M_STORAGE,{ visualizePathStyle: { stroke: '#FFFF00'}});
-                break;
             }//待修改
         }
         }
