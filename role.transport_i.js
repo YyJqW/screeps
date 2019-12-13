@@ -33,12 +33,10 @@ var roleTransport_i =
         }
         if (transmode)
         {
-            console.log(creep.store.getUsedCapacity(RESOURCE_ENERGY),111111111);
             if(creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0)//收集
         {
             if (creep.memory.link!=undefined)
             {
-                 console.log(2222);
                 if (creep.withdraw(creep.memory.link,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
                     creep.moveTo(creep.memory.link),{ visualizePathStyle: { stroke: '#FFFF00'}};
@@ -47,7 +45,6 @@ var roleTransport_i =
         }
             else
             {
-                 console.log(11111111111111);
                 if(creep.transfer(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 creep.moveTo(storage_);
             }

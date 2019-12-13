@@ -43,7 +43,6 @@ var LK ={
         else{
             for (var name_ in lo)
             {
-                console.log(lc[name].store.getFreeCapacity(RESOURCE_ENERGY));
             if (lc[name].store.getFreeCapacity(RESOURCE_ENERGY)==0&&lc[name].room.name==lo[name_].room.name&&lo[name_].store.getFreeCapacity(RESOURCE_ENERGY)>0)
             {
                 lc[name].transferEnergy(lo[name_],lc[name].store.getUsedCapacity(RESOURCE_ENERGY));
