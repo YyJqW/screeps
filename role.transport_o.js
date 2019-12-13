@@ -32,6 +32,7 @@ var roleTransport_o ={
             }
             creep.memory.target = m_c[check].id;
             if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){
+                creep.memory.goods=dropped_source.resourceType;
             creep.moveTo(dropped_source);
             }
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){

@@ -1,5 +1,5 @@
 var container = '5de0d75b9276c577635ded73';
-var Attackernum = 1;
+var Attackernum = 0;
 var Claimnum = 0;
 var Warupmnum = 0;
 var reapernum = 3;

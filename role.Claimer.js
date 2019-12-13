@@ -1,4 +1,4 @@
-var rOom = ['E22S39'];
+var rOom = ['E22S39','E22S37'];
 var CS = require('container sort');
 var roleClaim =
 {

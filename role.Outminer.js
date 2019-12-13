@@ -1,5 +1,5 @@
-var energylist = ['5bbcae3a9099fc012e6389a5']
-var energy_num = 1;
+var energylist = ['5bbcae3a9099fc012e6389a5','5bbcae399099fc012e63899f']
+var energy_num = 2;
 var roleOHar = {
     run: function (creep) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'O_Har');

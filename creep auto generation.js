@@ -2,17 +2,17 @@ var CS = require('container sort');
 var Harnum = 4;
 var Transnum = 1;
 var Upnum = 1;
-var buildnum = 1;
+var buildnum = 2;
 var Transnum_i = 1;
 var Minernum = 1;
-var Harnum_o =1;
-var claimernum = 1;
-var Transnumo = 1;
+var Harnum_o =2;
+var claimernum = 2;
+var Transnumo = 2;
 var watchernum = 2;
 var guardiannum = 0;
 var CAG = {
     run: function (spawn) {
-        var invader;
+        var invader=new Array();
         var mineral = spawn.room.find(FIND_MINERALS);
         var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine'&&creep.memory.home.room.name==spawn.room.name);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
@@ -27,6 +27,8 @@ var CAG = {
         var guardian = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard');
         var s_c = new Array();
         CS.run('storage',s_c);
+        if(claimer[0]!=undefined)
+        {
         for (var name in claimer)
         {
             invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);
@@ -34,6 +36,7 @@ var CAG = {
             {
                 guardiannum=Number(name)+1;
             }
+        }
         }
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
         ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length);

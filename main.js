@@ -42,6 +42,7 @@ module.exports.loop = function () {
     }
     TC.run();
     LK.run();
+    roleWatch.run();
     for(var name in Game.creeps)
     {
     var creep = Game.creeps[name];
@@ -80,6 +81,5 @@ module.exports.loop = function () {
             roleClaim.run(creep);
         }
     }
-    roleWatch.run();
     console.log('running');
 }
