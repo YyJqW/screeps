@@ -24,6 +24,7 @@ var roleHar = {
         }
         if (check)
         {
+                creep.memory.container = closestcontainer;
         if (creep.pos.x!=closestcontainer.pos.x||creep.pos.y!=closestcontainer.pos.y)
         creep.moveTo(closestcontainer);
         else {
@@ -44,19 +45,20 @@ var roleHar = {
             if (!busy) 
             {
                 target = i;
+                creep.memory.container = container[target];
                 break;
             }
         }
-        creep.memory.container = container[target];
-        if (creep.pos.x != container[target].pos.x||creep.pos.y != container[target].pos.y) {
-            creep.moveTo(container[target], {
+        }
+        if (creep.pos.x != creep.memory.container.pos.x||creep.pos.y != creep.memory.container.pos.y) {
+            creep.moveTo(creep.memory.container, {
                 visualizePathStyle: {
                     stroke: '#ffaa00'
                 }
             }); //前往箱子
         } 
         else if(creep.store.getFreeCapacity()>0)
-            {
+            {            
                 if (creep.memory.container.store.getUsedCapacity()>0)
                 {
                 creep.withdraw(creep.memory.container,RESOURCE_ENERGY);
@@ -71,7 +73,6 @@ var roleHar = {
         {
             creep.transfer(link[0],RESOURCE_ENERGY);
         }
-    }
     }
 };
 module.exports = roleHar;

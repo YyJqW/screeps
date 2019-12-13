@@ -24,7 +24,7 @@ var roleTransport_i =
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         for (var name in lo)
         {
-            if (lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getFreeCapacity()==0)
+            if (lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>400)
             {
             transmode = true;
             creep.memory.link = lo[name];
@@ -33,21 +33,24 @@ var roleTransport_i =
         }
         if (transmode)
         {
-            if(creep.store.getUsedCapacity() == 0)//收集
+            console.log(creep.store.getUsedCapacity(RESOURCE_ENERGY),111111111);
+            if(creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0)//收集
         {
             if (creep.memory.link!=undefined)
             {
+                 console.log(2222);
                 if (creep.withdraw(creep.memory.link,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
                     creep.moveTo(creep.memory.link),{ visualizePathStyle: { stroke: '#FFFF00'}};
                 }
             }
+        }
             else
             {
+                 console.log(11111111111111);
                 if(creep.transfer(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 creep.moveTo(storage_);
             }
-        }
     }
     else{
         if(creep.store.getUsedCapacity() == 0)//收集

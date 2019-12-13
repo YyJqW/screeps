@@ -1,6 +1,6 @@
 var CS = require('container sort');
 var Harnum = 4;
-var Transnum = 4;
+var Transnum = 3;
 var Upnum = 1;
 var buildnum = 1;
 var Transnum_i = 1;
@@ -53,7 +53,7 @@ var CAG = {
         if (transporter_i.length < Transnum_i){
                 var newName = 'trans_i' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter_i: ' + newName);
-        spawn.spawnCreep([MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], newName, {
+        spawn.spawnCreep([MOVE,MOVE,CARRY,CARRY,WORK], newName, {
             memory: {
                 role: 'transport_i',home:spawn
             }
