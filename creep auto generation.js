@@ -164,6 +164,7 @@ var CAG = {
         }
         if (invader[0]!=undefined)
         {
+            console.log('invader',invader[0].room.name);
             for (var name in guardian)
         {
             invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);

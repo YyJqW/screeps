@@ -24,11 +24,11 @@ var roleTransport_o ={
                 {
                 if (creep != transporter[name_])
                 {
-                if (transporter[name_].memory.target == m_c[name].id&&check<m_c.length-1) {check++; busy=true;break}
+                if (transporter[name_].memory.target == m_c[name].id&&check<m_c.length-1) { busy=true;break;}
                 else busy=false;
                 }
                 }
-                if (!busy) break
+                if (!busy) {check=name;break;}
             }
             creep.memory.target = m_c[check].id;
             if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){
