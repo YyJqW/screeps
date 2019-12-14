@@ -1,8 +1,8 @@
 var container = '5de0d75b9276c577635ded73';
-var Attackernum = 0;
+var Attackernum = 3;
 var Claimnum = 0;
 var Warupmnum = 0;
-var reapernum = 3;
+var reapernum = 2;
 var CS = require('container sort');
 var attacktrriger = true;
 var war =
@@ -121,8 +121,8 @@ var GOODS = 'O';
             }
             else
             {
-                console.log('attacker :',attacker[name],'moving to position',Game.flags.Flag1.pos);
-                attacker[name].moveTo(Game.flags.Flag1);
+                console.log('attacker :',attacker[name],'moving to position',Game.flags.Flag2.pos);
+                attacker[name].moveTo(Game.flags.Flag2);
             }
 
         }
@@ -159,6 +159,11 @@ var GOODS = 'O';
             reaper[name].memory.goods = GOODS;
             if (reaper[name].store.getFreeCapacity()>0)
             {
+                if (STORAGE==null)
+                {
+                    reaper[name].moveTo(Game.flags.Flag1);
+                    console.log(reaper[name],'moving to ',Game.flags.Flag1);;
+                }
                 if (reaper[name].withdraw(STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
                 {
                 reaper[name].moveTo(STORAGE);

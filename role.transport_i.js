@@ -8,7 +8,7 @@ var roleTransport_i =
     {
         var transmode = false;
         var s_c=new Array()
-        CS.run('storage',s_c);
+        CS.run('miner',s_c);
         var lo=new Array();
         var struc = FS_unfull.run(creep);
         var tower = new Array();
