@@ -26,6 +26,7 @@ var LK ={
         {
             lo[name].transferEnergy(li[name],lo[name].store.getUsedCapacity(RESOURCE_ENERGY));
         }
+    }
         for (var name in lc)
         {
             for (var name_ in li)
@@ -42,7 +43,6 @@ var LK ={
             {
             if (lc[name].store.getFreeCapacity(RESOURCE_ENERGY)==0&&lc[name].room.name==lo[name_].room.name&&lo[name_].store.getFreeCapacity(RESOURCE_ENERGY)>0)
             {
-                console.log(lc[name].transferEnergy(lo[name_],lc[name].store.getUsedCapacity(RESOURCE_ENERGY)));
                 if(lc[name].transferEnergy(lo[name_],lc[name].store.getUsedCapacity(RESOURCE_ENERGY))==ERR_INVALID_ARGS)
                { 
                    lc[name].transferEnergy(li[name_],lc[name].store.getFreeCapacity(RESOURCE_ENERGY));
