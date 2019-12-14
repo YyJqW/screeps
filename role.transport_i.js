@@ -8,7 +8,7 @@ var roleTransport_i =
     {
         var transmode = false;
         var s_c=new Array()
-        CS.run('miner',s_c);
+        CS.run('storage',s_c);
         var lo=new Array();
         var struc = FS_unfull.run(creep);
         var tower = new Array();
@@ -25,7 +25,7 @@ var roleTransport_i =
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         for (var name in lo)
         {
-            if (lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>400)
+            if (lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>0)
             {
             transmode = true;
             creep.memory.link = lo[name];
