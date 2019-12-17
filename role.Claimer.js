@@ -4,12 +4,22 @@ var roleClaim =
 {
     run: function(creep)
     {
-        var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
-for (var name in claimer)
+     var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');   
+        for (var name in claimer)
         {
-            if(claimer[name].reserveController(Game.rooms[rOom[name]].controller)==ERR_NOT_IN_RANGE)
-            claimer[name].moveTo(Game.rooms[rOom[name]].controller);
+            if (creep!=claimer[name]&&creep.memory.number==claimer[name].memory.number)
+            {
+                for (var name_ in claimer)
+                {
+                    claimer[name_].memory.number = name_;
+                }
+                break;
+            }
         }
+            if(creep.reserveController(Game.rooms[rOom[creep.memory.number]].controller)==ERR_NOT_IN_RANGE)
+            {
+           creep.moveTo(Game.rooms[rOom[creep.memory.number]].controller);
+            }
     }
     };
 module.exports = roleClaim;

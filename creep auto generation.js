@@ -31,15 +31,15 @@ var CAG = {
         {
         for (var name in claimer)
         {
-            invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);
-            if (invader[0]!=undefined) 
+            invader.push(claimer[name].room.find(FIND_HOSTILE_CREEPS));
+            if (invader.length>0) 
             {
-                guardiannum=Number(name)+1;
+                guardiannum=invader.length;
             }
         }
         }
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
-        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length);
+        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length,'Guardian=',guardian.length);
         if (guardian.length<guardiannum) {
             var newName = 'guardian' + Game.time;
             console.log('Spawning new attacker: ' + newName);
@@ -56,7 +56,8 @@ var CAG = {
         if (transporter_i.length < Transnum_i){
                 var newName = 'trans_i' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter_i: ' + newName);
-        spawn.spawnCreep([MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], newName, {
+        spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY
+        ,MOVE,MOVE], newName, {
             memory: {
                 role: 'transport_i',home:spawn
             }
@@ -64,7 +65,8 @@ var CAG = {
         }
         else if (harvesters.length < Harnum) {
             var newName = 'Harvester' + spawn.name + Game.time;
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,CARRY], newName, {
+            spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY
+            ,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'Har',home:spawn
                 }
@@ -73,8 +75,8 @@ var CAG = {
         else if (transporter.length < Transnum) {
             var newName = 'trans' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter: ' + newName);
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
-            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+            spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'transport',home:spawn
                 }
@@ -84,8 +86,8 @@ var CAG = {
     else if (transporter_o.length < Transnumo) {
         var newName = 'trans_o' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter: ' + newName);
-        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
-        CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+        spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY
+        ,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
                 role: 'transport_o',home:spawn
             }
@@ -94,7 +96,8 @@ var CAG = {
 }
         else if (miner.length < Minernum&&mineral[0].mineralAmount>0) {
             var newName = 'Miner' + spawn.name + Game.time;
-            spawn.spawnCreep([CARRY,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK], newName, {
+            spawn.spawnCreep([CARRY,WORK,WORK,WORK,WORK,WORK
+            ,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'mine',home:spawn
                 }
@@ -103,7 +106,8 @@ var CAG = {
     else if (upers.length < Upnum) {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
-               spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK], newName, {
+               spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,
+               MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                    memory: {
                        role: 'up',home:spawn
                    }
@@ -118,8 +122,8 @@ var CAG = {
                var newName = 'B' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new builder: ' + newName);
                spawn.spawnCreep([WORK, WORK,WORK,WORK,
-               MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
-               CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName, {
+               CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY
+               ,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                    memory: {
                        role: 'build',home:spawn
                    }
@@ -130,7 +134,8 @@ var CAG = {
     }
     if (harvesters_o.length < Harnum_o){
         var newName = 'Harvester_o' + spawn.name + Game.time;
-        spawn.spawnCreep([MOVE,MOVE,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK], newName, {
+        spawn.spawnCreep([CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,
+        MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
                 role: 'O_Har',home:spawn
             }
@@ -138,9 +143,10 @@ var CAG = {
     } //自动生成矿工
     else if (claimer.length < claimernum){
         var newName = 'claimer' + spawn.name + Game.time;
-        spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM,CLAIM], newName, {
+        spawn.spawnCreep([CLAIM,CLAIM,
+        MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
-                role: 'claim',home:spawn
+                role: 'claim',home:spawn,number:claimer.length
             }
         });
     } //自动生成矿工
@@ -162,15 +168,14 @@ var CAG = {
                     opacity: 0.8
                 });
         }
-        if (invader[0]!=undefined)
+        for (var name in guardian)
         {
-            console.log('invader',invader[0].room.name);
-            for (var name in guardian)
+        if (guardian[name].memory.target!=-10)
         {
-            invader = claimer[name].room.find(FIND_HOSTILE_CREEPS);
-            if (invader[0]!=undefined) 
+            
+            if (invader.length>0) 
             {
-                guardian[name].memory.target=claimer[name].room.controller;
+                guardian[name].memory.target=invader[name].room.controller;
             }
         }
         }

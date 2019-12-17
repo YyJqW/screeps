@@ -1,8 +1,9 @@
 var container = '5de0d75b9276c577635ded73';
-var Attackernum = 3;
-var Claimnum = 0;
+var TARGET_CONTROLLER_ID = '5bbcae2b9099fc012e638814'
+var Attackernum = 2;
+var Claimnum = 1;
 var Warupmnum = 0;
-var reapernum = 2;
+var reapernum = 0;
 var CS = require('container sort');
 var attacktrriger = true;
 var war =
@@ -12,6 +13,7 @@ var war =
         var STORAGE = Game.getObjectById('5dc8d0293253f2822f25293b');
 var M_STORAGE = Game.getObjectById('5dd14b4d8b1d9b586a08b4e6');
 var GOODS = 'O';
+var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
         var front_container = Game.getObjectById(container);
         var s_c = new Array();
         CS.run('storage',s_c);
@@ -39,7 +41,8 @@ var GOODS = 'O';
             {
                 var newName = 'claimer' + Game.time;
             console.log('Spawning new claimer: ' + newName);
-            spawn.spawnCreep([MOVE,CLAIM], newName, {
+            spawn.spawnCreep([CLAIM,CLAIM,
+            MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'claim_w'
                 }
@@ -128,9 +131,24 @@ var GOODS = 'O';
         }
         for (var name in claimer)
         {
-            console.log('claiming');
-            if(claimer[name].claimController(Game.getObjectById('5bbcae489099fc012e638b29'))==ERR_NOT_IN_RANGE)
-            claimer[name].moveTo(Game.getObjectById('5bbcae489099fc012e638b29'));
+            if (claimer[name].claimController(EnemyController)==ERR_INVALID_TARGET)
+            {
+            if(claimer[name].attackController(EnemyController)==ERR_NOT_IN_RANGE)
+            {
+            claimer[name].moveTo(EnemyController);
+            console.log('attacking',EnemyController.room.name,'s controller');
+            }
+            }
+            else if (claimer[name].claimController(EnemyController)==ERR_NOT_IN_RANGE)
+            {
+                claimer[name].moveTo(EnemyController);
+            console.log('claiming',EnemyController.room.name,'s controller');
+            }
+            else
+            {
+                console.log('claimer :',claimer[name],'moving to position',Game.flags.Flag1.pos);
+                claimer[name].moveTo(Game.flags.Flag1);
+            }
         }
         for (var name in waruper)
         {

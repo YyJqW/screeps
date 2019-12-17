@@ -49,8 +49,9 @@ var roleGuard=
             }
             else if (creep.memory.target!=-10)
             {
-                console.log('guardian :',creep,'moving to position',creep.memory.target.pos);
-                creep.moveTo(creep.memory.target.pos);
+                var position = new RoomPosition(creep.memory.target.pos.x,creep.memory.target.pos.y,creep.memory.target.room.name);
+                creep.moveTo(position);
+                console.log('guardian',creep,'moving to',position);
             }
     }
 }

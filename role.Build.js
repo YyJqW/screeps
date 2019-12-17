@@ -19,7 +19,7 @@ var roleBuild =
 	        creep.say('🚧');
         }
 	    if(creep.memory.building) {
-            if (important_target.length > 0&&Game.getObjectById(important_target[0]).progress!=undefined)
+            if (important_target.length > 0)
             {
                     for (var name in important_target)
                 {
