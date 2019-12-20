@@ -36,21 +36,21 @@ var roleTransport_o ={
             creep.memory.target = m_c[check].id;
             if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){
                 creep.memory.goods=dropped_source.resourceType;
-            creep.moveTo(dropped_source, {visualizePathStyle: {stroke: '#FFFFFF'}});
+            creep.moveTo(dropped_source, {visualizePathStyle: {stroke: '#FFD700'}});
             }
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
-            creep.moveTo(m_c[check]),{ visualizePathStyle: { stroke: '#FFFFFF'}};
+            creep.moveTo(m_c[check]),{ visualizePathStyle: { stroke: '#FFD700'}};
     }
 }
         else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name&&tower[0].store.getFreeCapacity(RESOURCE_ENERGY)>=500)
         {
             if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFFFFF'}});
+            creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFD700'}});
         }
         else if (creep.room.storage!=undefined)
         {
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
-            creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFFFFF'}});
+            creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFD700'}});
         }
         else 
         {
@@ -59,7 +59,7 @@ var roleTransport_o ={
                 s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
                 if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
-                creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
+                creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFD700'}});
                 break;
             }//待修改
             }
