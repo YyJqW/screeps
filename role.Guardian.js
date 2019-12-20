@@ -3,6 +3,10 @@ var roleGuard=
 {
     run:function(creep)
     {
+        if (creep.memory.target.pos == undefined)
+        {
+            creep.memory.target = -10;
+        }
         var target_creep = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS,2);
             var target_structure = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES,2);
             var target_heal = creep.room.find(FIND_MY_CREEPS,{
@@ -47,11 +51,32 @@ var roleGuard=
                 }
                 }
             }
+            else if (creep.memory.target == -10)
+            {
+                console.log(creep,' patroling');
+                if (creep.memory.patrol1 == false)
+                {
+                    creep.moveTo(Game.flags.patrol1);
+                    if (creep.pos.x==Game.flags.patrol1.pos.x&&creep.pos.y==Game.flags.patrol1.pos.y)
+                    {
+                    creep.memory.patrol1 = true;
+                    creep.memory.patrol2 = false;
+                    }
+                }
+                else if (creep.memory.patrol2 == false)
+                {
+                    creep.moveTo(Game.flags.patrol2);
+                    if (creep.pos.x==Game.flags.patrol2.pos.x&&creep.pos.y==Game.flags.patrol2.pos.y)
+                    {
+                    creep.memory.patrol2 = true;
+                    creep.memrry.patrol1 = false;
+                    }
+                }
+            }
             else if (creep.memory.target!=-10)
             {
-                var position = new RoomPosition(creep.memory.target.pos.x,creep.memory.target.pos.y,creep.memory.target.room.name);
-                creep.moveTo(position);
-                console.log('guardian',creep,'moving to',position);
+                creep.moveTo(creep.memory.target.pos);
+                console.log('guardian',creep,'moving to',creep.memory.target.pos);
             }
     }
 }

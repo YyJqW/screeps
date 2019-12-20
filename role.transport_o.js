@@ -20,6 +20,8 @@ var roleTransport_o ={
             creep.memory.goods = RESOURCE_ENERGY;
             for (var name in m_c)
             {
+                if (m_c[name]!=null)
+                {
                 for (var name_ in transporter)
                 {
                 if (creep != transporter[name_])
@@ -29,6 +31,7 @@ var roleTransport_o ={
                 }
                 }
                 if (!busy) {check=name;break;}
+                }
             }
             creep.memory.target = m_c[check].id;
             if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){

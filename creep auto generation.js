@@ -31,6 +31,7 @@ var CAG = {
         {
         for (var name in claimer)
         {
+            if (claimer[name].room.find(FIND_HOSTILE_CREEPS)!='')
             invader.push(claimer[name].room.find(FIND_HOSTILE_CREEPS));
             if (invader.length>0) 
             {
@@ -48,7 +49,7 @@ var CAG = {
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
                         HEAL,HEAL], newName, {
                 memory: {
-                    role: 'guard',home:spawn,target:-10
+                    role: 'guard',home:spawn,target:-10,patrol1:false,patrol2:false
                 }
             });//1k6
             
@@ -170,12 +171,11 @@ var CAG = {
         }
         for (var name in guardian)
         {
-        if (guardian[name].memory.target!=-10)
+        if (guardian[name].memory.target==-10)
         {
-            
-            if (invader.length>0) 
+            if (invader.length>0&&invader[name].pos!=undefined) 
             {
-                guardian[name].memory.target=invader[name].room.controller;
+                guardian[name].memory.target=invader[name];
             }
         }
         }

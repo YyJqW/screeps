@@ -1,8 +1,9 @@
-var container = '5de0d75b9276c577635ded73';
+var container = '5dfc508bd705e4988589d3af';
 var TARGET_CONTROLLER_ID = '5bbcae2b9099fc012e638814'
-var Attackernum = 2;
-var Claimnum = 1;
-var Warupmnum = 0;
+var UProom = 'E22S36';
+var Attackernum = 0;
+var Claimnum = 0;
+var Warupmnum = 2;
 var reapernum = 0;
 var CS = require('container sort');
 var attacktrriger = true;
@@ -52,9 +53,9 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             {
                 var newName = 'waruper' + Game.time;
             console.log('Spawning new waruper: ' + newName);
-            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
-            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
-            WORK,WORK], newName, {
+            spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            WORK,WORK,WORK,WORK], newName, {
                 memory: {
                     role: 'warup'
                 }
@@ -98,7 +99,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                     attacker[name].moveTo(target_creep[0]);
                 }
             }
-            else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
+            else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_RAMPART&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
             {
                 console.log('target_s',target_structure[0]);
                 attacker[name].attack(target_structure[0]);
@@ -131,6 +132,8 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
         }
         for (var name in claimer)
         {
+            if (EnemyController!=null&&EnemyController.owner!='lijuhaoshaleni')
+            {
             if (claimer[name].claimController(EnemyController)==ERR_INVALID_TARGET)
             {
             if(claimer[name].attackController(EnemyController)==ERR_NOT_IN_RANGE)
@@ -144,6 +147,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                 claimer[name].moveTo(EnemyController);
             console.log('claiming',EnemyController.room.name,'s controller');
             }
+            }
             else
             {
                 console.log('claimer :',claimer[name],'moving to position',Game.flags.Flag1.pos);
@@ -153,8 +157,8 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
         for (var name in waruper)
         {
             if(waruper[name].store.getUsedCapacity(RESOURCE_ENERGY)>0) {
-                if(waruper[name].upgradeController(Game.rooms['E23S39'].controller) == ERR_NOT_IN_RANGE) {
-                    waruper[name].moveTo(Game.rooms['E23S39'].controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                if(waruper[name].upgradeController(Game.rooms[UProom].controller) == ERR_NOT_IN_RANGE) {
+                    waruper[name].moveTo(Game.rooms[UProom].controller, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             else {
@@ -164,7 +168,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                       waruper[name].moveTo(front_container, {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
                    }
                 }
-                 if(s_c[0].store.getUsedCapacity(RESOURCE_ENERGY)>300)
+                 else if(s_c[0].store.getUsedCapacity(RESOURCE_ENERGY)>300)
                 {
                     if(waruper[name].withdraw(s_c[0],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
                       waruper[name].moveTo(s_c[0], {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
