@@ -42,7 +42,7 @@ var roleOHar = {
         if (creep.store.getFreeCapacity()>0)
         {
             if (creep.harvest(creep.memory.target)==ERR_NOT_IN_RANGE)
-            creep.moveTo(creep.memory.target);
+            creep.moveTo(creep.memory.target,{ visualizePathStyle: { stroke: '#FFFFFF'}});
         }
         else if (container!=null)
         {
@@ -51,7 +51,7 @@ var roleOHar = {
             else
             {
             if(creep.transfer(container,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(container);
+            creep.moveTo(container,{ visualizePathStyle: { stroke: '#FFFFFF'}});
             }
         }
         else if (container==null&&constructionSite[0]==undefined)

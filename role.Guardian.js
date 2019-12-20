@@ -20,7 +20,7 @@ var roleGuard=
             attack_parts.sort((a,b)=>b.hits-a.hits);
             if (attack_parts[0].hits<attack_parts[0].hitsMax)
             {
-                creep.moveTo(Game.flags.retreat);
+                creep.moveTo(Game.flags.retreat,{ visualizePathStyle: { stroke: '#FF0000'}});
                 creep.heal(creep);
             }
             else if (attacktrriger&&target_creep!=null)
@@ -28,7 +28,7 @@ var roleGuard=
                 console.log('target_c',target_creep);
                 if(creep.attack(target_creep)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(target_creep);
+                    creep.moveTo(target_creep,{ visualizePathStyle: { stroke: '#FF0000'}});
                 }
             }
             else if (attacktrriger&&target_structure!=null)
@@ -37,7 +37,7 @@ var roleGuard=
                 creep.attack(target_structure);
                 if(creep.attack(target_structure)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(target_structure);
+                    creep.moveTo(target_structure,{ visualizePathStyle: { stroke: '#FF0000'}});
                 }
             }
             else if (target_heal[0]!=null)
@@ -47,25 +47,25 @@ var roleGuard=
                 {
                 if (creep.rangedHeal(target_heal[0])==ERR_NOT_IN_RANGE)
                 {
-                creep.moveTo(target_heal[0]);
+                creep.moveTo(target_heal[0],{ visualizePathStyle: { stroke: '#00FF00'}});
                 }
                 }
             }
             else if (creep.memory.target == -10)
             {
                 console.log(creep,' patroling');
-                if (creep.memory.patrol1 == false)
+                if (!creep.memory.patrol1)
                 {
-                    creep.moveTo(Game.flags.patrol1);
+                    creep.moveTo(Game.flags.patrol1,{ visualizePathStyle: { stroke: '#00FFFF'}});
                     if (creep.pos.x==Game.flags.patrol1.pos.x&&creep.pos.y==Game.flags.patrol1.pos.y)
                     {
                     creep.memory.patrol1 = true;
                     creep.memory.patrol2 = false;
                     }
                 }
-                else if (creep.memory.patrol2 == false)
+                else if (!creep.memory.patrol2)
                 {
-                    creep.moveTo(Game.flags.patrol2);
+                    creep.moveTo(Game.flags.patrol2,{ visualizePathStyle: { stroke: '#00FFFF'}});
                     if (creep.pos.x==Game.flags.patrol2.pos.x&&creep.pos.y==Game.flags.patrol2.pos.y)
                     {
                     creep.memory.patrol2 = true;
@@ -75,7 +75,7 @@ var roleGuard=
             }
             else if (creep.memory.target!=-10)
             {
-                creep.moveTo(creep.memory.target.pos);
+                creep.moveTo(creep.memory.target.pos,{ visualizePathStyle: { stroke: '#FF0000'}});
                 console.log('guardian',creep,'moving to',creep.memory.target.pos);
             }
     }

@@ -87,7 +87,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             attack_parts.sort((a,b)=>b.hits-a.hits);
             if (attack_parts[0].hits==0)
             {
-                attacker[name].moveTo(Game.flags.retreat);
+                attacker[name].moveTo(Game.flags.retreat, {visualizePathStyle: {stroke: '#FF0000'}});
                 attacker[name].heal(attacker[name]);
                 console.log(attacker[name],'retreating');
             }
@@ -96,7 +96,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                 console.log('target_c',target_creep[0]);
                 if(attacker[name].attack(target_creep[0])==ERR_NOT_IN_RANGE)
                 {
-                    attacker[name].moveTo(target_creep[0]);
+                    attacker[name].moveTo(target_creep[0], {visualizePathStyle: {stroke: '#FF0000'}});
                 }
             }
             else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_RAMPART&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
@@ -105,7 +105,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                 attacker[name].attack(target_structure[0]);
                 if(attacker[name].attack(target_structure[0])==ERR_NOT_IN_RANGE)
                 {
-                    attacker[name].moveTo(target_structure[0]);
+                    attacker[name].moveTo(target_structure[0], {visualizePathStyle: {stroke: '#FF0000'}});
                 }
             }
                         else if (attacker[name].hits<attacker[name].hitsMax)
@@ -119,14 +119,14 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                 {
                 if (attacker[name].rangedHeal(target_heal[0])==ERR_NOT_IN_RANGE)
                 {
-                attacker[name].moveTo(target_heal[0]);
+                attacker[name].moveTo(target_heal[0], {visualizePathStyle: {stroke: '#00FF00'}});
                 }
                 }
             }
             else
             {
                 console.log('attacker :',attacker[name],'moving to position',Game.flags.Flag2.pos);
-                attacker[name].moveTo(Game.flags.Flag2);
+                attacker[name].moveTo(Game.flags.Flag2, {visualizePathStyle: {stroke: '#FFFFFF'}});
             }
 
         }
@@ -138,20 +138,20 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             {
             if(claimer[name].attackController(EnemyController)==ERR_NOT_IN_RANGE)
             {
-            claimer[name].moveTo(EnemyController);
+            claimer[name].moveTo(EnemyController, {visualizePathStyle: {stroke: '#FF00FF'}});
             console.log('attacking',EnemyController.room.name,'s controller');
             }
             }
             else if (claimer[name].claimController(EnemyController)==ERR_NOT_IN_RANGE)
             {
-                claimer[name].moveTo(EnemyController);
+                claimer[name].moveTo(EnemyController, {visualizePathStyle: {stroke: '#FF00FF'}});
             console.log('claiming',EnemyController.room.name,'s controller');
             }
             }
             else
             {
                 console.log('claimer :',claimer[name],'moving to position',Game.flags.Flag1.pos);
-                claimer[name].moveTo(Game.flags.Flag1);
+                claimer[name].moveTo(Game.flags.Flag1, {visualizePathStyle: {stroke: '#FFFFFF'}});
             }
         }
         for (var name in waruper)
@@ -183,23 +183,23 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             {
                 if (STORAGE==null)
                 {
-                    reaper[name].moveTo(Game.flags.Flag1);
+                    reaper[name].moveTo(Game.flags.Flag1, {visualizePathStyle: {stroke: '#FFFFFF'}});
                     console.log(reaper[name],'moving to ',Game.flags.Flag1);;
                 }
                 if (reaper[name].withdraw(STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
                 {
-                reaper[name].moveTo(STORAGE);
+                reaper[name].moveTo(STORAGE, {visualizePathStyle: {stroke: '#FFFFFF'}});
                 console.log(reaper[name],'moving to ',STORAGE,'reaping');
                 }
             }
             else if (reaper[name].room.storage!=undefined&&reaper[name].room.storage.owner=='lijunhaoshaleni')
         {
             if (reaper[name].room.storage.store.getFreeCapacity(reaper[name].memory.goods)>0&&reaper[name].transfer(reaper[name].room.storage,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
-            reaper[name].moveTo(reaper[name].room.storage);
+            reaper[name].moveTo(reaper[name].room.storage, {visualizePathStyle: {stroke: '#FFFFFF'}});
         }
         else 
         {
-                if(M_STORAGE.store.getFreeCapacity(reaper[name].memory.goods)>0&&reaper[name].transfer(M_STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
+                if(M_STORAGE.store.getFreeCapacity(reaper[name].memory.gsoods)>0&&reaper[name].transfer(M_STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
                 console.log(reaper[name],'backing');
                 reaper[name].moveTo(M_STORAGE,{ visualizePathStyle: { stroke: '#FFFF00'}});

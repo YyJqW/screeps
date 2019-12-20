@@ -18,7 +18,7 @@ var roleClaim =
         }
             if(creep.reserveController(Game.rooms[rOom[creep.memory.number]].controller)==ERR_NOT_IN_RANGE)
             {
-           creep.moveTo(Game.rooms[rOom[creep.memory.number]].controller);
+           creep.moveTo(Game.rooms[rOom[creep.memory.number]].controller, {visualizePathStyle: {stroke: '#FF00FF'}});
             }
     }
     };

@@ -38,7 +38,7 @@ var roleMine = {
         {
         if (creep.harvest(target)==ERR_NOT_IN_RANGE)
         {
-            creep.moveTo(target);
+            creep.moveTo(target,{ visualizePathStyle: { stroke: '#FFFFFF'}});
         }
     }
     else
@@ -49,7 +49,7 @@ var roleMine = {
             });
         if(creep.transfer(container,creep.memory.mineraltype)==ERR_NOT_IN_RANGE)
         {
-            creep.moveTo(container);
+            creep.moveTo(container,{ visualizePathStyle: { stroke: '#FFFFFF'}});
         }
     }
     }

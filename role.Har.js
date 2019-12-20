@@ -26,7 +26,7 @@ var roleHar = {
         {
                 creep.memory.container = closestcontainer;
         if (creep.pos.x!=closestcontainer.pos.x||creep.pos.y!=closestcontainer.pos.y)
-        creep.moveTo(closestcontainer);
+        creep.moveTo(closestcontainer,{ visualizePathStyle: { stroke: '#FFFFFF'}});
         else {
             var sources = creep.pos.findClosestByRange(FIND_SOURCES);
             creep.harvest(sources);
