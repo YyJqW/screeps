@@ -1,11 +1,13 @@
 var important_target = [];
 var myrooms = ['E22S38','E21S38','E23S39','E22S37','E22S36','E22S39'];
+var fcontainerID = '5dfc508bd705e4988589d3af';
 var roleUp = require('role.Up');
 var CS = require('container sort');
 var roleBuild =
 {
     run: function(creep)
     {
+        var fcontainer = Game.getObjectById(fcontainerID);
         var storage_ = creep.room.storage;
         var s_c = new Array();
         CS.run('storage',s_c);
@@ -58,12 +60,19 @@ var roleBuild =
                       creep.moveTo(storage_, {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
                    }
 	        }
+	        else if (fcontainer!=undefined&&fcontainer.store.getUsedCapacity(RESOURCE_ENERGY)>400)
+	        {
+	            if(creep.withdraw(fcontainer,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
+                      creep.moveTo(fcontainer, {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
+                   }
+                }
+
                 else if(s_c[0].store.getUsedCapacity(RESOURCE_ENERGY)>0){
                    if(creep.withdraw(s_c[0],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
                       creep.moveTo(s_c[0], {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
                    }
                 }
-	    }
+            }
     }
 };
 
