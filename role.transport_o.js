@@ -1,6 +1,9 @@
 var CS = require('container sort');
 var roleTransport_o ={
     run :function(creep){
+                var road = creep.pos.findInRange(FIND_STRUCTURES,1,{
+            filter:(road)=>road.structureType == STRUCTURE_ROAD
+        });
         var check=0;
         var busy = false;
         var tower = new Array();
@@ -13,6 +16,7 @@ var roleTransport_o ={
         var s_c=new Array()
         CS.run('storage',s_c);
         var dropped_source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+        s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         if(creep.store.getUsedCapacity() == 0)//收集
         {
@@ -56,13 +60,16 @@ var roleTransport_o ={
         {
             for (var name in s_c)
             {
-                s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
                 if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
                 creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFD700'}});
                 break;
             }//待修改
             }
+        }
+        if (road[0]!=undefined&&road[0].hits<road[0].hitsMax)
+        {
+            creep.repair(road[0]);
         }
     }
 };
