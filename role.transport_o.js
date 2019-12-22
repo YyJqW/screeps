@@ -38,10 +38,10 @@ var roleTransport_o ={
                 }
             }
             creep.memory.target = m_c[check].id;
-            if (dropped_source!=null){
+            if (dropped_source[0]!=undefined){
                 creep.memory.goods=dropped_source.resourceType;
-            if (creep.pickup(dropped_source)==ERR_NOT_IN_RANGE)
-            creep.moveTo(dropped_source, {visualizePathStyle: {stroke: '#FFD700'}});
+            if (creep.pickup(dropped_source[0])==ERR_NOT_IN_RANGE)
+            creep.moveTo(dropped_source[0], {visualizePathStyle: {stroke: '#FFD700'}});
             }
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
             creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'}});

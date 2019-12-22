@@ -139,7 +139,7 @@ var CAG = {
         ,WORK,WORK
         ,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
-                role: 'transport_o',home:spawn
+                role: 'transport_o',home:spawn,renewN:false
             }
         });//900
      //自动生成搬运工人

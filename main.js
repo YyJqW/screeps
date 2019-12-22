@@ -14,6 +14,7 @@ var roleWatch = require('role.watch');
 var roleGuard = require("role.Guardian");
 var NS = require('new spawn');
 var war = require('war');
+var CNC = require('CNC')
 var wartrriger = true;
 
 module.exports.loop = function () {
@@ -74,6 +75,9 @@ module.exports.loop = function () {
            roleOHar.run(creep);
         }
         if(creep.memory.role == 'transport_o') {
+            if(creep.ticksToLive<=300) creep.memory.renewN=true;
+            if (creep.memory.renewN) CNC.run(creep);
+            else
            roleTransport_o.run(creep);
          }
         if (creep.memory.role == 'claim')
