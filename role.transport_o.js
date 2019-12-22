@@ -15,7 +15,7 @@ var roleTransport_o ={
         CS.run('miner_o',m_c);
         var s_c=new Array()
         CS.run('storage',s_c);
-        var dropped_source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+        var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         if(creep.store.getUsedCapacity() == 0)//收集
@@ -38,12 +38,13 @@ var roleTransport_o ={
                 }
             }
             creep.memory.target = m_c[check].id;
-            if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){
+            if (dropped_source!=null){
                 creep.memory.goods=dropped_source.resourceType;
+            if (creep.pickup(dropped_source)==ERR_NOT_IN_RANGE)
             creep.moveTo(dropped_source, {visualizePathStyle: {stroke: '#FFD700'}});
             }
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
-            creep.moveTo(m_c[check]),{ visualizePathStyle: { stroke: '#FFD700'}};
+            creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'}});
     }
 }
         else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name&&tower[0].store.getFreeCapacity(RESOURCE_ENERGY)>=500)

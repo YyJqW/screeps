@@ -7,6 +7,7 @@ var roleOHar = {
         {
             filter:(ener)=>ener.id!='5bbcae3a9099fc012e6389a2'
         });
+        var droppedenergy = creep.pos.findInRange(FIND_DROPPED_RESOURCES,1);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'O_Har');
         var container = creep.pos.findClosestByRange(FIND_STRUCTURES,{
             filter:(contain)=> contain.structureType == STRUCTURE_CONTAINER
@@ -41,7 +42,11 @@ var roleOHar = {
         }
         if (creep.store.getFreeCapacity()>0)
         {
-            if (creep.harvest(creep.memory.target)==ERR_NOT_IN_RANGE)
+            if (droppedenergy[0]!=undefined)
+            {
+                creep.pickup(droppedenergy[0],RESOURCE_ENERGY);
+            }
+            else if (creep.harvest(creep.memory.target)==ERR_NOT_IN_RANGE)
             creep.moveTo(creep.memory.target,{ visualizePathStyle: { stroke: '#FFFFFF'}});
         }
         else if (container!=null)

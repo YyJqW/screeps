@@ -53,23 +53,22 @@ var roleGuard=
             }
             else if (creep.memory.target == -10)
             {
-                console.log(creep,' patroling');
                 if (!creep.memory.patrol1)
                 {
                     creep.moveTo(Game.flags.patrol1,{ visualizePathStyle: { stroke: '#00FFFF'}});
+                    console.log(creep,' patroling to 1');
                     if (creep.pos.x==Game.flags.patrol1.pos.x&&creep.pos.y==Game.flags.patrol1.pos.y)
                     {
                     creep.memory.patrol1 = true;
-                    creep.memory.patrol2 = false;
                     }
                 }
-                else if (!creep.memory.patrol2)
+                else if (creep.memory.patrol1)
                 {
                     creep.moveTo(Game.flags.patrol2,{ visualizePathStyle: { stroke: '#00FFFF'}});
+                    console.log(creep,' patroling to 2');
                     if (creep.pos.x==Game.flags.patrol2.pos.x&&creep.pos.y==Game.flags.patrol2.pos.y)
                     {
-                    creep.memory.patrol2 = true;
-                    creep.memrry.patrol1 = false;
+                    creep.memory.patrol1 = false;
                     }
                 }
             }

@@ -1,9 +1,9 @@
 var CS = require('container sort');
 var Harnum = 0;
 var Transnum = 0;
-var Upnum = 1;
-var buildnum = 1;
-var Transnum_i = 1;
+var Upnum = 0;
+var buildnum = 0;
+var Transnum_i = 0;
 var NS = {
     run: function (spawn) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har'&&creep.memory.home.name==spawn.name);
