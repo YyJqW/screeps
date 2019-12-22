@@ -75,7 +75,7 @@ module.exports.loop = function () {
            roleOHar.run(creep);
         }
         if(creep.memory.role == 'transport_o') {
-            if(creep.ticksToLive<=300) creep.memory.renewN=true;
+            if(creep.ticksToLive<=400) creep.memory.renewN=true;
             if (creep.memory.renewN) CNC.run(creep);
             else
            roleTransport_o.run(creep);

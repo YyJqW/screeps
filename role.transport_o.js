@@ -18,6 +18,7 @@ var roleTransport_o ={
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
+        console.log(creep,'at',creep.pos);
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             check=0;
@@ -38,7 +39,7 @@ var roleTransport_o ={
                 }
             }
             creep.memory.target = m_c[check].id;
-            if (dropped_source[0]!=undefined){
+            if (dropped_source[0]!=undefined&&dropped_source[0].amount>=1000){
                 creep.memory.goods=dropped_source.resourceType;
             if (creep.pickup(dropped_source[0])==ERR_NOT_IN_RANGE)
             creep.moveTo(dropped_source[0], {visualizePathStyle: {stroke: '#FFD700'}});

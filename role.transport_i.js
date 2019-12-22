@@ -1,5 +1,5 @@
 var link_o = ['5dd0c9af25214e5302d1a290','5dd3e1c8a1ca0b0ae302acaf','5de7b2180a41178afdbcaef0'];
-var towers = ['5dcb80c9b272c27f9ad4889f','5dce10c0080252ca761c99b2','5dd0be2aa851cf478471b88b','5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544','5de89bced4468d7c3bdecd2a'];
+var towers = ['5dcb80c9b272c27f9ad4889f','5dce10c0080252ca761c99b2','5dd0be2aa851cf478471b88b','5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544','5de89bced4468d7c3bdecd2a','5dfe41609f4c7d93393cff05'];
 var CS = require('container sort');
 var FS_unfull = require('findstructure_energy_unfull');
 var roleTransport_i =
@@ -79,7 +79,7 @@ var roleTransport_i =
             creep.moveTo(s_c[0]),{ visualizePathStyle: { stroke: '#FFFF00'}};
         }
         }
-        else if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0)
+         else if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0)
         {
             if (creep.transfer(Game.spawns[creep.memory.home.name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
             creep.moveTo(Game.spawns[creep.memory.home.name]),{ visualizePathStyle: { stroke: '#FFFF00'}};

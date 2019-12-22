@@ -4,10 +4,15 @@ var CNC=
     {
         if (creep.memory.renewN)
         {
-            creep.moveTo(creep.memory.home);
-            creep.memory.home.renewCreep(creep);
+            creep.moveTo(Game.spawns[creep.memory.home.name],{visualizePathStyle: { stroke: '#0000FF'}});
+            Game.spawns[creep.memory.home.name].renewCreep(creep);
         }
-        if (creep.ticksToLive>=1500||creep.memory.home.store.getUsedCapacity(RESOURCE_ENERGY)==0) creep.memory.renewN=false;
+        if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0&&creep.store.getUsedCapacity(RESOURCE_ENERGY)>0)
+        {
+            creep.transfer(Game.spawns[creep.memory.home.name],RESOURCE_ENERGY);
+        }
+        if (creep.ticksToLive>=1400) creep.memory.renewN=false;
+         console.log(creep,'renewing at',creep.pos,'livetime now',creep.ticksToLive);
     }
 };
 
