@@ -10,7 +10,7 @@ var claimernum = 2;
 var Transnumo = 2;
 var watchernum = 2;
 var guardiannum = 0;
-var GBT = false;
+var GBT = true;
 var CAG = {
     run: function (spawn) {
         var invader=new Array();
@@ -120,7 +120,7 @@ var CAG = {
            } //自动生成建筑工人
        }
     }
-    if(spawn.name!='Spawn1'&&spawn.name!='Spawn1——1')
+    if(spawn.name!=''&&spawn.name!='')
     {
     if (harvesters_o.length < Harnum_o){
         var newName = 'Harvester_o' + spawn.name + Game.time;

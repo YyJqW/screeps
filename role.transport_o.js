@@ -1,9 +1,10 @@
 var CS = require('container sort');
 var roleTransport_o ={
     run :function(creep){
-                var road = creep.pos.findInRange(FIND_STRUCTURES,1,{
+                var road = creep.pos.findInRange(FIND_STRUCTURES,2,{
             filter:(road)=>road.structureType == STRUCTURE_ROAD
         });
+        road.sort((a,b)=>a.hits-b.hits);
         var check=0;
         var busy = false;
         var tower = new Array();
@@ -17,6 +18,7 @@ var roleTransport_o ={
         CS.run('storage',s_c);
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
+        m_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         console.log(creep,'at',creep.pos);
         if(creep.store.getUsedCapacity() == 0)//收集
