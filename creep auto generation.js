@@ -1,6 +1,7 @@
 var CS = require('container sort');
 var Harnum = 6;
-var Transnum = 5;
+var Transnum_m = 1;
+var Transnum = 0;
 var Upnum = 1;
 var buildnum = 1;
 var Transnum_i = 1;
@@ -19,6 +20,7 @@ var CAG = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
         var harvesters_o = _.filter(Game.creeps, (creep) => creep.memory.role == 'O_Har');
         var upers = _.filter(Game.creeps, (creep) => creep.memory.role == 'up'&&creep.memory.home.room.name==spawn.room.name);
+        var transporter_m = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_m');
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'build');
         var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.name==spawn.name);
@@ -41,7 +43,7 @@ var CAG = {
         }
         }
         console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
-        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length,'Guardian=',guardian.length);
+        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length,'Guardian=',guardian.length,'TM= ',transporter_m.length);
         if (guardian.length<guardiannum) {
             var newName = 'guardian' + Game.time;
             console.log('Spawning new attacker: ' + newName);
@@ -81,6 +83,17 @@ var CAG = {
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'transport',home:spawn
+                }
+            });//900
+         //自动生成搬运工人
+    }
+        else if (transporter_m.length < Transnum_m) {
+            var newName = 'trans' + '['+spawn.name +']'+ Game.time;
+            console.log('Spawning new transporter_m: ' + newName);
+            spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+                memory: {
+                    role: 'transport_m',home:spawn
                 }
             });//900
          //自动生成搬运工人

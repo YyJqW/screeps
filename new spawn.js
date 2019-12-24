@@ -1,6 +1,7 @@
 var CS = require('container sort');
 var Harnum = 0;
-var Transnum = 5;
+var Transnum = 2;
+var Transnum_m = 0;
 var Upnum = 2;
 var buildnum = 1;
 var Transnum_i = 1;
@@ -9,11 +10,12 @@ var NS = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har'&&creep.memory.home.name==spawn.name);
         var upers = _.filter(Game.creeps, (creep) => creep.memory.role == 'up'&&creep.memory.home.name==spawn.name);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport'&&creep.memory.home.name==spawn.name);
+        var transporter_m = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_m'&&creep.memory.home.name==spawn.name);
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'build'&&creep.memory.home.name==spawn.name);
         var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.name==spawn.name);
         var s_c = new Array();
         CS.run('storage',s_c);
-        console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length);
+        console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,'TM= ',transporter_m.length);
         if (transporter_i.length < Transnum_i){
                 var newName = 'trans_i' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter_i: ' + newName);
@@ -42,6 +44,17 @@ var NS = {
             });//900
          //自动生成搬运工人
     }
+    else if (transporter_m.length < Transnum_m) {
+        var newName = 'trans' + '['+spawn.name +']'+ Game.time;
+        console.log('Spawning new transporter_m: ' + newName);
+        spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+        MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+            memory: {
+                role: 'transport_m',home:spawn
+            }
+        });//900
+     //自动生成搬运工人
+}
     else if (upers.length < Upnum) {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
