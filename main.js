@@ -1,7 +1,7 @@
 var roleHar = require('role.Har');
 var roleBuild = require('role.Build');
 var roleUp = require('role.Up');
-var roleTransport = require('role.Transporter');
+var roleTransport = require('transporter_e');
 var roleMine = require('role.Mine');
 var roleOHar = require('role.Outminer')
 var roleClaim = require('role.Claimer');
@@ -12,6 +12,7 @@ var roleTransport_i = require('role.transport_i');
 var roleTransport_o = require('role.transport_o');
 var roleWatch = require('role.watch');
 var roleGuard = require("role.Guardian");
+var roleTransport_m = require('role.Transporter_m')
 var NS = require('new spawn');
 var war = require('war');
 var CNC = require('CNC')
@@ -52,6 +53,10 @@ module.exports.loop = function () {
          }
         if(creep.memory.role == 'transport') {
             roleTransport.run(creep);
+        }
+        if(creep.memory.role == 'transport_m')
+        {
+            roleTransport_m.run(creep);
         }
          if(creep.memory.role == 'Har') {
             roleHar.run(creep);

@@ -1,5 +1,5 @@
 var CS = require('container sort');
-var roleTransport ={
+var roleTransport_m ={
     run :function(creep){
         var check=0;
         var busy = false;
@@ -45,4 +45,4 @@ var roleTransport ={
         }
     }
 };
-module.exports = roleTransport;
+module.exports = roleTransport_m;
