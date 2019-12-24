@@ -1,5 +1,4 @@
 var CS = require('container sort');
-var container_energy_num = 4;
 var roleHar = {
     run: function (creep) {
         var link = creep.pos.findInRange(FIND_STRUCTURES,1,{
@@ -35,10 +34,10 @@ var roleHar = {
         }
         else
         {
-                for (var i = 0; i < container_energy_num;i++) {
+                for (var i = 0; i < container.length;i++) {
             busy = false;
             for (var name in harvesters) {
-                if (harvesters[name].pos.x == container[i].pos.x&&harvesters[name].pos.y == container[i].pos.y&&harvesters[name]!=creep){
+                if (harvesters[name].memory.container!=-10&&harvesters[name].memory.container.id == container[i].id&&harvesters[name]!=creep){
                     busy = true;
                     break;
                 }
@@ -51,15 +50,16 @@ var roleHar = {
             }
         }
         }
-        if (creep.pos.x != creep.memory.container.pos.x||creep.pos.y != creep.memory.container.pos.y) {
-            creep.moveTo(creep.memory.container, {
+        var Contain = Game.getObjectById(creep.memory.container.id);
+        if (creep.pos.x != Contain.pos.x||creep.pos.y != Contain.pos.y) {
+            creep.moveTo(Contain, {
                 visualizePathStyle: {
                     stroke: '#ffaa00'
                 }
             }); //前往箱子
         } 
         else if(creep.store.getFreeCapacity()>0)
-            {            
+            {
                 if (creep.memory.container.store.getUsedCapacity()>0)
                 {
                 creep.withdraw(creep.memory.container,RESOURCE_ENERGY);

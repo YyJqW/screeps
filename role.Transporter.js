@@ -40,7 +40,7 @@ var roleTransport ={
                 creep.moveTo(mine_c[check]),{ visualizePathStyle: { stroke: '#FFD700'}};
             }
         }
-            else if (m_c[0]!=null)
+           else if (m_c[0]!=null)
             {
             check=0;
             creep.memory.goods = RESOURCE_ENERGY;

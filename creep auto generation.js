@@ -1,6 +1,6 @@
 var CS = require('container sort');
-var Harnum = 4;
-var Transnum = 1;
+var Harnum = 6;
+var Transnum = 5;
 var Upnum = 1;
 var buildnum = 1;
 var Transnum_i = 1;
@@ -10,7 +10,7 @@ var claimernum = 2;
 var Transnumo = 2;
 var watchernum = 2;
 var guardiannum = 0;
-var GBT = true;
+var GBT = false;
 var CAG = {
     run: function (spawn) {
         var invader=new Array();
@@ -70,15 +70,15 @@ var CAG = {
             spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY
             ,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
-                    role: 'Har',home:spawn
+                    role: 'Har',home:spawn,container:-10
                 }
             });
         } //自动生成矿工
         else if (transporter.length < Transnum) {
             var newName = 'trans' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter: ' + newName);
-            spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
-            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+            spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'transport',home:spawn
                 }
@@ -97,7 +97,8 @@ var CAG = {
     else if (upers.length < Upnum) {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
-               spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,WORK,WORK,
+               spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+               WORK,WORK,WORK,
                MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                    memory: {
                        role: 'up',home:spawn
@@ -124,8 +125,9 @@ var CAG = {
     {
     if (harvesters_o.length < Harnum_o){
         var newName = 'Harvester_o' + spawn.name + Game.time;
-        spawn.spawnCreep([CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,
-        MOVE,MOVE,MOVE,MOVE], newName, {
+        spawn.spawnCreep([CARRY,
+        WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,
+        MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
                 role: 'O_Har',home:spawn
             }
@@ -146,7 +148,8 @@ var CAG = {
 }
     else if (claimer.length < claimernum){
         var newName = 'claimer' + spawn.name + Game.time;
-        spawn.spawnCreep([CLAIM,CLAIM,
+        spawn.spawnCreep([
+        CLAIM,CLAIM,
         MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
                 role: 'claim',home:spawn,number:claimer.length

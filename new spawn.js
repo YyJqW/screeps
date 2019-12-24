@@ -1,8 +1,8 @@
 var CS = require('container sort');
 var Harnum = 0;
-var Transnum = 0;
-var Upnum = 0;
-var buildnum = 0;
+var Transnum = 5;
+var Upnum = 2;
+var buildnum = 1;
 var Transnum_i = 1;
 var NS = {
     run: function (spawn) {
@@ -25,7 +25,7 @@ var NS = {
         }
         else if (harvesters.length < Harnum) {
             var newName = 'Harvester' + spawn.name + Game.time;
-            spawn.spawnCreep([MOVE,MOVE,WORK,WORK,WORK,WORK], newName, {
+            spawn.spawnCreep([MOVE,MOVE,WORK,WORK], newName, {
                 memory: {
                     role: 'Har',home:spawn
                 }
@@ -34,7 +34,8 @@ var NS = {
         else if (transporter.length < Transnum) {
             var newName = 'trans' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter: ' + newName);
-            spawn.spawnCreep([CARRY,MOVE,CARRY], newName, {
+            spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'transport',home:spawn
                 }
@@ -44,7 +45,9 @@ var NS = {
     else if (upers.length < Upnum) {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
-               spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,CARRY,WORK,WORK,CARRY,CARRY,WORK,WORK,WORK,WORK,WORK,WORK], newName, {
+               spawn.spawnCreep([MOVE,MOVE,MOVE,MOVE,
+               CARRY,CARRY,
+               WORK,WORK,WORK,WORK,WORK,WORK], newName, {
                    memory: {
                        role: 'up',home:spawn
                    }
