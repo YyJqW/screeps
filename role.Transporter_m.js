@@ -1,38 +1,25 @@
 var CS = require('container sort');
 var roleTransport_m ={
     run :function(creep){
-        var check=0;
-        var busy = false;
         var s_c=new Array()
         CS.run('storage',s_c);
-        var mine_c=new Array();
-        CS.run('mineral',mine_c);
-        var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
-        mine_c.sort((a,b) => b.store.getUsedCapacity() - a.store.getUsedCapacity());
+        var mineral=Game.spawns[creep.memory.home.name].room.find(FIND_MINERALS);
+        var mine_c=mineral[0].pos.findInRange(FIND_STRUCTURES,3,{
+            filter:(contai)=>contai.structureType==STRUCTURE_CONTAINER
+        });
         if(creep.store.getUsedCapacity() == 0)//收集
         {
-            if (mine_c[0].store.getUsedCapacity()>600)
-            {
-                check=0;
-                for (var name in mine_c)
-            {
-                for (var name_ in transporter)
-                {
-                if (creep != transporter[name_])
-                {
-                if (transporter[name_].memory.target == mine_c[name].id&&check<mine_c.length-1) {check++; busy=true;break}
-                else busy=false;
-                }
-                }
-                if (!busy) break
+            creep.memory.goods = mineral[0].mineralType;
+            if (creep.withdraw(mine_c[0],creep.memory.goods)==ERR_NOT_IN_RANGE){
+                creep.moveTo(mine_c[0]),{ visualizePathStyle: { stroke: '#FFD700'}};
             }
-            creep.memory.target = mine_c[check].id;
-            creep.memory.goods = mine_c[check].pos.findClosestByRange(FIND_MINERALS).mineralType;
-            if (creep.withdraw(mine_c[check],creep.memory.goods)==ERR_NOT_IN_RANGE){
-                creep.moveTo(mine_c[check]),{ visualizePathStyle: { stroke: '#FFD700'}};
-            }
-        }
 }
+else if (creep.room.storage!=undefined)
+        {
+            if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
+            creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFD700'}});
+        }
+else
         {
             for (var name in s_c)
             {

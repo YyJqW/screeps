@@ -20,7 +20,7 @@ var CAG = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
         var harvesters_o = _.filter(Game.creeps, (creep) => creep.memory.role == 'O_Har');
         var upers = _.filter(Game.creeps, (creep) => creep.memory.role == 'up'&&creep.memory.home.room.name==spawn.room.name);
-        var transporter_m = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_m');
+        var transporter_m = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_m'&&creep.memory.home.room.name==spawn.room.name);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'build');
         var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.name==spawn.name);
@@ -88,12 +88,12 @@ var CAG = {
          //自动生成搬运工人
     }
         else if (transporter_m.length < Transnum_m) {
-            var newName = 'trans' + '['+spawn.name +']'+ Game.time;
+            var newName = 'trans_m' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter_m: ' + newName);
             spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
-                    role: 'transport_m',home:spawn
+                    role: 'transport_m',home:spawn,target:-10
                 }
             });//900
          //自动生成搬运工人
