@@ -14,7 +14,6 @@ var roleTransport_o ={
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
         m_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));
-        console.log(m_c[0].store.getUsedCapacity());
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         creep.memory.goods = RESOURCE_ENERGY;
         console.log(creep,'at',creep.pos);
