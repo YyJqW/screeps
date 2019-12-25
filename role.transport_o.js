@@ -7,11 +7,6 @@ var roleTransport_o ={
         road.sort((a,b)=>a.hits-b.hits);
         var check=0;
         var busy = false;
-        var tower = new Array();
-        tower = creep.room.find(FIND_MY_STRUCTURES,{
-            filter: { structureType: STRUCTURE_TOWER }
-        });
-        tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         var m_c=new Array()
         CS.run('miner_o',m_c);
         var s_c=new Array()
@@ -19,12 +14,13 @@ var roleTransport_o ={
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
         m_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));
+        console.log(m_c[0].store.getUsedCapacity());
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
+        creep.memory.goods = RESOURCE_ENERGY;
         console.log(creep,'at',creep.pos);
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             check=0;
-            creep.memory.goods = RESOURCE_ENERGY;
             for (var name in m_c)
             {
                 if (m_c[name]!=null)
@@ -50,26 +46,29 @@ var roleTransport_o ={
             creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'}});
     }
 }
-        else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name&&tower[0].store.getFreeCapacity(RESOURCE_ENERGY)>=500)
-        {
-            if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFD700'}});
-        }
         else if (creep.room.storage!=undefined)
         {
-            if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
-            creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFD700'}});
+            creep.memory.backgoal = creep.room.storage;
+            var st = Game.getObjectById(creep.memory.backgoal.id);
+            if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(st,creep.memory.goods)==ERR_NOT_IN_RANGE)
+            creep.moveTo(st,{ visualizePathStyle: { stroke: '#FFD700'}});
+            else if (creep.transfer(st,creep.memory.goods)==OK)
+            creep.memory.done=true;
         }
         else 
         {
-            for (var name in s_c)
+            if (creep.memory.done)
             {
-                if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
-            {
-                creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFD700'}});
-                break;
-            }//待修改
+            creep.memory.backgoal = s_c[0];
+            creep.memory.done=false;
             }
+            var sc = Game.getObjectById(creep.memory.backgoal.id);
+                if(creep.transfer(sc,creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
+            {
+                creep.moveTo(sc,{ visualizePathStyle: { stroke: '#FFD700'}});
+            }//待修改
+            else if (creep.transfer(sc,creep.memory.goods)==OK)
+            creep.memory.done=true;
         }
         if (road[0]!=undefined&&road[0].hits<road[0].hitsMax)
         {

@@ -8,12 +8,16 @@ var Transnum_i = 1;
 var Minernum = 1;
 var Harnum_o =2;
 var claimernum = 2;
-var Transnumo = 2;
+var Transnumo = 4;
 var watchernum = 2;
 var guardiannum = 0;
 var GBT = false;
 var CAG = {
     run: function (spawn) {
+        var mineral=spawn.room.find(FIND_MINERALS);
+        var mine_c=mineral[0].pos.findInRange(FIND_STRUCTURES,3,{
+            filter:(contai)=>contai.structureType==STRUCTURE_CONTAINER
+        });
         var invader=new Array();
         var mineral = spawn.room.find(FIND_MINERALS);
         var miner = _.filter(Game.creeps, (creep) => creep.memory.role == 'mine'&&creep.memory.home.room.name==spawn.room.name);
@@ -87,7 +91,7 @@ var CAG = {
             });//900
          //自动生成搬运工人
     }
-        else if (transporter_m.length < Transnum_m) {
+        else if (transporter_m.length < Transnum_m&&mine_c[0].getUsedCapacity()>600) {
             var newName = 'trans_m' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter_m: ' + newName);
             spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,
@@ -100,7 +104,8 @@ var CAG = {
     }
         else if (miner.length < Minernum&&mineral[0].mineralAmount>0) {
             var newName = 'Miner' + spawn.name + Game.time;
-            spawn.spawnCreep([CARRY,WORK,WORK,WORK,WORK,WORK
+            spawn.spawnCreep([CARRY,
+            WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK
             ,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
                     role: 'mine',home:spawn
@@ -154,7 +159,7 @@ var CAG = {
         ,WORK,WORK
         ,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
-                role: 'transport_o',home:spawn,renewN:false
+                role: 'transport_o',home:spawn,renewN:false,done:true
             }
         });//900
      //自动生成搬运工人
