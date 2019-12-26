@@ -40,6 +40,8 @@ var CAG = {
         {
             if (watcher[name].room.find(FIND_HOSTILE_CREEPS)[0]!=undefined)
             invader.push(watcher[name].room.find(FIND_HOSTILE_CREEPS)[0]);
+            if (watcher[name].room.find(FIND_HOSTILE_STRUCTURES)[0]!=undefined)
+            invader.push(watcher[name].room.find(FIND_HOSTILE_STRUCTURES)[0]);
             if (invader.length>0) 
             {
                 guardiannum=invader.length;
