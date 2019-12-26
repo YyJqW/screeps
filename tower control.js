@@ -1,6 +1,6 @@
 var towers = ['5dce10c0080252ca761c99b2','5dcb80c9b272c27f9ad4889f','5dd0be2aa851cf478471b88b',
 '5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544',
-'5de89bced4468d7c3bdecd2a','5dfe41609f4c7d93393cff05','5dfe084edc7f996ea0e365f9'];
+'5de89bced4468d7c3bdecd2a','5dfe41609f4c7d93393cff05','5dfe084edc7f996ea0e365f9','5e034b5fd705e495bf8c8e3b'];
 var roleRepair = require('role.Repair');
 var TC ={
     run :function()

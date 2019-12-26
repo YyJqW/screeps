@@ -17,7 +17,6 @@ var NS = require('new spawn');
 var war = require('war');
 var CNC = require('CNC')
 var wartrriger = true;
-
 module.exports.loop = function () {
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {

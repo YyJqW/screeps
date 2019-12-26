@@ -1,5 +1,5 @@
 var important_target = [];
-var myrooms = ['E22S38','E21S38','E23S39','E22S37','E22S36','E22S39'];
+var myrooms = ['E22S38','E21S38','E23S39','E22S37','E22S36','E22S39','E21S37'];
 var fcontainerID = '5dfc508bd705e4988589d3af';
 var roleUp = require('role.Up');
 var CS = require('container sort');
@@ -42,6 +42,7 @@ var roleBuild =
             {
                 for (var name_ in Game.rooms[myrooms[name]].find(FIND_MY_CONSTRUCTION_SITES))
                 {
+                    if(Game.rooms[myrooms[name]]!=undefined)
             targets.push(Game.rooms[myrooms[name]].find(FIND_MY_CONSTRUCTION_SITES)[name_]);
                 }
             }

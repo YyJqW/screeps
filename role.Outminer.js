@@ -1,5 +1,4 @@
-var energylist = ['5bbcae3a9099fc012e6389a5','5bbcae399099fc012e63899f']
-var energy_num = 2;
+var energylist = ['5bbcae3a9099fc012e6389a5','5bbcae399099fc012e63899f','5bbcae2b9099fc012e638815']
 var roleOHar = {
     run: function (creep) {
         var constructionSite_ = creep.pos.findInRange(FIND_MY_CONSTRUCTION_SITES,3);
@@ -25,7 +24,7 @@ var roleOHar = {
         }
         else
         {
-                for (var i = 0; i < energy_num;i++) {
+                for (var i = 0; i < energylist.length;i++) {
             busy = false;
             for (var name in harvesters) {
                 if (harvesters[name].memory.target==energy[i]&&harvesters[name]!=creep){

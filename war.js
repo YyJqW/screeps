@@ -3,7 +3,7 @@ var TARGET_CONTROLLER_ID = '5bbcae2b9099fc012e638814'
 var UProom = 'E22S36';
 var Attackernum = 0;
 var Claimnum = 0;
-var Warupmnum = 1;
+var Warupmnum = 0;
 var reapernum = 0;
 var CS = require('container sort');
 var attacktrriger = true;
@@ -99,7 +99,7 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
                     attacker[name].moveTo(target_creep[0], {visualizePathStyle: {stroke: '#FF0000'}});
                 }
             }
-            else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_RAMPART&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
+            else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
             {
                 console.log('target_s',target_structure[0]);
                 attacker[name].attack(target_structure[0]);

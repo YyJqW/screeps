@@ -3,10 +3,6 @@ var roleGuard=
 {
     run:function(creep)
     {
-        if (creep.memory.target.pos == undefined)
-        {
-            creep.memory.target = -10;
-        }
         var target_creep = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS,2);
             var target_structure = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES,2);
             var target_heal = creep.room.find(FIND_MY_CREEPS,{
@@ -74,8 +70,10 @@ var roleGuard=
             }
             else if (creep.memory.target!=-10)
             {
-                creep.moveTo(creep.memory.target.pos,{ visualizePathStyle: { stroke: '#FF0000'}});
-                console.log('guardian',creep,'moving to',creep.memory.target.pos);
+                var location = Game.rooms[creep.memory.target.roomName].getPositionAt(creep.memory.target.x,creep.memory.target.y);
+                creep.moveTo(location,{ visualizePathStyle: { stroke: '#FF0000'}});
+                console.log('guardian',creep,'moving to',location);
+                if (creep.pos.x==location.x&&creep.pos.y==location.y) creep.memory.target=-10;
             }
     }
 }

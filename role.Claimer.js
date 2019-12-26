@@ -1,4 +1,4 @@
-var rOom = ['E22S39','E22S37'];
+var rOom = ['E22S39','E22S37','E21S37'];
 var CS = require('container sort');
 var roleClaim =
 {
@@ -16,7 +16,7 @@ var roleClaim =
                 break;
             }
         }
-            if(creep.reserveController(Game.rooms[rOom[creep.memory.number]].controller)==ERR_NOT_IN_RANGE)
+            if(Game.rooms[rOom[creep.memory.number]]!=undefined&&creep.reserveController(Game.rooms[rOom[creep.memory.number]].controller)==ERR_NOT_IN_RANGE)
             {
            creep.moveTo(Game.rooms[rOom[creep.memory.number]].controller, {visualizePathStyle: {stroke: '#F0F8FF'}});
             }

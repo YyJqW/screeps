@@ -6,10 +6,10 @@ var Upnum = 1;
 var buildnum = 1;
 var Transnum_i = 1;
 var Minernum = 1;
-var Harnum_o =2;
-var claimernum = 2;
-var Transnumo = 2;
-var watchernum = 2;
+var Harnum_o =3;
+var claimernum = 3;
+var Transnumo = 4;
+var watchernum = 3;
 var guardiannum = 0;
 var GBT = false;
 var CAG = {
@@ -34,12 +34,12 @@ var CAG = {
         var guardian = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard');
         var s_c = new Array();
         CS.run('storage',s_c);
-        if(claimer[0]!=undefined)
+        if(watcher[0]!=undefined)
         {
-        for (var name in claimer)
+        for (var name in watcher)
         {
-            if (claimer[name].room.find(FIND_HOSTILE_CREEPS)[0]!=undefined)
-            invader.push(claimer[name].room.find(FIND_HOSTILE_CREEPS)[0]);
+            if (watcher[name].room.find(FIND_HOSTILE_CREEPS)[0]!=undefined)
+            invader.push(watcher[name].room.find(FIND_HOSTILE_CREEPS)[0]);
             if (invader.length>0) 
             {
                 guardiannum=invader.length;
@@ -91,7 +91,7 @@ var CAG = {
             });//900
          //自动生成搬运工人
     }
-        else if (transporter_m.length < Transnum_m&&mine_c[0].getUsedCapacity()>600) {
+        else if (transporter_m.length < Transnum_m&&mine_c[0].store.getUsedCapacity()>600) {
             var newName = 'trans_m' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter_m: ' + newName);
             spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,
@@ -167,7 +167,7 @@ var CAG = {
     else if (claimer.length < claimernum){
         var newName = 'claimer' + spawn.name + Game.time;
         spawn.spawnCreep([
-        CLAIM,CLAIM,
+        CLAIM,CLAIM,CLAIM,
         MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
             memory: {
                 role: 'claim',home:spawn,number:claimer.length

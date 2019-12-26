@@ -3,7 +3,7 @@ var Harnum = 0;
 var Transnum = 2;
 var Transnum_m = 0;
 var Upnum = 2;
-var buildnum = 1;
+var buildnum = 2;
 var Transnum_i = 1;
 var NS = {
     run: function (spawn) {
@@ -74,9 +74,9 @@ var NS = {
              if (builders.length < buildnum) {
                var newName = 'B' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new builder: ' + newName);
-               spawn.spawnCreep([WORK,
-               MOVE,
-               CARRY], newName, {
+               spawn.spawnCreep([WORK,WORK,
+               CARRY,CARRY,CARRY,CARRY,
+               MOVE,MOVE,MOVE,MOVE], newName, {
                    memory: {
                        role: 'build',home:spawn
                    }
