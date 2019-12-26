@@ -27,14 +27,14 @@ var roleTransport_i =
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         for (var name in lo)
         {
-            if (lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>0)
+            if (storage_.store.getFreeCapacity()>0&&lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>0)
             {
             transmode = true;
             creep.memory.link = lo[name];
             break;
             }
         }
-        if (transmode)
+        if (creep.memory.done&&transmode)
         {
             if(creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0)//收集
         {
@@ -57,6 +57,8 @@ var roleTransport_i =
             creep.moveTo(tower[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
             break;
             }
+            else if (creep.transfer(tower[name],RESOURCE_ENERGY)==OK)
+            break;
         }
                 else if(creep.transfer(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
@@ -67,6 +69,7 @@ var roleTransport_i =
             }
     }
     else{
+        creep.memory.done=false;
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             s_c.sort((a,b) => b.store.getUsedCapacity(RESOURCE_ENERGY)/b.store.getCapacity(RESOURCE_ENERGY)*100 - a.store.getUsedCapacity(RESOURCE_ENERGY)/a.store.getCapacity(RESOURCE_ENERGY)*100);
@@ -85,6 +88,8 @@ var roleTransport_i =
         {
             if (creep.transfer(Game.spawns[creep.memory.home.name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
             creep.moveTo(Game.spawns[creep.memory.home.name]),{ visualizePathStyle: { stroke: '#FFFF00'}};
+            else if (creep.transfer(Game.spawns[creep.memory.home.name],RESOURCE_ENERGY)==OK)
+            creep.memory.done=true;
         }
         else if (struc!=undefined)
         {
@@ -92,6 +97,8 @@ var roleTransport_i =
         {
             creep.moveTo(struc,{ visualizePathStyle: { stroke: '#FFFF00'}});
         }
+        else if (creep.transfer(struc,RESOURCE_ENERGY)==OK)
+        creep.memory.done=true;
     }
     else
     {
@@ -102,6 +109,11 @@ var roleTransport_i =
             {
             creep.moveTo(tower[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
             break;
+            }
+            else if (creep.transfer(tower[name],RESOURCE_ENERGY)==OK)
+            {
+                creep.memory.done=true;
+                break;
             }
         }
     }

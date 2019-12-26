@@ -45,9 +45,13 @@ var roleTransport_o ={
             creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'}});
     }
 }
-        else if (creep.room.storage!=undefined)
+        else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
         {
+            if(creep.memory.done)
+            {
             creep.memory.backgoal = creep.room.storage;
+            creep.memory.done=false;
+            }
             var st = Game.getObjectById(creep.memory.backgoal.id);
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(st,creep.memory.goods)==ERR_NOT_IN_RANGE)
             creep.moveTo(st,{ visualizePathStyle: { stroke: '#FFD700'}});
@@ -56,6 +60,8 @@ var roleTransport_o ={
         }
         else 
         {
+            if (creep.memory.backgoal!=undefined&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+        creep.memory.done = true;
             if (creep.memory.done)
             {
             creep.memory.backgoal = s_c[0];

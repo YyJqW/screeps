@@ -67,7 +67,7 @@ var CAG = {
         spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY
         ,MOVE,MOVE], newName, {
             memory: {
-                role: 'transport_i',home:spawn
+                role: 'transport_i',home:spawn,done:true
             }
         });//300
         }
