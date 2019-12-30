@@ -44,6 +44,13 @@ var CS=
                 array[name]=Game.getObjectById(mineral_container[name]);
             }
         }
+        if (KOC=='terminal')
+        {
+            for (var name in Game.spawns)
+            {
+                array[name]=Game.spawns[name].room.terminal;
+            }
+        }
     }
 };
 module.exports = CS;

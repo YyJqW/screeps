@@ -11,12 +11,14 @@ var roleTransport_o ={
         CS.run('miner_o',m_c);
         var s_c=new Array()
         CS.run('storage',s_c);
+        var terminals = new Array();
+        CS.run('terminal',terminals);
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
-        s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
+        s_c.sort((a,b)=>a.store.getUsedCapacity()-b.store.getUsedCapacity());
         m_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));
+        terminals.sort((a,b)=>a.store.getUsedCapacity()-b.store.getUsedCapacity());
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         creep.memory.goods = RESOURCE_ENERGY;
-        console.log(creep,'at',creep.pos);
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             check=0;
@@ -44,21 +46,20 @@ var roleTransport_o ={
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
             creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'}});
     }
+    console.log(creep,'at',creep.pos,'transportiing',Game.getObjectById(creep.memory.target).room.name);
 }
         else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
         {
-            if(creep.memory.done)
-            {
             creep.memory.backgoal = creep.room.storage;
             creep.memory.done=false;
-            }
             var st = Game.getObjectById(creep.memory.backgoal.id);
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(st,creep.memory.goods)==ERR_NOT_IN_RANGE)
             creep.moveTo(st,{ visualizePathStyle: { stroke: '#FFD700'}});
             else if (creep.transfer(st,creep.memory.goods)==OK)
             creep.memory.done=true;
+            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.room.name);
         }
-        else 
+        else if(s_c[0].store.getFreeCapacity()>0)
         {
             if (creep.memory.backgoal!=undefined&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
@@ -74,6 +75,25 @@ var roleTransport_o ={
             }//待修改
             else if (creep.transfer(sc,creep.memory.goods)==OK)
             creep.memory.done=true;
+            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.room.name);
+        }
+        else
+        {
+            if (creep.memory.backgoal!=undefined&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+        creep.memory.done = true;
+        if (creep.memory.done)
+            {
+            creep.memory.backgoal = terminals[0];
+            creep.memory.done=false;
+            }
+            var tm = Game.getObjectById(creep.memory.backgoal.id);
+             if(creep.transfer(tm,creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
+            {
+                creep.moveTo(tm,{ visualizePathStyle: { stroke: '#FFD700'}});
+            }//待修改
+            else if (creep.transfer(tm,creep.memory.goods)==OK)
+            creep.memory.done=true;
+            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.room.name);
         }
         if (road[0]!=undefined&&road[0].hits<road[0].hitsMax)
         {

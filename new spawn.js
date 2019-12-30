@@ -68,8 +68,7 @@ var NS = {
            } //自动生成升级工人
     else{
         var construction = Game.rooms[spawn.room.name].find(FIND_CONSTRUCTION_SITES);
-        for (var name in s_c){
-            if (s_c[name].store.getUsedCapacity(RESOURCE_ENERGY)>200&&construction.length>0)
+            if (construction.length>0)
             {
              if (builders.length < buildnum) {
                var newName = 'B' + '['+spawn.name +']'+ Game.time;
@@ -82,7 +81,6 @@ var NS = {
                    }
                });//1K500
            } //自动生成建筑工人
-       }
        }
     }
 

@@ -153,7 +153,7 @@ var CAG = {
             }
         });
     } //自动生成矿工
-    else if (transporter_o.length < Transnumo) {
+    else if (transporter_o.length < Transnumo&&spawn.name!='Spawn1'&&spawn.name!='Spawn1——1') {
         var newName = 'trans_o' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter: ' + newName);
         spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY
