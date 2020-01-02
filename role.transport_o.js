@@ -49,7 +49,7 @@ var roleTransport_o ={
     }
     console.log(creep,'at',creep.pos,'transportiing',Game.getObjectById(creep.memory.target).room.name);
 }
-        else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+        else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
         {
             if (creep.memory.done)
             {
@@ -65,7 +65,7 @@ var roleTransport_o ={
         }
         else if(s_c[0].store.getFreeCapacity()>0)
         {
-            if (creep.memory.backgoal!=undefined&&creep.memory.backgoal!=null&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+            if (creep.memory.backgoal!=undefined&&creep.memory.backgoal!=null)
         creep.memory.done = true;
             if (creep.memory.done)
             {
@@ -83,7 +83,7 @@ var roleTransport_o ={
         }
         else
         {
-            if (creep.memory.backgoal!=undefined&&creep.memory.backgoal!=null&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+            if (creep.memory.backgoal!=undefined&&creep.memory.backgoal!=null)
         creep.memory.done = true;
         if (creep.memory.done)
             {
