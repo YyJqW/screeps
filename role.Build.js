@@ -40,11 +40,13 @@ var roleBuild =
                 var targets = new Array();
             for (var name in myrooms)
             {
+                if(Game.rooms[myrooms[name]]!=undefined)
+                {
                 for (var name_ in Game.rooms[myrooms[name]].find(FIND_MY_CONSTRUCTION_SITES))
                 {
-                    if(Game.rooms[myrooms[name]]!=undefined)
             targets.push(Game.rooms[myrooms[name]].find(FIND_MY_CONSTRUCTION_SITES)[name_]);
                 }
+            }
             }
              if(targets.length) {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {

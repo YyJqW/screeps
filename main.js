@@ -31,7 +31,7 @@ module.exports.loop = function () {
         {
             NS.run(Game.spawns[name]);
         }
-    else
+    else if (Game.spawns[name].name!='Spawn5')
     {
     CAG.run(Game.spawns[name]);
     if (wartrriger)

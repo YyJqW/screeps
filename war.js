@@ -1,9 +1,9 @@
-var container = '5e00a8c3fb940e97e46bfd08';
-var TARGET_CONTROLLER_ID = '5bbcae2b9099fc012e638814'
-var UProom = 'E22S36';
+var container = '5e0d9f0446f9f55ce46a437a';
+var TARGET_CONTROLLER_ID = '5bbcae399099fc012e63899e'
+var UProom = 'E22S37';
 var Attackernum = 0;
 var Claimnum = 0;
-var Warupmnum = 0;
+var Warupmnum = 2;
 var reapernum = 0;
 var CS = require('container sort');
 var attacktrriger = true;

@@ -11,10 +11,11 @@ var roleTransport_o ={
         CS.run('miner_o',m_c);
         var s_c=new Array()
         CS.run('storage',s_c);
-        var terminals = new Array();
+        var terminals=new Array();
         CS.run('terminal',terminals);
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity()-b.store.getUsedCapacity());
+        if (m_c[0]!=null)
         m_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));
         terminals.sort((a,b)=>a.store.getUsedCapacity()-b.store.getUsedCapacity());
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
@@ -48,20 +49,23 @@ var roleTransport_o ={
     }
     console.log(creep,'at',creep.pos,'transportiing',Game.getObjectById(creep.memory.target).room.name);
 }
-        else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
+        else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
         {
+            if (creep.memory.done)
+            {
             creep.memory.backgoal = creep.room.storage;
             creep.memory.done=false;
+            }
             var st = Game.getObjectById(creep.memory.backgoal.id);
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(st,creep.memory.goods)==ERR_NOT_IN_RANGE)
             creep.moveTo(st,{ visualizePathStyle: { stroke: '#FFD700'}});
             else if (creep.transfer(st,creep.memory.goods)==OK)
             creep.memory.done=true;
-            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.room.name);
+            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.structureType,creep.memory.backgoal.room.name);
         }
         else if(s_c[0].store.getFreeCapacity()>0)
         {
-            if (creep.memory.backgoal!=undefined&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+            if (creep.memory.backgoal!=undefined&&creep.memory.backgoal!=null&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
             if (creep.memory.done)
             {
@@ -75,11 +79,11 @@ var roleTransport_o ={
             }//待修改
             else if (creep.transfer(sc,creep.memory.goods)==OK)
             creep.memory.done=true;
-            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.room.name);
+            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.structureType,creep.memory.backgoal.room.name);
         }
         else
         {
-            if (creep.memory.backgoal!=undefined&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
+            if (creep.memory.backgoal!=undefined&&creep.memory.backgoal!=null&&Game.getObjectById(creep.memory.backgoal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
         if (creep.memory.done)
             {
@@ -93,7 +97,7 @@ var roleTransport_o ={
             }//待修改
             else if (creep.transfer(tm,creep.memory.goods)==OK)
             creep.memory.done=true;
-            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.room.name);
+            console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.structureType,creep.memory.backgoal.room.name);
         }
         if (road[0]!=undefined&&road[0].hits<road[0].hitsMax)
         {
