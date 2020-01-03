@@ -1,7 +1,7 @@
 var link_o = ['5dd0c9af25214e5302d1a290','5dd3e1c8a1ca0b0ae302acaf','5de7b2180a41178afdbcaef0','5e034387b7711e32d5ece9b7'];
 var towers = ['5dcb80c9b272c27f9ad4889f','5dce10c0080252ca761c99b2','5dd0be2aa851cf478471b88b',
 '5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544','5de89bced4468d7c3bdecd2a',
-'5dfe41609f4c7d93393cff05','5dfe084edc7f996ea0e365f9','5e034b5fd705e495bf8c8e3b'];
+'5dfe41609f4c7d93393cff05','5dfe084edc7f996ea0e365f9','5e034b5fd705e495bf8c8e3b','5e0e1f9f48a65b00882824bd'];
 var CS = require('container sort');
 var FS_unfull = require('findstructure_energy_unfull');
 var roleTransport_i =
@@ -27,7 +27,7 @@ var roleTransport_i =
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         for (var name in lo)
         {
-            if (storage_.store.getFreeCapacity()>0&&lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>0)
+            if (storage_!=undefined&&storage_.store.getFreeCapacity()>0&&lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>0)
             {
             transmode = true;
             creep.memory.link = lo[name];

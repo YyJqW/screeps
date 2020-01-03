@@ -93,7 +93,7 @@ var CAG = {
             });//900
          //自动生成搬运工人
     }
-        else if (transporter_m.length < Transnum_m&&mine_c[0].store.getUsedCapacity()>600) {
+        else if (mine_c[0]!=undefined&&transporter_m.length < Transnum_m&&mine_c[0].store.getUsedCapacity()>600) {
             var newName = 'trans_m' + '['+spawn.name +']'+ Game.time;
             console.log('Spawning new transporter_m: ' + newName);
             spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,

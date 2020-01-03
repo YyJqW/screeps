@@ -27,11 +27,11 @@ module.exports.loop = function () {
     for (var name in Game.spawns)
     {
         console.log(Game.spawns[name],' working');
-        if(Game.spawns[name].name=='Spawn4')
+        if(Game.spawns[name].name=='Spawn5')
         {
             NS.run(Game.spawns[name]);
         }
-    else if (Game.spawns[name].name!='Spawn5')
+    else 
     {
     CAG.run(Game.spawns[name]);
     if (wartrriger)
