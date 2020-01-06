@@ -1,17 +1,17 @@
 var CS = require('container sort');
 var Harnum = 6;
 var Transnum_m = 1;
-var Transnum = 0;
+var Transnum = 1;
 var Upnum = 1;
-var buildnum = 3;
+var buildnum = 1;
 var Transnum_i = 1;
 var Minernum = 1;
 var Harnum_o =4;
 var claimernum = 2;
 var Transnumo = 4;
-var watchernum = 3;
+var watchernum = 2;
 var guardiannum = 0;
-var GBT = true;
+var GBT = false;
 var CAG = {
     run: function (spawn) {
         var mineral=spawn.room.find(FIND_MINERALS);
@@ -126,7 +126,8 @@ var CAG = {
                });//1k600
            } //自动生成升级工人
     else{
-            if (GBT)
+        var construction = Game.rooms[spawn.room.name].find(FIND_CONSTRUCTION_SITES);
+            if (GBT||construction.length>0)
             {
              if (builders.length < buildnum) {
                var newName = 'B' + '['+spawn.name +']'+ Game.time;
@@ -153,7 +154,7 @@ var CAG = {
             }
         });
     } //自动生成矿工
-    else if (transporter_o.length < Transnumo&&spawn.name!='Spawn1'&&spawn.name!='Spawn1——1') {
+    else if (transporter_o.length < Transnumo&&spawn.name!=''&&spawn.name!='') {
         var newName = 'trans_o' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter: ' + newName);
         spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY

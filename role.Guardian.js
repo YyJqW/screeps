@@ -68,6 +68,8 @@ var roleGuard=
                     }
                 }
             }
+            else if(Game.rooms[creep.memory.target.roomName]==undefined)
+            creep.memory.target=-10;
             else if (creep.memory.target!=-10)
             {
                 var location = Game.rooms[creep.memory.target.roomName].getPositionAt(creep.memory.target.x,creep.memory.target.y);

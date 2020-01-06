@@ -12,7 +12,14 @@ var roleHar = {
         var closestcontainer = creep.pos.findClosestByRange(FIND_STRUCTURES,{
             filter:(contain)=> contain.structureType == STRUCTURE_CONTAINER&&
             contain.id != '5e0d9f0446f9f55ce46a437a'&&
-            contain.id != '5e0da23fd2e4535720b38c7f'
+            contain.id != '5e0da23fd2e4535720b38c7f'&&
+            contain.id != '5e0dd2d0864eb4b36c18214d'&&
+            contain.id != '5e0ecd6d75a77b686d4e8e68'&&
+            contain.id != '5e0ee3791b057b3f56e73b82'&&
+            contain.id != '5df1d6e37cdbdb534abff006'&&
+            contain.id != '5dde676abca74326c19ee604'&&
+            contain.id != '5dde4a3d26efdb785b8cef38'&&
+            contain.id != '5e0ef23fd8f1f2c24b5d3aed'
         });
         for (var name in harvesters)
         {

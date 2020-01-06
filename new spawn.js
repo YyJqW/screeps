@@ -3,7 +3,7 @@ var Harnum = 0;
 var Transnum = 0;
 var Transnum_m = 0;
 var Upnum = 0;
-var buildnum = 0;
+var buildnum = 1;
 var Transnum_i = 1;
 var NS = {
     run: function (spawn) {

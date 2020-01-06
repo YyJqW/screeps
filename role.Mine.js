@@ -43,13 +43,13 @@ var roleMine = {
     }
     else
     {
-        var container = creep.pos.findClosestByRange(FIND_STRUCTURES,
+        var container = creep.pos.findInRange(FIND_STRUCTURES,2,
             {
                 filter:(struc) => struc.structureType == STRUCTURE_CONTAINER
             });
-        if(creep.transfer(container,creep.memory.mineraltype)==ERR_NOT_IN_RANGE)
+        if(creep.transfer(container[0],creep.memory.mineraltype)==ERR_NOT_IN_RANGE)
         {
-            creep.moveTo(container,{ visualizePathStyle: { stroke: '#FFFFFF'}});
+            creep.moveTo(container[0],{ visualizePathStyle: { stroke: '#FFFFFF'}});
         }
     }
     }

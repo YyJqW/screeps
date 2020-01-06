@@ -14,6 +14,8 @@ var roleTransport_o ={
         var terminals=new Array();
         CS.run('terminal',terminals);
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
+        s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
+        if (s_c[0].store.getFreeCapacity()==0)
         s_c.sort((a,b)=>a.store.getUsedCapacity()-b.store.getUsedCapacity());
         if (m_c[0]!=null)
         m_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));

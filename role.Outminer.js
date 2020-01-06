@@ -7,6 +7,10 @@ var roleOHar = {
             filter:(ener)=>ener.id!='5bbcae3a9099fc012e6389a2'
             &&ener.id!='5bbcae2b9099fc012e638818'
         });
+        var road = creep.pos.findInRange(FIND_STRUCTURES,1,{
+            filter:(roa)=>roa.structureType == STRUCTURE_ROAD
+        });
+        road.sort((a,b)=>a.hits-b.hits);
         var droppedenergy = creep.pos.findInRange(FIND_DROPPED_RESOURCES,1);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'O_Har');
         var container = creep.pos.findInRange(FIND_STRUCTURES,2,{
@@ -61,9 +65,9 @@ var roleOHar = {
             creep.moveTo(container[0],{ visualizePathStyle: { stroke: '#FFFFFF'}});
             }
         }
-        else if (container[0]==undefined&&constructionSite_[0]==undefined)
+        if (road[0]!=undefined&&road[0].hits<road[0].hitsMax)
         {
-            //creep.room.createConstructionSite(creep.pos,STRUCTURE_CONTAINER);
+            creep.repair(road[0]);
         }
     }
 };

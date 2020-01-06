@@ -10,8 +10,10 @@ var roleTransport_m ={
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             creep.memory.goods = mineral[0].mineralType;
-            if (creep.withdraw(mine_c[0],creep.memory.goods)==ERR_NOT_IN_RANGE){
-                creep.moveTo(mine_c[0]),{ visualizePathStyle: { stroke: '#FFD700'}};
+            if (mine_c[0]!=undefined)
+            creep.memory.target=mine_c[0].id;
+            if (creep.withdraw(Game.getObjectById(creep.memory.target),creep.memory.goods)==ERR_NOT_IN_RANGE){
+                creep.moveTo(Game.getObjectById(creep.memory.target),{ visualizePathStyle: { stroke: '#FFD700'}});
             }
 }
 else if (creep.room.storage!=undefined)
