@@ -5,6 +5,7 @@ var Attackernum = 0;
 var Claimnum = 0;
 var Warupmnum = 2;
 var reapernum = 0;
+var healer = 0;
 var CS = require('container sort');
 var attacktrriger = true;
 var war =
