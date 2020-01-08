@@ -1,11 +1,11 @@
 var container = '5e0d9f0446f9f55ce46a437a';
 var TARGET_CONTROLLER_ID = '5bbcae399099fc012e63899e'
 var UProom = 'E22S37';
-var Attackernum = 0;
+var healernum = 0;
 var Claimnum = 0;
 var Warupmnum = 2;
 var reapernum = 0;
-var healer = 0;
+var healernum = 0;
 var CS = require('container sort');
 var attacktrriger = true;
 var war =
@@ -20,14 +20,15 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
         var s_c = new Array();
         CS.run('storage',s_c);
         s_c.sort((a,b) => b.store.getUsedCapacity(RESOURCE_ENERGY) - a.store.getUsedCapacity(RESOURCE_ENERGY));
-        var attacker = _.filter(Game.creeps, (creep) => creep.memory.role == 'attack');
+        var healer = _.filter(Game.creeps, (creep) => creep.memory.role == 'attack');
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim_w');
         var waruper = _.filter(Game.creeps, (creep) => creep.memory.role == 'warup');
         var reaper = _.filter(Game.creeps, (creep) => creep.memory.role == 'reap');
-        console.log('A=',attacker.length,' claimer=',claimer.length,' waruper=',waruper.length,' reaper=',reaper.length);
-        if (attacker.length < Attackernum) {
-            var newName = 'attacker' + Game.time;
-            console.log('Spawning new attacker: ' + newName);
+        var healer = _.filter(Game.creeps, (creep) => creep.memory.role == 'heal');
+        console.log('A=',healer.length,' claimer=',claimer.length,' waruper=',waruper.length,' reaper=',reaper.length,'healer=',healer.length);
+        if (healer.length < healernum) {
+            var newName = 'healer' + Game.time;
+            console.log('Spawning new healer: ' + newName);
             spawn.spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,
             TOUGH,TOUGH,
             ATTACK,ATTACK,ATTACK,ATTACK,
@@ -39,6 +40,17 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             });//1k6
             
         } //生成近战兵
+        else if (healer.length<healernum)
+        {
+            var newName = 'healer' + Game.time;
+        console.log('Spawning new healer: ' + newName);
+        spawn.spawnCreep([HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,HEAL,
+        MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
+            memory: {
+                role: 'heal'
+            }
+        });//650
+        }
         else if (claimer.length<Claimnum)
             {
                 var newName = 'claimer' + Game.time;
@@ -73,63 +85,85 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
         });//900
      //自动生成搬运工人
 }
-        for (var name in attacker)
+        for (var name in healer)
         {
-            var target_creep = attacker[name].pos.findInRange(FIND_HOSTILE_CREEPS,1);
-            var target_structure = attacker[name].pos.findInRange(FIND_HOSTILE_STRUCTURES,1);
-           var target_heal = attacker[name].room.find(FIND_MY_CREEPS,{
+            var target_creep = healer[name].pos.findInRange(FIND_HOSTILE_CREEPS,1);
+            var target_structure = healer[name].pos.findInRange(FIND_HOSTILE_STRUCTURES,1);
+           var target_heal = healer[name].room.find(FIND_MY_CREEPS,{
             filter:(creep)=>creep.hits<creep.hitsMax
         });
             var attack_parts=new Array();
-            for (var name_ in attacker[name].body)
+            for (var name_ in healer[name].body)
             {
-                if (attacker[name].body[name_].type==ATTACK) attack_parts[name_]=attacker[name].body[name_];
+                if (healer[name].body[name_].type==ATTACK) attack_parts[name_]=healer[name].body[name_];
             }
             attack_parts.sort((a,b)=>b.hits-a.hits);
             if (attack_parts[0].hits==0)
             {
-                attacker[name].moveTo(Game.flags.retreat, {visualizePathStyle: {stroke: '#FF0000'}});
-                attacker[name].heal(attacker[name]);
-                console.log(attacker[name],'retreating');
+                healer[name].moveTo(Game.flags.retreat, {visualizePathStyle: {stroke: '#FF0000'}});
+                healer[name].heal(healer[name]);
+                console.log(healer[name],'retreating');
             }
             else if (attacktrriger&&target_creep[0]!=undefined)
             {
                 console.log('target_c',target_creep[0]);
-                if(attacker[name].attack(target_creep[0])==ERR_NOT_IN_RANGE)
+                if(healer[name].attack(target_creep[0])==ERR_NOT_IN_RANGE)
                 {
-                    attacker[name].moveTo(target_creep[0], {visualizePathStyle: {stroke: '#FF0000'}});
+                    healer[name].moveTo(target_creep[0], {visualizePathStyle: {stroke: '#FF0000'}});
                 }
             }
             else if (attacktrriger&&target_structure[0]!=undefined&&target_structure[0].structureType!=STRUCTURE_STORAGE&&target_structure[0].structureType!=STRUCTURE_CONTROLLER)
             {
                 console.log('target_s',target_structure[0]);
-                attacker[name].attack(target_structure[0]);
-                if(attacker[name].attack(target_structure[0])==ERR_NOT_IN_RANGE)
+                healer[name].attack(target_structure[0]);
+                if(healer[name].attack(target_structure[0])==ERR_NOT_IN_RANGE)
                 {
-                    attacker[name].moveTo(target_structure[0], {visualizePathStyle: {stroke: '#FF0000'}});
+                    healer[name].moveTo(target_structure[0], {visualizePathStyle: {stroke: '#FF0000'}});
                 }
             }
-                        else if (attacker[name].hits<attacker[name].hitsMax)
+                        else if (healer[name].hits<healer[name].hitsMax)
             {
-                attacker[name].heal(attacker[name]);
+                healer[name].heal(healer[name]);
             }
             else if (target_heal[0]!=null)
             {
+                var target_heal = healer[name].room.find(FIND_MY_CREEPS,{
+                    filter:(creep)=>creep.hits<creep.hitsMax
+                });
                 //heal_target.sort((a,b)=>a.hits/a.hitsMax - b.hits/b.hitsMax);
-                if (attacker[name].heal(target_heal[0])==ERR_NOT_IN_RANGE)
+                if (healer[name].heal(target_heal[0])==ERR_NOT_IN_RANGE)
                 {
-                if (attacker[name].rangedHeal(target_heal[0])==ERR_NOT_IN_RANGE)
+                if (healer[name].rangedHeal(target_heal[0])==ERR_NOT_IN_RANGE)
                 {
-                attacker[name].moveTo(target_heal[0], {visualizePathStyle: {stroke: '#00FF00'}});
+                healer[name].moveTo(target_heal[0], {visualizePathStyle: {stroke: '#00FF00'}});
                 }
                 }
             }
             else
             {
-                console.log('attacker :',attacker[name],'moving to position',Game.flags.Flag2.pos);
-                attacker[name].moveTo(Game.flags.Flag2, {visualizePathStyle: {stroke: '#FFFFFF'}});
+                console.log('healer :',healer[name],'moving to position',Game.flags.A_F.pos);
+                healer[name].moveTo(Game.flags.A_F, {visualizePathStyle: {stroke: '#FFFFFF'}});
             }
 
+        }
+        for (var name in healer)
+        {
+            if (target_heal[0]!=null)
+            {
+                //heal_target.sort((a,b)=>a.hits/a.hitsMax - b.hits/b.hitsMax);
+                if (healer[name].heal(target_heal[0])==ERR_NOT_IN_RANGE)
+                {
+                if (healer[name].rangedHeal(target_heal[0])==ERR_NOT_IN_RANGE)
+                {
+                healer[name].moveTo(target_heal[0], {visualizePathStyle: {stroke: '#00FF00'}});
+                }
+                }
+            }
+            else
+            {
+                console.log('healer :',healer[name],'moving to position',Game.flags.A_F.pos);
+                healer[name].moveTo(Game.flags.A_F, {visualizePathStyle: {stroke: '#FFFFFF'}});
+            }
         }
         for (var name in claimer)
         {
@@ -151,8 +185,8 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             }
             else
             {
-                console.log('claimer :',claimer[name],'moving to position',Game.flags.Flag1.pos);
-                claimer[name].moveTo(Game.flags.Flag1, {visualizePathStyle: {stroke: '#FFFFFF'}});
+                console.log('claimer :',claimer[name],'moving to position',Game.flags.W_F.pos);
+                claimer[name].moveTo(Game.flags.W_F, {visualizePathStyle: {stroke: '#FFFFFF'}});
             }
         }
         for (var name in waruper)
@@ -184,8 +218,8 @@ var EnemyController = Game.getObjectById(TARGET_CONTROLLER_ID);
             {
                 if (STORAGE==null)
                 {
-                    reaper[name].moveTo(Game.flags.Flag1, {visualizePathStyle: {stroke: '#FFFFFF'}});
-                    console.log(reaper[name],'moving to ',Game.flags.Flag1);;
+                    reaper[name].moveTo(Game.flags.W_F, {visualizePathStyle: {stroke: '#FFFFFF'}});
+                    console.log(reaper[name],'moving to ',Game.flags.W_F);;
                 }
                 if (reaper[name].withdraw(STORAGE,reaper[name].memory.goods)==ERR_NOT_IN_RANGE)
                 {
