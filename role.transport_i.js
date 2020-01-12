@@ -104,9 +104,9 @@ var roleTransport_i =
     }
     if (creep.memory.goal!=undefined&&creep.memory.goal!=-10)
     {
-        if (creep.transfer(Game.getObjectById(creep.memory.goal.id))==ERR_NOT_IN_RANGE)
+        if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==ERR_NOT_IN_RANGE)
         creep.moveTo(Game.getObjectById(creep.memory.goal.id))
-        else if (creep.transfer(Game.getObjectById(creep.memory.goal.id))==OK)
+        else if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==OK)
         creep.memory.done = true;
     }
 }
