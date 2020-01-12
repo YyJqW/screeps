@@ -16,7 +16,10 @@ var roleTransport_m = require('role.Transporter_m')
 var NS = require('new spawn');
 var war = require('war');
 var CNC = require('CNC')
+var trade = require('trade.js')
 var wartrriger = true;
+var tradegoods = -10;
+var goodsnum = 0;
 module.exports.loop = function () {
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -48,7 +51,10 @@ module.exports.loop = function () {
     {
     var creep = Game.creeps[name];
             if(creep.memory.role == 'transport_i') {
+            if (creep.memory.done)
             roleTransport_i.run(creep);
+            if (creep.memory.done&&Game.rooms[creep.memory.home.name].storage.store.getUsedCapacity(tradegoods)>0)
+            trade.run(creep,tradegoods,goodsnum);
          }
         if(creep.memory.role == 'transport') {
             roleTransport.run(creep);
