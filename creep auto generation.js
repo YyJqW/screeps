@@ -66,7 +66,7 @@ var CAG = {
         if (transporter_i.length < Transnum_i){
                 var newName = 'trans_i' + '['+spawn.name +']'+ Game.time;
         console.log('Spawning new transporter_i: ' + newName);
-        spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY
+        spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY
         ,MOVE,MOVE], newName, {
             memory: {
                 role: 'transport_i',home:spawn,done:true,trade:false,link:-10,goal:-10
