@@ -20,6 +20,7 @@ var trade=
                 creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal);
             }
         }
+        console.log(creep,'in room',creep.memory.home.name,'dealing with',tradegoods);
     }
 }
 
