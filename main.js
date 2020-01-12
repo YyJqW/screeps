@@ -105,5 +105,4 @@ module.exports.loop = function () {
             roleClaim.run(creep);
         }
     }
-    console.log('running');
 }
