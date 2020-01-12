@@ -11,16 +11,21 @@ var trade=
             for (var name in s_c)
             {
                 if (s_c[name].store.getUsedCapacity(tradegoods)>0)
-                warehouse = s_c[name];
+                {
+                    warehouse = s_c[name];
+                    break;
+                }
             }
             creep.memory.goods=tradegoods;
-            if (Game.rooms[creep.memory.home.room.name].terminal.store.getUsedCapacity(tradegoods)<goodsnum)
+            if (creep.store.getFreeCapacity()>0)
             {
-                if (creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==ERR_NOT_IN_RANGE)
-                creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal);
+                if (creep.withdraw(Game.rooms[creep.memory.home.room.name].storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
+                creep.moveTo(Game.rooms[creep.memory.home.room.name].storage);
             }
+            
+            else if (creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==ERR_NOT_IN_RANGE)
+                creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal);
         }
-        console.log(creep,'in room',creep.memory.home.name,'dealing with',tradegoods);
     }
 }
 

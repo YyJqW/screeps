@@ -17,10 +17,16 @@ var NS = require('new spawn');
 var war = require('war');
 var CNC = require('CNC')
 var trade = require('trade')
+var GSBI = require('GetStructuresById')
 var wartrriger = true;
-var tradegoods = -10;
-var goodsnum = 0;
+var tradegoods = RESOURCE_ZYNTHIUM;
+var goodsnum = 10000;
 module.exports.loop = function () {
+    var lo=new Array();
+    var tower = new Array();
+    var li=new Array();
+    var lc=new Array();
+    GSBI.run(lo,li,lc,tower);
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];                           //内存清理
@@ -44,20 +50,24 @@ module.exports.loop = function () {
     }
     }
     }
-    TC.run();
-    LK.run();
+    TC.run(tower);
+    LK.run(lo,li,lc);
     roleWatch.run();
     for(var name in Game.creeps)
     {
     var creep = Game.creeps[name];
             if(creep.memory.role == 'transport_i') {
-            if (creep.memory.done)
-            roleTransport_i.run(creep);
-            if (creep.memory.done&&Game.rooms[creep.memory.home.name].storage.store.getUsedCapacity(tradegoods)>0)
+            if (creep.memory.done=true&&Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>0&&Game.rooms[creep.memory.home.room.name].terminal.store.getUsedCapacity(tradegoods)<goodsnum||creep.store.getUsedCapacity(tradegoods)>0)
+            creep.memory.trade = true;
+            else if (creep.store.getUsedCapacity(RESOURCE_ENERGY)>0||Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>=goodsnum)
+            creep.memory.trade = false;
+            if (creep.memory.trade)
             trade.run(creep,tradegoods,goodsnum);
+            else
+            roleTransport_i.run(creep);
          }
         if(creep.memory.role == 'transport') {
-            roleTransport.run(creep);
+            roleTransport.run(creep,lo);
         }
         if(creep.memory.role == 'transport_m')
         {

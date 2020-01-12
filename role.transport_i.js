@@ -1,48 +1,42 @@
-var link_o = ['5dd0c9af25214e5302d1a290','5dd3e1c8a1ca0b0ae302acaf','5de7b2180a41178afdbcaef0','5e034387b7711e32d5ece9b7','5e12b0561a0aa84359d22b8a'];
-var towers = ['5dcb80c9b272c27f9ad4889f','5dce10c0080252ca761c99b2','5dd0be2aa851cf478471b88b',
-'5dd3b16bca73bf5d5367786a','5de1042e8ed33a2b7a3a3763','5de7c139ee54d94612510544','5de89bced4468d7c3bdecd2a',
-'5dfe41609f4c7d93393cff05','5dfe084edc7f996ea0e365f9','5e034b5fd705e495bf8c8e3b','5e0e1f9f48a65b00882824bd','5e129611ea8896835b84e99e','5e14c2cffb142056bc7c70d4'];
+
 var CS = require('container sort');
 var FS_unfull = require('findstructure_energy_unfull');
 var roleTransport_i =
 {
-    run:function(creep)
+    run:function(creep,lo)
     {
+        creep.memory.goods=RESOURCE_ENERGY;
         var transmode = false;
         var s_c=new Array()
         CS.run('storage',s_c);
-        var lo=new Array();
         var struc = FS_unfull.run(creep);
-        var tower = new Array();
         var storage_ = Game.rooms[creep.memory.home.room.name].storage;
-        for (var name in link_o)
-        {
-            lo[name]=Game.getObjectById(link_o[name]);
-        }
-        for (var name in towers)
-        {
-            if (Game.getObjectById(towers[name]).room.name==creep.memory.home.room.name)
-            tower[name]=Game.getObjectById(towers[name]);
-        }
+        tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
+            filter: { structureType: STRUCTURE_TOWER }
+        });
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
+        if (creep.memory.link==-10)
+        {
         for (var name in lo)
         {
-            if (storage_!=undefined&&storage_.store.getFreeCapacity()>0&&lo[name].room.name==creep.memory.home.room.name&&lo[name].store.getUsedCapacity(RESOURCE_ENERGY)>0)
+            if (lo[name].room.name==creep.memory.home.room.name)
             {
-            transmode = true;
             creep.memory.link = lo[name];
             break;
             }
         }
+        }
+        else if (creep.memory.link!=undefined&&storage_!=undefined&&storage_.store.getFreeCapacity()>0&&Game.getObjectById(creep.memory.link.id).store.getUsedCapacity(RESOURCE_ENERGY)>0)
+        transmode=true;
         if (creep.memory.done&&transmode)
         {
             if(creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0)//收集
         {
             if (creep.memory.link!=undefined)
             {
-                if (creep.withdraw(creep.memory.link,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+                if (creep.withdraw(Game.getObjectById(creep.memory.link,id),RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(creep.memory.link),{ visualizePathStyle: { stroke: '#FFFF00'}};
+                    creep.moveTo(Game.getObjectById(creep.memory.link,id)),{ visualizePathStyle: { stroke: '#FFFF00'}};
                 }
             }
         }
@@ -52,7 +46,7 @@ var roleTransport_i =
                 {
                 if (creep.memory.home.room.name==tower[name].room.name&&tower[name].store.getFreeCapacity(RESOURCE_ENERGY)>300)
         {
-            if (creep.transfer(tower[name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+            if (tower[name].room.name==creep.memory.home.room.name&&creep.transfer(tower[name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
             {
             creep.moveTo(tower[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
             break;
@@ -68,8 +62,8 @@ var roleTransport_i =
             }
             }
     }
-    else{
-        creep.memory.done=false;
+    else
+    {
         if(creep.store.getUsedCapacity() == 0)//收集
         {
             s_c.sort((a,b) => b.store.getUsedCapacity(RESOURCE_ENERGY)/b.store.getCapacity(RESOURCE_ENERGY)*100 - a.store.getUsedCapacity(RESOURCE_ENERGY)/a.store.getCapacity(RESOURCE_ENERGY)*100);
@@ -84,39 +78,36 @@ var roleTransport_i =
             creep.moveTo(s_c[0]),{ visualizePathStyle: { stroke: '#FFFF00'}};
         }
         }
-         else if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0)
+        else
         {
-            if (creep.transfer(Game.spawns[creep.memory.home.name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(Game.spawns[creep.memory.home.name]),{ visualizePathStyle: { stroke: '#FFFF00'}};
-            else if (creep.transfer(Game.spawns[creep.memory.home.name],RESOURCE_ENERGY)==OK)
-            creep.memory.done=true;
+        if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0&&creep.memory.done)
+        {
+            creep.memory.goal=Game.spawns[creep.memory.home.name];
+            creep.memory.done=false;
         }
-        else if (struc!=undefined)
+        else if (struc!=undefined&&creep.memory.done)
         {
-          if (creep.transfer(struc,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE) //运输到工作建筑
-        {
-            creep.moveTo(struc,{ visualizePathStyle: { stroke: '#FFFF00'}});
-        }
-        else if (creep.transfer(struc,RESOURCE_ENERGY)==OK)
-        creep.memory.done=true;
+            creep.memory.goal = struc;
+            creep.memory.done=false;
     }
-    else
+    else if (creep.memory.done)
     {
         for (var name in tower)
         if (creep.memory.home.room.name==tower[name].room.name&&tower[name].store.getFreeCapacity(RESOURCE_ENERGY)>300)
         {
-            if (creep.transfer(tower[name],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            {
-            creep.moveTo(tower[name],{ visualizePathStyle: { stroke: '#FFFF00'}});
+            creep.memory.goal = tower[name];
+            creep.memory.done=false;
             break;
-            }
-            else if (creep.transfer(tower[name],RESOURCE_ENERGY)==OK)
-            {
-                creep.memory.done=true;
-                break;
-            }
         }
     }
+    if (creep.memory.goal!=-10)
+    {
+        if (creep.transfer(Game.getObjectById(creep.memory.goal.id))==ERR_NOT_IN_RANGE)
+        creep.moveTo(Game.getObjectById(creep.memory.goal.id))
+        else if (creep.transfer(Game.getObjectById(creep.memory.goal.id))==OK)
+        creep.memory.done = true;
+    }
+}
     }
 }
 };
