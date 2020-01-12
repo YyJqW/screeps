@@ -12,13 +12,13 @@ var GSBI=
     run :function(lo,li,lc,tower,)
     {
         for (var name in link_o)
-            lo[name]=Game.getObjectById(link_o[name]);
+            {lo[name]=Game.getObjectById(link_o[name]);}
         for (var name in towers)
-            tower[name]=Game.getObjectById(towers[name]);
+            {tower[name]=Game.getObjectById(towers[name]);}
         for (var name in link_i)
-            li[name]=Game.getObjectById(link_i[name]);
+            {li[name]=Game.getObjectById(link_i[name]);}
         for (var name in link_c)
-            lc[name]=Game.getObjectById(link_c[name]);
+            {lc[name]=Game.getObjectById(link_c[name]);}
     }
 };
 module.exports = GSBI;

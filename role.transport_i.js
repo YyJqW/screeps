@@ -3,8 +3,10 @@ var CS = require('container sort');
 var FS_unfull = require('findstructure_energy_unfull');
 var roleTransport_i =
 {
-    run:function(creep,lo)
+    run:function(creep,lo,tower)
     {
+        if (creep.memory.goal==-10)
+        creep.memory.done = true;
         creep.memory.goods=RESOURCE_ENERGY;
         var transmode = false;
         var s_c=new Array()
@@ -34,9 +36,9 @@ var roleTransport_i =
         {
             if (creep.memory.link!=undefined)
             {
-                if (creep.withdraw(Game.getObjectById(creep.memory.link,id),RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
+                if (creep.withdraw(Game.getObjectById(creep.memory.link.id),RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(Game.getObjectById(creep.memory.link,id)),{ visualizePathStyle: { stroke: '#FFFF00'}};
+                    creep.moveTo(Game.getObjectById(creep.memory.link.id)),{ visualizePathStyle: { stroke: '#FFFF00'}};
                 }
             }
         }
@@ -100,7 +102,7 @@ var roleTransport_i =
             break;
         }
     }
-    if (creep.memory.goal!=-10)
+    if (creep.memory.goal!=undefined&&creep.memory.goal!=-10)
     {
         if (creep.transfer(Game.getObjectById(creep.memory.goal.id))==ERR_NOT_IN_RANGE)
         creep.moveTo(Game.getObjectById(creep.memory.goal.id))

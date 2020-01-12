@@ -64,7 +64,7 @@ module.exports.loop = function () {
             if (creep.memory.trade)
             trade.run(creep,tradegoods,goodsnum);
             else
-            roleTransport_i.run(creep);
+            roleTransport_i.run(creep,lo,tower);
          }
         if(creep.memory.role == 'transport') {
             roleTransport.run(creep,lo);
