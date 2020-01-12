@@ -1,8 +1,6 @@
 var CS = require('container sort');
 var FS_unfull = {
     run: function (creep) {
-        var m_c = new Array();
-        CS.run('miner',m_c);
         var extension = Game.spawns[creep.memory.home.name].room.find(FIND_STRUCTURES, {
             filter: (ex) => {
                 return ex.structureType == STRUCTURE_EXTENSION &&
@@ -18,9 +16,9 @@ var FS_unfull = {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN||
-                            structure.structureType == STRUCTURE_LAB) &&
+                            structure.structureType == STRUCTURE_LAB)||
+                            (structure.structureType == STRUCTURE_TERMINAL&&structure.store.getUsedCapacity(RESOURCE_ENERGY)<=200000) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-                        && Game.getObjectById(structure.id) != m_c
                         && structure.structureType != STRUCTURE_STORAGE
                 }
             });

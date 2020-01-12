@@ -82,7 +82,7 @@ var roleTransport_i =
         }
         else
         {
-        if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0&&creep.memory.done)
+        if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>150&&creep.memory.done)
         {
             creep.memory.goal=Game.spawns[creep.memory.home.name];
             creep.memory.done=false;
