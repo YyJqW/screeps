@@ -5,7 +5,7 @@ var roleUp = require('role.Up');
 var CS = require('container sort');
 var roleBuild =
 {
-    run: function(creep)
+    run: function(creep,s_c)
     {
         var fcontainer = Game.getObjectById(fcontainerID);
         var storage_ = creep.room.storage;

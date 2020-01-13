@@ -4,7 +4,7 @@ var roleTransport ={
         var check=0;
         var busy = false;
         var tower = new Array();
-        tower = creep.room.find(FIND_MY_STRUCTURES,{
+        tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_TOWER }
         });
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
@@ -40,14 +40,14 @@ var roleTransport ={
         }
     }
 }
-        else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name&&tower[0].store.getFreeCapacity(RESOURCE_ENERGY)>=500)
+        else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name)
         {
             if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
             creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFD700'}});
         }
         else if (creep.room.storage!=undefined)
         {
-            if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
+            if (creep.room.storage.store.getFreeCapacity()>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
             creep.moveTo(creep.room.storage);
         }
         else 
