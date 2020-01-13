@@ -1,6 +1,6 @@
 var CS = require('container sort');
 var roleTransport ={
-    run :function(creep){
+    run :function(creep,s_c){
         var check=0;
         var busy = false;
         var tower = new Array();
@@ -10,9 +10,6 @@ var roleTransport ={
         tower.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY) - b.store.getUsedCapacity(RESOURCE_ENERGY));
         var m_c=new Array()
         CS.run('miner_unlinked',m_c);
-        var s_c=new Array()
-        CS.run('storage',s_c);
-        var mine_c=new Array();
         var dropped_source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         if(creep.store.getUsedCapacity() == 0)//收集

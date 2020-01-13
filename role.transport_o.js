@@ -1,18 +1,12 @@
 var CS = require('container sort');
 var roleTransport_o ={
-    run :function(creep){
+    run :function(creep,s_c,m_c,terminals){
                 var road = creep.pos.findInRange(FIND_STRUCTURES,2,{
             filter:(road)=>road.structureType == STRUCTURE_ROAD
         });
         road.sort((a,b)=>a.hits-b.hits);
         var check=0;
         var busy = false;
-        var m_c=new Array()
-        CS.run('miner_o',m_c);
-        var s_c=new Array()
-        CS.run('storage',s_c);
-        var terminals=new Array();
-        CS.run('terminal',terminals);
         var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,2);
         s_c.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
         if (s_c[0].store.getFreeCapacity()==0)

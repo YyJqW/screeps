@@ -9,8 +9,6 @@ var roleBuild =
     {
         var fcontainer = Game.getObjectById(fcontainerID);
         var storage_ = creep.room.storage;
-        var s_c = new Array();
-        CS.run('storage',s_c);
         s_c.sort((a,b)=> b.store.getUsedCapacity(RESOURCE_ENERGY)/b.store.getCapacity() - a.store.getUsedCapacity(RESOURCE_ENERGY)/a.store.getCapacity());
         if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;

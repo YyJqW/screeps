@@ -1,6 +1,6 @@
 var roleRepair = require('role.Repair');
 var TC ={
-    run :function(tower)
+    run :function(tower,m_c)
     {
         for (var name in tower)
         {
@@ -13,7 +13,7 @@ var TC ={
         if (enemy.length>0)
         tower[name].attack(enemy[0]);
         else
-        roleRepair.run(tower[name]);
+        roleRepair.run(tower[name],m_c);
         }
     }
 };

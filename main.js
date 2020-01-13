@@ -12,12 +12,13 @@ var roleTransport_i = require('role.transport_i');
 var roleTransport_o = require('role.transport_o');
 var roleWatch = require('role.watch');
 var roleGuard = require("role.Guardian");
-var roleTransport_m = require('role.Transporter_m')
+var roleTransport_m = require('role.Transporter_m');
 var NS = require('new spawn');
 var war = require('war');
-var CNC = require('CNC')
-var trade = require('trade')
-var GSBI = require('GetStructuresById')
+var CNC = require('CNC');
+var trade = require('trade');
+var GSBI = require('GetStructuresById');
+var CS = require('container sort');
 var wartrriger = true;
 var tradegoods = RESOURCE_ZYNTHIUM;
 var goodsnum = 0;
@@ -27,6 +28,12 @@ module.exports.loop = function () {
     var li=new Array();
     var lc=new Array();
     GSBI.run(lo,li,lc,tower);
+    var s_c = new Array();
+    CS.run('storage',s_c);
+    var m_c=new Array()
+    CS.run('miner_o',m_c);
+    var terminals=new Array();
+    CS.run('terminal',terminals);
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];                           //内存清理
@@ -50,7 +57,7 @@ module.exports.loop = function () {
     }
     }
     }
-    TC.run(tower);
+    TC.run(tower,m_c);
     LK.run(lo,li,lc);
     roleWatch.run();
     for(var name in Game.creeps)
@@ -64,27 +71,27 @@ module.exports.loop = function () {
             if (creep.memory.trade)
             trade.run(creep,tradegoods,goodsnum);
             else
-            roleTransport_i.run(creep,lo,tower);
+            roleTransport_i.run(creep,lo,tower,s_c);
          }
         if(creep.memory.role == 'transport') {
-            roleTransport.run(creep,lo);
+            roleTransport.run(creep,s_c);
         }
         if(creep.memory.role == 'transport_m')
         {
-            roleTransport_m.run(creep);
+            roleTransport_m.run(creep,s_c);
         }
          if(creep.memory.role == 'Har') {
-            roleHar.run(creep);
+            roleHar.run(creep,m_c);
         }
         if (creep.memory.role=='mine')
         {
             roleMine.run(creep);
         }
                 if(creep.memory.role == 'up') {
-            roleUp.run(creep);
+            roleUp.run(creep,li,s_c);
         }
         if(creep.memory.role == 'build') {
-            roleBuild.run(creep);
+            roleBuild.run(creep,s_c);
         }
         if (creep.memory.role == 'guard')
         {
@@ -98,7 +105,7 @@ module.exports.loop = function () {
             if(creep.ticksToLive<=400) creep.memory.renewN=true;
             if (creep.memory.renewN) CNC.run(creep);
             else
-           roleTransport_o.run(creep);
+           roleTransport_o.run(creep,s_c,m_c,terminals);
          }
         if (creep.memory.role == 'claim')
         {

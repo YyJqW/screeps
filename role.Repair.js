@@ -1,11 +1,7 @@
 var CS = require('container sort');
 var roleRepair = {
-    run: function (tower) {
+    run: function (tower,m_c) {
         var check_1 = false;
-        var m_c = new Array();
-        var s_c = new Array();
-        CS.run('storage', s_c);
-        CS.run('miner', m_c);
         for (var name in m_c) {
             if (m_c[name].hits < 200000) {
                 tower.repair(m_c[name]);

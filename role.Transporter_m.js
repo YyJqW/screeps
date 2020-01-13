@@ -1,8 +1,5 @@
-var CS = require('container sort');
 var roleTransport_m ={
-    run :function(creep){
-        var s_c=new Array()
-        CS.run('storage',s_c);
+    run :function(creep,s_c){
         var mineral=Game.spawns[creep.memory.home.name].room.find(FIND_MINERALS);
         var mine_c=mineral[0].pos.findInRange(FIND_STRUCTURES,3,{
             filter:(contai)=>contai.structureType==STRUCTURE_CONTAINER

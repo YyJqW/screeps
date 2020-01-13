@@ -1,14 +1,12 @@
 var CS = require('container sort');
 var roleHar = {
-    run: function (creep) {
+    run: function (creep,container) {
         var link = creep.pos.findInRange(FIND_STRUCTURES,1,{
             filter:(struc)=>struc.structureType == STRUCTURE_LINK
         });
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Har');
-        var container = new Array();
         var target;
         var check = true;
-        CS.run('miner',container);
         var closestcontainer = creep.pos.findClosestByRange(FIND_STRUCTURES,{
             filter:(contain)=> contain.structureType == STRUCTURE_CONTAINER&&
             contain.id != '5e1c41b3e697d7cd6e84d219'&&

@@ -1,17 +1,13 @@
-
-var CS = require('container sort');
 var FS_unfull = require('findstructure_energy_unfull');
 var roleTransport_i =
 {
-    run:function(creep,lo,tower)
+    run:function(creep,lo,tower,s_c)
     {
         if (creep.memory.goal==-10||creep.memory.goal==undefined||Game.getObjectById(creep.memory.goal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
         creep.memory.goods=RESOURCE_ENERGY;
         var transmode = false;
-        var s_c=new Array();
         var tower_t=false;
-        CS.run('storage',s_c);
         var struc = FS_unfull.run(creep);
         var storage_ = Game.rooms[creep.memory.home.room.name].storage;
         tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
@@ -86,7 +82,6 @@ var roleTransport_i =
         creep.memory.done = false;
     }
     creep.memory.goal = Game.getObjectById(creep.memory.goal.id);
-    console.log(creep,1);
     if (!creep.memory.done&&creep.memory.goal!=undefined&&creep.memory.goal!=-10)
     {
         if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==ERR_NOT_IN_RANGE)
