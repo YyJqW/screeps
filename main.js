@@ -31,9 +31,11 @@ module.exports.loop = function () {
     var s_c = new Array();
     CS.run('storage',s_c);
     var m_c=new Array()
-    CS.run('miner_o',m_c);
+    CS.run('miner',m_c);
     var terminals=new Array();
     CS.run('terminal',terminals);
+     var m_co=new Array()
+    CS.run('miner_o',m_co);
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];                           //内存清理
@@ -105,7 +107,7 @@ module.exports.loop = function () {
             if(creep.ticksToLive<=400) creep.memory.renewN=true;
             if (creep.memory.renewN) CNC.run(creep);
             else
-           roleTransport_o.run(creep,s_c,m_c,terminals);
+           roleTransport_o.run(creep,s_c,m_co,terminals);
          }
         if (creep.memory.role == 'claim')
         {

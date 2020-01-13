@@ -27,7 +27,7 @@ var CAG = {
         var transporter_m = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_m'&&creep.memory.home.room.name==spawn.room.name);
         var transporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'build');
-        var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.room.name==spawn.room.name);
+        var transporter_i = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_i'&&creep.memory.home.name==spawn.name);
         var claimer = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
         var transporter_o = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport_o');
         var watcher = _.filter(Game.creeps, (creep) => creep.memory.role == 'watch');
