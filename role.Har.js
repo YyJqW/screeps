@@ -10,6 +10,7 @@ var roleHar = {
         var closestcontainer = creep.pos.findClosestByRange(FIND_STRUCTURES,{
             filter:(contain)=> contain.structureType == STRUCTURE_CONTAINER&&
             contain.id != '5e1c41b3e697d7cd6e84d219'&&
+            contain.id != '5e1dbba591e04f4abb4789a4'&&
             contain.id != '5e1c7a406e043f57ee973c3b'&&
             contain.id != '5e1c705443eed46a66b8adb0'&&
             contain.id != '5e1c73b026765a75f9204a66'&&
