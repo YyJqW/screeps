@@ -19,9 +19,9 @@ var CNC = require('CNC');
 var trade = require('trade');
 var GSBI = require('GetStructuresById');
 var CS = require('container sort');
-var wartrriger = true;
+var wartrriger = false;
 var tradegoods = RESOURCE_ZYNTHIUM;
-var goodsnum = 0;
+var goodsnum = 100000;
 module.exports.loop = function () {
     var lo=new Array();
     var tower = new Array();
@@ -93,7 +93,7 @@ module.exports.loop = function () {
             roleUp.run(creep,li,s_c);
         }
         if(creep.memory.role == 'build') {
-            roleBuild.run(creep,s_c);
+            roleBuild.run(creep,li,s_c);
         }
         if (creep.memory.role == 'guard')
         {

@@ -5,7 +5,7 @@ var roleUp = require('role.Up');
 var CS = require('container sort');
 var roleBuild =
 {
-    run: function(creep,s_c)
+    run: function(creep,li,s_c)
     {
         var fcontainer = Game.getObjectById(fcontainerID);
         var storage_ = creep.room.storage;
@@ -51,7 +51,7 @@ var roleBuild =
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
-            else roleUp.run(creep);
+            else roleUp.run(creep,li,s_c);
         }
     }
 	    else if(creep.store.getFreeCapacity() > 0){

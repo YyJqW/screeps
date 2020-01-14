@@ -16,8 +16,7 @@ var FS_unfull = {
                 filter: (structure) => {
                     structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN||
-                            structure.structureType == STRUCTURE_LAB ||
-                            (structure.structureType == STRUCTURE_TERMINAL&&structure.store.getUsedCapacity(RESOURCE_ENERGY)<=200000) &&
+                            structure.structureType == STRUCTURE_LAB  &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
                         && structure.structureType != STRUCTURE_STORAGE
                 }

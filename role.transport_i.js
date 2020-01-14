@@ -10,6 +10,7 @@ var roleTransport_i =
         var tower_t=false;
         var struc = FS_unfull.run(creep);
         var storage_ = Game.rooms[creep.memory.home.room.name].storage;
+        var terminal_ = Game.rooms[creep.memory.home.room.name].terminal;
         tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_TOWER }
         });
@@ -61,24 +62,29 @@ var roleTransport_i =
         }
         else
         {
-        if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>150&&creep.memory.done)
+        if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>50&&creep.memory.done)
         {
             creep.memory.goal=Game.spawns[creep.memory.home.name];
             creep.memory.done=false;
         }
+else if (tower_t&&creep.memory.done)
+    {
+            creep.memory.goal = tower_t;
+            creep.memory.done=false;
+    }
         else if (struc!=undefined&&creep.memory.done)
         {
             creep.memory.goal = struc;
             creep.memory.done=false;
     }
-    else if (tower_t&&creep.memory.done)
-    {
-            creep.memory.goal = tower_t;
-            creep.memory.done=false;
-    }
     else if (creep.memory.done&&transmode)
     {
         creep.memory.goal = storage_;
+        creep.memory.done = false;
+    }
+    else if (creep.memory.done&&terminal_.store.getUsedCapacity(RESOURCE_ENERGY)<70000)
+    {
+        creep.memory.goal = terminal_;
         creep.memory.done = false;
     }
     creep.memory.goal = Game.getObjectById(creep.memory.goal.id);
