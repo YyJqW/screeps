@@ -16,7 +16,6 @@ var roleHar = {
             contain.id != '5e1c73b026765a75f9204a66'&&
             contain.id != '5e1c460e1aeb2b9c99814321'&&
             contain.id != '5e1c5c4d9e776e58c4def4ef'&&
-            contain.id != '5e0d9f0446f9f55ce46a437a'&&
             contain.id != '5e0da23fd2e4535720b38c7f'&&
             contain.id != '5e0dd2d0864eb4b36c18214d'&&
             contain.id != '5e0ecd6d75a77b686d4e8e68'&&

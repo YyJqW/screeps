@@ -1,4 +1,4 @@
-var energylist = ['5bbcae3a9099fc012e6389a5','5bbcae399099fc012e63899f','5bbcae2b9099fc012e638815','5bbcae2b9099fc012e638813']
+var energylist = ['5bbcae3a9099fc012e6389a5','5bbcae2b9099fc012e638815','5bbcae2b9099fc012e638813']
 var roleOHar = {
     run: function (creep) {
         var constructionSite_ = creep.pos.findInRange(FIND_MY_CONSTRUCTION_SITES,3);
