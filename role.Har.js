@@ -22,7 +22,9 @@ var roleHar = {
             contain.id != '5e0ee3791b057b3f56e73b82'&&
             contain.id != '5df1d6e37cdbdb534abff006'&&
             contain.id != '5dde676abca74326c19ee604'&&
-            contain.id != '5dde4a3d26efdb785b8cef38'
+            contain.id != '5dde4a3d26efdb785b8cef38'&&
+            contain.id != '5e1ddf5a2d333a9a7e742658'&&
+            contain.id != '5e0ef23fd8f1f2c24b5d3aed'
         });
         for (var name in harvesters)
         {

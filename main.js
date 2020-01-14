@@ -45,7 +45,7 @@ module.exports.loop = function () {
     for (var name in Game.spawns)
     {
         console.log(Game.spawns[name],' working');
-        if(Game.spawns[name].name=='Spawn5')
+        if(Game.spawns[name].name=='')
         {
             NS.run(Game.spawns[name]);
         }
