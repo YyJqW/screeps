@@ -31,6 +31,7 @@ var roleTransport ={
                 if (!busy) break
             }
             creep.memory.target = m_c[check].id;
+            creep.memory.done = false;
             if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){
                 creep.memory.goods=dropped_source.resourceType;
             creep.moveTo(dropped_source, {visualizePathStyle: {stroke: '#FFD700'}});
@@ -44,11 +45,15 @@ var roleTransport ={
         {
             if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
             creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFD700'}});
+            else if (creep.transfer(tower[0],RESOURCE_ENERGY)==OK)
+            creep.memory.done = true;
         }
         else if (creep.room.storage!=undefined)
         {
             if (creep.room.storage.store.getFreeCapacity()>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
             creep.moveTo(creep.room.storage);
+            else if (creep.transfer(creep.room.storage,creep.memory.goods)==OK)
+            creep.memory.done = true;
         }
         else 
         {
@@ -59,6 +64,11 @@ var roleTransport ={
                 creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFD700'}});
                 break;
             }//待修改
+            else if (creep.transfer(s_c[name],creep.memory.goods)==OK)
+            {
+                creep.memory.done = true;
+                break;
+            }
             }
         }
     }
