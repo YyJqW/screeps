@@ -25,6 +25,11 @@ var lab=
                 if (creep[0].withdraw(container1[0],reactant1)==ERR_NOT_IN_RANGE)
                 creep[0].moveTo(container1[0]);
             }
+            else if (creep[0].store.getUsedCapacity(reactant2)>0)
+            {
+                if (creep[0].transfer(container2[0],reactant2)==ERR_NOT_IN_RANGE)
+                creep[0].moveTo(container2[0]);
+            }
             else
             {
                 if (creep[0].transfer(lab[1],reactant1)==ERR_NOT_IN_RANGE)
@@ -35,7 +40,7 @@ var lab=
                 creep[0].memory.lab = false;
                 }
             }
-            if (lab[1].store.getUsedCapacity()==3000)
+            if (lab[1].store.getUsedCapacity(reactant1)>=2990)
             creep[0].memory.trans = false;
         }
         else if (lab[2].store.getFreeCapacity(reactant2)>0)
@@ -49,8 +54,8 @@ var lab=
             }
             else if (creep[0].store.getUsedCapacity(reactant1)>0)
             {
-                if (creep.transfer(container1,reactant1)==ERR_NOT_IN_RANGE)
-                creep.moveTo(container1);
+                if (creep[0].transfer(container1[0],reactant1)==ERR_NOT_IN_RANGE)
+                creep[0].moveTo(container1[0]);
             }
             else
             {
@@ -62,7 +67,7 @@ var lab=
                 creep[0].memory.lab = false;
                 }
             }
-            if (lab[2].store.getUsedCapacity()==3000)
+            if (lab[2].store.getUsedCapacity(reactant2)>=2990)
             creep[0].memory.trans = true;
         }
         if (lab[1].store.getUsedCapacity(reactant1)>0&&lab[2].store.getUsedCapacity(reactant2)>0)
