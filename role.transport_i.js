@@ -3,6 +3,7 @@ var roleTransport_i =
 {
     run:function(creep,lo,tower,s_c)
     {
+        creep.memory.lab=false;
         if (creep.memory.goal==-10||creep.memory.goal==undefined||Game.getObjectById(creep.memory.goal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
         creep.memory.goods=RESOURCE_ENERGY;

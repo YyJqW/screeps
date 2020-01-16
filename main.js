@@ -22,7 +22,7 @@ var CS = require('container sort');
 var lab = require('lab')
 var resultantnum = 10000;
 var reactant1 = RESOURCE_LEMERGIUM;
-var reactant2 = RESOURCE_OXIDE;
+var reactant2 = RESOURCE_OXYGEN;
 var LAB_SPAWN = 'Spawn2';
 var wartrriger = false;
 var tradegoods = RESOURCE_LEMERGIUM;
@@ -63,7 +63,7 @@ module.exports.loop = function () {
     war.run(Game.spawns[name]);
     }
     }
-    if (Game.spawns[name]==LAB_SPAWN)
+    if (Game.spawns[name].==LAB_SPAWN)
     lab.run(resultantnum,reactant1,reactant2,Game.spawns[name]);
     }
     TC.run(tower,m_c);
@@ -81,7 +81,7 @@ module.exports.loop = function () {
             creep.memory.trade = true;
             if (creep.memory.trade)
             trade.run(creep,tradegoods,goodsnum);
-            else if (creep.memory.done)
+            else if (!creep.memory.lab)
             roleTransport_i.run(creep,lo,tower,s_c);
          }
         if(creep.memory.role == 'transport') {
