@@ -38,6 +38,7 @@ var lab=
                 {
                 creep[0].memory.done = true;
                 creep[0].memory.lab = false;
+                creep[0].memory.goods = reactant1;
                 }
             }
             if (lab[1].store.getUsedCapacity(reactant1)>=2990)
@@ -65,6 +66,7 @@ var lab=
                 {
                 creep[0].memory.done = true;
                 creep[0].memory.lab = false;
+                creep[0].memory.goods = reactant2;
                 }
             }
             if (lab[2].store.getUsedCapacity(reactant2)>=2990)
