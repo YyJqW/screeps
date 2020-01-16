@@ -16,7 +16,7 @@ var lab=
         var lab = spawn.room.find(FIND_STRUCTURES,{
             filter: { structureType: STRUCTURE_LAB }
         });
-        if (creep[0].memory.trans&&lab[1].store.getFreeCapacity()>0)
+        if (creep[0].memory.trans&&lab[1].store.getFreeCapacity(reactant1)>0)
         {
             creep[0].memory.done = false;
             creep[0].memory.lab = true;
@@ -31,15 +31,14 @@ var lab=
                 creep[0].moveTo(lab[1]);
                 else if (creep[0].transfer(lab[1],reactant1)==OK)
                 {
-                creep[0].memory.trans = false;
                 creep[0].memory.done = true;
                 creep[0].memory.lab = false;
                 }
             }
-            if (lab[2].store.getFreeCapacity()==0)
+            if (lab[1].store.getFreeCapacity(reactant1)==0)
             creep[0].memory.trans = false;
         }
-        else if (lab[2].store.getFreeCapacity()>0)
+        else if (lab[2].store.getFreeCapacity(reactant2)>0)
         {
             creep[0].memory.done = false;
             creep[0].memory.lab = true;
@@ -58,7 +57,7 @@ var lab=
                 creep[0].memory.lab = false;
                 }
             }
-            if (lab[2].store.getFreeCapacity()==0)
+            if (lab[2].store.getFreeCapacity(reactant2)==0)
             creep[0].memory.trans = true;
         }
         if (lab[1].store.getUsedCapacity(reactant1)>0&&lab[2].store.getUsedCapacity(reactant2)>0)
