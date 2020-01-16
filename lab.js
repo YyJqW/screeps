@@ -18,44 +18,44 @@ var lab=
         var lab = spawn.room.find(FIND_STRUCTURES,{
             filter: { structureType: STRUCTURE_LAB }
         });
-        if (creep.memory.done)
+        if (creep[0].memory.done)
         {
-            creep.memory.done = false;
+            creep[0].memory.done = false;
         if (lab[1].store.getUsedCapacity(reactant1)<num)
         {
-            if (creep.store.getFreeCapacity()>0)
+            if (creep[0].store.getFreeCapacity()>0)
             {
-                creep.memory.lab = true;
-                if (creep.withdrwa(container1,reactant1)==ERR_NOT_IN_RANGE)
-                creep.moveTo(container1);
+                creep[0].memory.lab = true;
+                if (creep[0].withdrwa(container1,reactant1)==ERR_NOT_IN_RANGE)
+                creep[0].moveTo(container1);
             }
             else
             {
-                if (creep.transfer(lab[1],reactant1)==ERR_NOT_IN_RANGE)
-                creep.moveTo(lab[1]);
-                else if (creep.transfer(lab[1],reactant1)==OK)
+                if (creep[0].transfer(lab[1],reactant1)==ERR_NOT_IN_RANGE)
+                creep[0].moveTo(lab[1]);
+                else if (creep[0].transfer(lab[1],reactant1)==OK)
                 {
-                creep.memory.done = true;
-                creep.memory.lab = false;
+                creep[0].memory.done = true;
+                creep[0].memory.lab = false;
                 }
             }
         }
         else if (lab[2].store.getUsedCapacity(reactant2)<num)
         {
-            if (creep.store.getFreeCapacity()>0)
+            if (creep[0].store.getFreeCapacity()>0)
             {
-                creep.memory.lab = true;
-                if (creep.withdrwa(container2,reactant2)==ERR_NOT_IN_RANGE)
-                creep.moveTo(container2);
+                creep[0].memory.lab = true;
+                if (creep[0].withdrwa(container2,reactant2)==ERR_NOT_IN_RANGE)
+                creep[0].moveTo(container2);
             }
             else
             {
-                if (creep.transfer(lab[2],reactant2)==ERR_NOT_IN_RANGE)
-                creep.moveTo(lab[2]);
-                else if (creep.transfer(lab[2],reactant2)==OK)
+                if (creep[0].transfer(lab[2],reactant2)==ERR_NOT_IN_RANGE)
+                creep[0].moveTo(lab[2]);
+                else if (creep[0].transfer(lab[2],reactant2)==OK)
                 {
-                creep.memory.done = true;
-                creep.memory.lab = false;
+                creep[0].memory.done = true;
+                creep[0].memory.lab = false;
                 }
             }
         }

@@ -63,7 +63,7 @@ module.exports.loop = function () {
     war.run(Game.spawns[name]);
     }
     }
-    if (Game.spawns[name].==LAB_SPAWN)
+    if (Game.spawns[name].name==LAB_SPAWN)
     lab.run(resultantnum,reactant1,reactant2,Game.spawns[name]);
     }
     TC.run(tower,m_c);
