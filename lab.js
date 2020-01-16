@@ -29,7 +29,6 @@ var lab=
             }
             else
             {
-                console.log(creep[0].transfer(lab[1],reactant1));
                 if (creep[0].transfer(lab[1],reactant1)==ERR_NOT_IN_RANGE)
                 creep[0].moveTo(lab[1]);
                 else if (creep[0].transfer(lab[1],reactant1)==OK)

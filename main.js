@@ -26,8 +26,9 @@ var reactant1 = RESOURCE_LEMERGIUM;
 var reactant2 = RESOURCE_OXYGEN;
 var LAB_SPAWN = 'Spawn2';
 var wartrriger = false;
+var tradetrriger = false;
 var tradegoods = '';
-var goodsnum = 100000;
+var goodsnum = 0;
 module.exports.loop = function () {
     var lo=new Array();
     var tower = new Array();
@@ -80,7 +81,7 @@ module.exports.loop = function () {
             creep.memory.trade = false;
             if (creep.store.getUsedCapacity(tradegoods)>0)
             creep.memory.trade = true;
-            if (creep.memory.trade)
+            if (creep.memory.trade&&tradetrriger)
             trade.run(creep,tradegoods,goodsnum);
             else if (!creep.memory.lab)
             roleTransport_i.run(creep,lo,tower,s_c);
