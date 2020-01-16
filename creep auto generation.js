@@ -88,7 +88,7 @@ var CAG = {
             spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
             MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                 memory: {
-                    role: 'transport',home:spawn
+                    role: 'transport',home:spawn,lab:false,trans:true,done:true
                 }
             });//900
          //自动生成搬运工人
