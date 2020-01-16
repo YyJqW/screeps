@@ -35,7 +35,7 @@ var lab=
                 creep[0].memory.lab = false;
                 }
             }
-            if (lab[1].store.getFreeCapacity(reactant1)==0)
+            if (lab[1].store.getUsedCapacity()==3000)
             creep[0].memory.trans = false;
         }
         else if (lab[2].store.getFreeCapacity(reactant2)>0)
@@ -57,7 +57,7 @@ var lab=
                 creep[0].memory.lab = false;
                 }
             }
-            if (lab[2].store.getFreeCapacity(reactant2)==0)
+            if (lab[2].store.getUsedCapacity()==3000)
             creep[0].memory.trans = true;
         }
         if (lab[1].store.getUsedCapacity(reactant1)>0&&lab[2].store.getUsedCapacity(reactant2)>0)
