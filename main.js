@@ -83,10 +83,11 @@ module.exports.loop = function () {
             creep.memory.trade = true;
             if (creep.memory.trade&&tradetrriger)
             trade.run(creep,tradegoods,goodsnum);
-            else if (!creep.memory.lab)
+            else
             roleTransport_i.run(creep,lo,tower,s_c);
          }
         if(creep.memory.role == 'transport') {
+            if (!creep.memory.lab)
             roleTransport.run(creep,s_c);
         }
         if(creep.memory.role == 'transport_m')

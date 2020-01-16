@@ -2,9 +2,7 @@ var lab=
 {
     run:function(num,reactant1,reactant2,spawn,reaction)
     {
-        var creep = spawn.room.find(FIND_MY_CREEPS,{
-            filter:(cre)=> cre.memory.role == 'transport_i'
-        });
+        var creep = _.filter(Game.creeps, (creep) => creep.memory.role == 'transport');
         container1 = spawn.room.find(FIND_STRUCTURES,{
             filter:(struc)=> (struc.structureType == STRUCTURE_STORAGE||
             struc.structureType == STRUCTURE_TERMINAL) &&
