@@ -19,6 +19,11 @@ var CNC = require('CNC');
 var trade = require('trade');
 var GSBI = require('GetStructuresById');
 var CS = require('container sort');
+var lab = require('lab')
+var resultantnum = 10000;
+var reactant1 = RESOURCE_LEMERGIUM;
+var reactant2 = RESOURCE_OXIDE;
+var LAB_SPAWN = 'Spawn2';
 var wartrriger = false;
 var tradegoods = RESOURCE_LEMERGIUM;
 var goodsnum = 100000;
@@ -58,6 +63,8 @@ module.exports.loop = function () {
     war.run(Game.spawns[name]);
     }
     }
+    if (Game.spawns[name]==LAB_SPAWN)
+    lab.run(resultantnum,reactant1,reactant2,Game.spawns[name]);
     }
     TC.run(tower,m_c);
     LK.run(lo,li,lc);
@@ -68,11 +75,13 @@ module.exports.loop = function () {
             if(creep.memory.role == 'transport_i') {
             if (creep.memory.done&&Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>0&&Game.rooms[creep.memory.home.room.name].terminal.store.getUsedCapacity(tradegoods)<goodsnum||creep.store.getUsedCapacity(tradegoods)>0)
             creep.memory.trade = true;
-            else if (creep.store.getUsedCapacity(RESOURCE_ENERGY)>0||Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>=goodsnum)
+            if (creep.store.getUsedCapacity(RESOURCE_ENERGY)>0||Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>=goodsnum)
             creep.memory.trade = false;
+            if (creep.store.getUsedCapacity(tradegoods)>0)
+            creep.memory.trade = true;
             if (creep.memory.trade)
             trade.run(creep,tradegoods,goodsnum);
-            else
+            else if (creep.memory.done)
             roleTransport_i.run(creep,lo,tower,s_c);
          }
         if(creep.memory.role == 'transport') {
