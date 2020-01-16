@@ -5,7 +5,6 @@ var roleTransport_i =
     {
         if (creep.memory.goal==-10||creep.memory.goal==undefined||Game.getObjectById(creep.memory.goal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
-        console.log(11);
         creep.memory.goods=RESOURCE_ENERGY;
         var transmode = false;
         var tower_t=false;
