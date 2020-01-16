@@ -20,12 +20,13 @@ var trade = require('trade');
 var GSBI = require('GetStructuresById');
 var CS = require('container sort');
 var lab = require('lab')
-var resultantnum = 10000;
+var reaction = false;
+var resultantnum = 3000;
 var reactant1 = RESOURCE_LEMERGIUM;
 var reactant2 = RESOURCE_OXYGEN;
 var LAB_SPAWN = 'Spawn2';
 var wartrriger = false;
-var tradegoods = RESOURCE_LEMERGIUM;
+var tradegoods = '';
 var goodsnum = 100000;
 module.exports.loop = function () {
     var lo=new Array();
@@ -63,8 +64,8 @@ module.exports.loop = function () {
     war.run(Game.spawns[name]);
     }
     }
-    if (Game.spawns[name].name==LAB_SPAWN)
-    lab.run(resultantnum,reactant1,reactant2,Game.spawns[name]);
+    if (!reaction&&Game.spawns[name].name==LAB_SPAWN)
+    reaction=lab.run(resultantnum,reactant1,reactant2,Game.spawns[name]);
     }
     TC.run(tower,m_c);
     LK.run(lo,li,lc);
