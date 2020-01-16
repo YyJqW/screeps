@@ -47,6 +47,11 @@ var lab=
                 if (creep[0].withdraw(container2[0],reactant2)==ERR_NOT_IN_RANGE)
                 creep[0].moveTo(container2[0]);
             }
+            else if (creep[0].store.getUsedCapacity(reactant1)>0)
+            {
+                if (creep.transfer(container1,reactant1)==ERR_NOT_IN_RANGE)
+                creep.moveTo(container1);
+            }
             else
             {
                 if (creep[0].transfer(lab[2],reactant2)==ERR_NOT_IN_RANGE)
