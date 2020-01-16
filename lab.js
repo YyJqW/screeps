@@ -74,9 +74,9 @@ var lab=
         }
         if (lab[1].store.getUsedCapacity(reactant1)>0&&lab[2].store.getUsedCapacity(reactant2)>0)
         lab[0].runReaction(lab[1],lab[2]);
-        if (lab[0].store.getUsedCapacity()>=num||lab[0].store.getFreeCapacity()==0)
+        if (lab[2].store.getUsedCapacity(reactant2)>=2990&&lab[1].store.getUsedCapacity(reactant1)>=2990||lab[0].store.getUsedCapacity()>=num||lab[0].store.getFreeCapacity()==0)
         reaction = true;
-        if (lab[2].store.getUsedCapacity(reactant2)>=2990&&lab[1].store.getUsedCapacity(reactant1)>=2990||creep[0].store.getUsedCapacity(RESOURCE_ENERGY)>0)
+        if (creep[0].store.getUsedCapacity(RESOURCE_ENERGY)>0)
         creep[0].memory.lab = false;
     }
 }
