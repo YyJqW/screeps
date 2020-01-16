@@ -1,6 +1,6 @@
 var lab=
 {
-    run:function(num,reactant1,reactant2,spawn)
+    run:function(num,reactant1,reactant2,spawn,reaction)
     {
         var creep = spawn.room.find(FIND_MY_CREEPS,{
             filter:(cre)=> cre.memory.role == 'transport_i'
@@ -18,7 +18,7 @@ var lab=
         var lab = spawn.room.find(FIND_STRUCTURES,{
             filter: { structureType: STRUCTURE_LAB }
         });
-        if (lab[1].store.getUsedCapacity(reactant1)<num)
+        if (creep[0].memory.trans&&lab[1].store.getUsedCapacity(reactant1)<num)
         {
             creep[0].memory.done = false;
             creep[0].memory.lab = true;
@@ -33,12 +33,13 @@ var lab=
                 creep[0].moveTo(lab[1]);
                 else if (creep[0].transfer(lab[1],reactant1)==OK)
                 {
+                creep[0].memory.trans = false;
                 creep[0].memory.done = true;
                 creep[0].memory.lab = false;
                 }
             }
         }
-        else if (lab[2].store.getUsedCapacity(reactant2)<num)
+        else if (lab[2].store.getUsedCapacity()<num)
         {
             creep[0].memory.done = false;
             creep[0].memory.lab = true;
@@ -53,6 +54,7 @@ var lab=
                 creep[0].moveTo(lab[2]);
                 else if (creep[0].transfer(lab[2],reactant2)==OK)
                 {
+                creep[0].memory.trans = true;
                 creep[0].memory.done = true;
                 creep[0].memory.lab = false;
                 }
@@ -60,8 +62,10 @@ var lab=
         }
         if (lab[1].store.getUsedCapacity(reactant1)>0&&lab[2].store.getUsedCapacity(reactant2)>0)
         lab[0].runReaction(lab[1],lab[2]);
-        if (lab[0].store.getUsedCapacity()>=num)
-        return true;
+        if (lab[0].store.getUsedCapacity()>=num||lab[0].store.getFreeCapacity()==0)
+        reaction = true;
+        if (creep[0].store.getUsedCapacity(RESOURCE_ENERGY)>0)
+        creep[0].memory.lab = false;
     }
 }
 

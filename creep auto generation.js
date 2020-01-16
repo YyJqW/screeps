@@ -69,7 +69,7 @@ var CAG = {
         spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY
         ,MOVE,MOVE], newName, {
             memory: {
-                role: 'transport_i',home:spawn,done:true,trade:false,link:-10,goal:-10,lab:false
+                role: 'transport_i',home:spawn,done:true,trade:false,link:-10,goal:-10,lab:false,trans:true
             }
         });//300
         }

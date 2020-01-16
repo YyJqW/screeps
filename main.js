@@ -66,7 +66,7 @@ module.exports.loop = function () {
     }
     }
     if (!reaction&&Game.spawns[name].name==LAB_SPAWN)
-    reaction=lab.run(resultantnum,reactant1,reactant2,Game.spawns[name]);
+    lab.run(resultantnum,reactant1,reactant2,Game.spawns[name],reaction);
     }
     TC.run(tower,m_c);
     LK.run(lo,li,lc);
