@@ -13,20 +13,17 @@ var roleTransport_m ={
                 creep.moveTo(Game.getObjectById(creep.memory.target),{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
             }
 }
-else if (creep.room.storage!=undefined)
+else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
         {
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
             creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
         }
 else
         {
-            for (var name in s_c)
+            s_c.sort((a,b)=>b.store.getFreeCapacity()-a.store.getFreeCapacity());
+                if(s_c[0].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[0],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
-                if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
-            {
-                creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
-                break;
-            }//待修改
+                creep.moveTo(s_c[0],{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
             }
         }
     }
