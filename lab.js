@@ -16,6 +16,8 @@ var lab=
         var lab = spawn.room.find(FIND_STRUCTURES,{
             filter: { structureType: STRUCTURE_LAB }
         });
+        if(creep[0]!=undefined)
+        {
         if (creep[0].memory.trans&&lab[1].store.getFreeCapacity(reactant1)>0)
         {
             creep[0].memory.done = false;
@@ -72,6 +74,7 @@ var lab=
             if (lab[2].store.getUsedCapacity(reactant2)>=2990)
             creep[0].memory.trans = true;
         }
+    }
         if (lab[1].store.getUsedCapacity(reactant1)>0&&lab[2].store.getUsedCapacity(reactant2)>0)
         lab[0].runReaction(lab[1],lab[2]);
         if (lab[0].store.getUsedCapacity()>=num||lab[0].store.getFreeCapacity()==0)
