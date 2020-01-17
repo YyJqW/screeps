@@ -77,7 +77,7 @@ else if (tower_t&&creep.memory.done)
             creep.memory.goal = struc;
             creep.memory.done=false;
     }
-    else if (creep.memory.done&&transmode)
+    else if (creep.memory.done)
     {
         creep.memory.goal = storage_;
         creep.memory.done = false;
