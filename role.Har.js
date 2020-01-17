@@ -62,7 +62,12 @@ var roleHar = {
         } 
         else if(creep.store.getFreeCapacity()>0)
             {
-                if (creep.memory.container.store.getUsedCapacity()>0)
+                var dropped_source = creep.pos.findInRange(FIND_DROPPED_RESOURCES,1);
+                if (dropped_source[0]!=undefined)
+                {
+                    creep.pickup(dropped_source[0]);
+                }
+                else if (creep.memory.container.store.getUsedCapacity()>0)
                 {
                 creep.withdraw(creep.memory.container,RESOURCE_ENERGY);
                 }
