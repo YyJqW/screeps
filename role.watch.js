@@ -6,7 +6,7 @@ var roleWatch=
         var watchers = _.filter(Game.creeps, (creep) => creep.memory.role == 'watch');
         for (var name in watchers)
         {
-        watchers[name].moveTo(FLAG[name]);
+        watchers[name].moveTo(FLAG[name],{reusePath: 5});
         }
     }
 }

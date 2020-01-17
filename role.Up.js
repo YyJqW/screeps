@@ -20,7 +20,7 @@ var roleUp = {
                 if (target_link!=-1)
                 {
                     if(creep.withdraw(li[target_link],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
-                      creep.moveTo(li[target_link], {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
+                      creep.moveTo(li[target_link], {visualizePathStyle: {stroke: '#ffaa00'},reusePath: 5});//采矿
                     }
                 }
                 else
@@ -32,12 +32,12 @@ var roleUp = {
             {
                 if (creep.withdraw(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(storage_),{ visualizePathStyle: { stroke: '#FFFF00'}};
+                    creep.moveTo(storage_,{ visualizePathStyle: { stroke: '#FFFF00'},reusePath: 5});
                 }
             }
         }
             else if (creep.withdraw(s_c[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
-            creep.moveTo(s_c[0]),{ visualizePathStyle: { stroke: '#FFFF00'}};
+            creep.moveTo(s_c[0],{ visualizePathStyle: { stroke: '#FFFF00'},reusePath: 5});
         }
                 }
             }
