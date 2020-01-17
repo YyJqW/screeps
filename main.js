@@ -77,7 +77,7 @@ module.exports.loop = function () {
             if(creep.memory.role == 'transport_i') {
             if (creep.memory.done&&Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>0&&Game.rooms[creep.memory.home.room.name].terminal.store.getUsedCapacity(tradegoods)<goodsnum||creep.store.getUsedCapacity(tradegoods)>0)
             creep.memory.trade = true;
-            if (creep.store.getUsedCapacity(RESOURCE_ENERGY)>0||Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>=goodsnum)
+            if (creep.store.getUsedCapacity(RESOURCE_ENERGY)>0||Game.rooms[creep.memory.home.room.name].terminal.store.getUsedCapacity(tradegoods)>=goodsnum)
             creep.memory.trade = false;
             if (creep.store.getUsedCapacity(tradegoods)>0)
             creep.memory.trade = true;
