@@ -77,14 +77,14 @@ else if (tower_t&&creep.memory.done)
             creep.memory.goal = struc;
             creep.memory.done=false;
     }
-    else if (creep.memory.done)
-    {
-        creep.memory.goal = storage_;
-        creep.memory.done = false;
-    }
     else if (creep.memory.done&&terminal_.store.getUsedCapacity(RESOURCE_ENERGY)<70000)
     {
         creep.memory.goal = terminal_;
+        creep.memory.done = false;
+    }
+    else if (creep.memory.done)
+    {
+        creep.memory.goal = storage_;
         creep.memory.done = false;
     }
     creep.memory.goal = Game.getObjectById(creep.memory.goal.id);
