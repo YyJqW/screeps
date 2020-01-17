@@ -41,36 +41,33 @@ var roleTransport ={
         }
     }
 }
-        else if (tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].room.name==creep.room.name)
+        else if (creep.memory.done&&tower[0]!=undefined&&creep.memory.goods==RESOURCE_ENERGY&&tower[0].store.getUsedCapacity()<300)
         {
-            if (creep.transfer(tower[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(tower[0],{ visualizePathStyle: { stroke: '#FFD700'}});
-            else if (creep.transfer(tower[0],RESOURCE_ENERGY)==OK)
-            creep.memory.done = true;
+            creep.memory.goal = tower[0];
+            creep.memory.done = false;
         }
-        else if (creep.room.storage!=undefined)
+        else if (creep.room.storage!=undefined&&creep.memory.done)
         {
-            if (creep.room.storage.store.getFreeCapacity()>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
-            creep.moveTo(creep.room.storage);
-            else if (creep.transfer(creep.room.storage,creep.memory.goods)==OK)
-            creep.memory.done = true;
+            if (creep.room.storage.store.getFreeCapacity()>0)
+            creep.memory.goal=creep.room.storage;
+            creep.memory.done = false;
         }
-        else 
+        else if (creep.memory.done)
         {
-            for (var name in s_c)
+            s_c.sort((a,b)=>a.store.getUsedCapacity(creep.memory.goods)-b.store.getUsedCapacity(creep.memory.goods));
+                if(s_c[0].store.getFreeCapacity(creep.memory.goods)>0) //运输到仓库
             {
-                if(s_c[name].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[name],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
-            {
-                creep.moveTo(s_c[name],{ visualizePathStyle: { stroke: '#FFD700'}});
-                break;
-            }//待修改
-            else if (creep.transfer(s_c[name],creep.memory.goods)==OK)
-            {
-                creep.memory.done = true;
-                break;
-            }
+               creep.memory.goal = s_c[0];
+               creep.memory.done = false;
             }
         }
+        if (!creep.memory.done&&creep.memory.goal!=undefined&&creep.memory.goal!=-10)
+    {
+        if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==ERR_NOT_IN_RANGE)
+        creep.moveTo(Game.getObjectById(creep.memory.goal.id));
+        else if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==OK)
+        creep.memory.done = true;
+    }
     }
 };
 module.exports = roleTransport;
