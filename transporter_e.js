@@ -31,7 +31,6 @@ var roleTransport ={
                 if (!busy) break
             }
             creep.memory.target = m_c[check].id;
-            creep.memory.done = false;
             if (dropped_source!=null&&dropped_source.amount>=500&&creep.pickup(dropped_source)==ERR_NOT_IN_RANGE){
                 creep.memory.goods=dropped_source.resourceType;
             creep.moveTo(dropped_source, {visualizePathStyle: {stroke: '#FFD700'}});
