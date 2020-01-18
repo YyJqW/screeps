@@ -60,6 +60,9 @@ var roleTransport ={
                creep.memory.done = false;
             }
         }
+        creep.memory.goal = Game.getObjectById(creep.memory.goal.id);
+        if (Game.getObjectById(creep.memory.goal.id).store.getFreeCapacity()==0)
+        creep.memory.done = true;
         if (!creep.memory.done&&creep.memory.goal!=undefined&&creep.memory.goal!=-10)
     {
         if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==ERR_NOT_IN_RANGE)
