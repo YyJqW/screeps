@@ -118,7 +118,7 @@ var CAG = {
                var newName = 'U' + '['+spawn.name +']'+ Game.time;
                console.log('Spawning new uper: ' + newName);
                spawn.spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
-               WORK,WORK,WORK,
+               WORK,WORK,WORK,WORK,WORK,
                MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName, {
                    memory: {
                        role: 'up',home:spawn
