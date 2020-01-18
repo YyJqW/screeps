@@ -1,7 +1,7 @@
 var CS = require('container sort');
 var trade=
 {
-    run:function(creep,tradegoods,goodsnum)
+    run:function(creep,tradegoods)
     {
         var s_c=new Array()
         CS.run('storage',s_c);
