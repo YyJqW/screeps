@@ -4,8 +4,8 @@ var CNC=
     {
         if (creep.memory.renewN)
         {
+            if (Game.spawns[creep.memory.home.name].renewCreep(creep)==ERR_NOT_IN_RANGE)
             creep.moveTo(Game.spawns[creep.memory.home.name],{visualizePathStyle: { stroke: '#0000FF'},reusePath: 5});
-            Game.spawns[creep.memory.home.name].renewCreep(creep);
         }
         if (Game.spawns[creep.memory.home.name].store.getFreeCapacity(RESOURCE_ENERGY)>0&&creep.store.getUsedCapacity(RESOURCE_ENERGY)>0)
         {
