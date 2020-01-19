@@ -7,7 +7,7 @@ var factory=
             var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
                 filter: { structureType: STRUCTURE_FACTORY }
             });
-            var warehouse = creep.room.find(FIND_STRUCTURE,{
+            var warehouse = creep.room.find(FIND_STRUCTURES,{
                 filter:(stru)=>
                     stru.stuctureType == STRUCTURE_STORAGE ||
                     stru.stuctureType == STRUCTURE_TERMINAL&&
@@ -16,10 +16,10 @@ var factory=
             });
             if (creep.store.getFreeCapacity()>0)
             {
+                creep.memory.goods=tradegoods;
                 if (creep.withdraw(warehouse[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
                 creep.moveTo(warehouse[0],{reusePath: 10});
-                creep.memory.goods=tradegoods;
                 }
             }
             

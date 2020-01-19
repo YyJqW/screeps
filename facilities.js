@@ -13,7 +13,7 @@ var facilities=
         creep.memory.trade = true;
         if (Factory[0]!=undefined)
         {
-        if (creep.memory.done&&Factory[0].store.getUsedCapacity(factorygoods)>0&&Factory[0].store.getUsedCapacity(factorygoods)<goodsnum_f||creep.store.getUsedCapacity(tradegoods)>0)
+        if (creep.memory.done&&Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(factorygoods)>0&&Factory[0].store.getUsedCapacity(factorygoods)<goodsnum_f||creep.store.getUsedCapacity(tradegoods)>0)
         creep.memory.factory = true;
         if (creep.store.getUsedCapacity(RESOURCE_ENERGY)>0||Factory[0].store.getUsedCapacity(factorygoods)>=goodsnum_f||Factory[0].store.getFreeCapacity()==0)
         creep.memory.factory = false;
