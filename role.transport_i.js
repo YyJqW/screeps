@@ -85,7 +85,7 @@ else if (tower_t&&creep.memory.done)
         creep.memory.goal = terminal_;
         creep.memory.done = false;
     }
-    else if (creep.memory.done&&Factory[0]!=undefined&&Factory[0].store.getUsedCapacity(RESOURCE_ENERGY)<50000)
+    else if (creep.memory.done&&Factory[0]!=undefined&&Factory[0].store.getUsedCapacity(RESOURCE_ENERGY)<10000)
     {
         creep.memory.goal = Factory[0];
         creep.memory.done = false;

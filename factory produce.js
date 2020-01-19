@@ -8,7 +8,6 @@ var FP=
                 stru.store.getUsedCapacity(material)>0
             
         });
-                    console.log(Factory);
         if (Factory[0]!=undefined)
         Factory[0].produce(production);
     }
