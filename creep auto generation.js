@@ -48,8 +48,8 @@ var CAG = {
             }
         }
         }
-        console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
-        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length,'Guardian=',guardian.length,'TM= ',transporter_m.length);
+        /*console.log('H=',harvesters.length,' U=',upers.length,' T=',transporter.length,' B=',builders.length,' T_i=',transporter_i.length,
+        ' M=',miner.length,' Claim=',claimer.length,' oH=',harvesters_o.length,' OT=',transporter_o.length,'Guardian=',guardian.length,'TM= ',transporter_m.length);*/
         if (guardian.length<guardiannum) {
             var newName = 'guardian' + Game.time;
             console.log('Spawning new attacker: ' + newName);
