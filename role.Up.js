@@ -6,7 +6,7 @@ var roleUp = {
         s_c.sort((a,b)=>b.store.getUsedCapacity(RESOURCE_ENERGY)-a.store.getUsedCapacity(RESOURCE_ENERGY));
 	    if(creep.store.getUsedCapacity(RESOURCE_ENERGY)>0) {
             if(creep.upgradeController(Game.rooms[creep.memory.home.room.name].controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(Game.rooms[creep.memory.home.room.name].controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveTo(Game.rooms[creep.memory.home.room.name].controller, {visualizePathStyle: {stroke: '#ffffff'},reusePath: 5});
             }
         }
         else {
