@@ -12,5 +12,4 @@ var FP=
         Factory[0].produce(production);
     }
 }
-s
 module.exports = FP;
