@@ -89,14 +89,14 @@ module.exports.loop = function () {
     var creep = Game.creeps[name];
             if(creep.memory.role == 'transport_i') {
             roleTransport_i.run(creep,lo,tower,s_c);
+         }
+        if(creep.memory.role == 'transport') {
             if (factorytrriger||tradetrriger)
             facilities.run(creep,tradegoods,factorygoods,goodsnum_t,goodsnum_f);
             if (creep.memory.factory&&factorytrriger)
             factory.run(creep,factorygoods)
             else if (creep.memory.trade&&tradetrriger)
             trade.run(creep,tradegoods);
-         }
-        if(creep.memory.role == 'transport') {
             if (!creep.memory.lab)
             roleTransport.run(creep,s_c);
         }
