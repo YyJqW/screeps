@@ -17,14 +17,16 @@ var factory=
             if (creep.store.getFreeCapacity()>0)
             {
                 creep.memory.goods=tradegoods;
+                creep.memory.done = false;
                 if (creep.withdraw(warehouse[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
                 creep.moveTo(warehouse[0],{reusePath: 10});
                 }
             }
-            
             else if (creep.transfer(Factory[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 creep.moveTo(Factory[0],{reusePath: 10});
+            else if (creep.transfer(Factory[0],creep.memory.goods)==OK)
+            creep.memory.done = true;
         }
     }
 }
