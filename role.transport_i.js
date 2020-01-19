@@ -14,7 +14,6 @@ var roleTransport_i =
         var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_FACTORY }
         });
-        console.log(Factory[0]);
         tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_TOWER }
         });

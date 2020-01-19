@@ -2,10 +2,8 @@ var facilities=
 {
     run:function(creep,tradegoods,factorygoods,goodsnum_t,goodsnum_f)
     {
-        var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_STRUCTURES,{
-            filter:(stru)=>{
-                stru.stuctureType == STRUCTURE_FACTORY
-            }
+        var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
+            filter: { structureType: STRUCTURE_FACTORY }
         });
         if (creep.memory.done&&Game.rooms[creep.memory.home.room.name].storage.store.getUsedCapacity(tradegoods)>0&&Game.rooms[creep.memory.home.room.name].terminal.store.getUsedCapacity(tradegoods)<goodsnum_t||creep.store.getUsedCapacity(tradegoods)>0)
         creep.memory.trade = true;
