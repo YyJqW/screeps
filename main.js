@@ -32,12 +32,13 @@ var wartrriger = false;
 var tradetrriger = false;
 var tradegoods = RESOURCE_OXYGEN;
 var goodsnum_t = 0;
-var factorytrriger = true;
+var factorytrriger = false;
 var factorygoods = RESOURCE_ZYNTHIUM;
 var goodsnum_f = 30000;
 var production = RESOURCE_ZYNTHIUM_BAR;
 var material = RESOURCE_ZYNTHIUM;
-var MemoryClean = false;
+var MemoryClean = true;
+var labtrriger = false;
 module.exports.loop = function () {
     var lo=new Array();
     var tower = new Array();
@@ -76,7 +77,7 @@ module.exports.loop = function () {
     war.run(Game.spawns[name]);
     }
     }
-    if (!reaction&&Game.spawns[name].name==LAB_SPAWN)
+    if (labtrriger&&!reaction&&Game.spawns[name].name==LAB_SPAWN)
     lab.run(resultantnum,reactant1,reactant2,Game.spawns[name],reaction);
     FP.run(Game.spawns[name],production,material);
     }
@@ -133,7 +134,5 @@ module.exports.loop = function () {
         {
             roleClaim.run(creep);
         }
-        if (creep.ticksToLive==0)
-        delete Memory.creeps[creep.name];
     }
 }
