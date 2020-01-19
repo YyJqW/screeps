@@ -63,7 +63,7 @@ var roleTransport ={
         if (creep.memory.goal==-10)
         {
         creep.memory.goal = Game.getObjectById(creep.memory.goal.id);
-        if (creep.memory.goal.store.getFreeCapacity()==0)
+        if (creep.memory.goal!=null&&creep.memory.goal.store.getFreeCapacity()==0)
         creep.memory.done = true;
         }
         if (!creep.memory.done&&creep.memory.goal!=undefined&&creep.memory.goal!=-10)
