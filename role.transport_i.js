@@ -11,10 +11,8 @@ var roleTransport_i =
         var struc = FS_unfull.run(creep);
         var storage_ = Game.rooms[creep.memory.home.room.name].storage;
         var terminal_ = Game.rooms[creep.memory.home.room.name].terminal;
-        var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_STRUCTURES,{
-            filter:(stru)=>{
-                stru.stuctureType == STRUCTURE_FACTORY
-            }
+        var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
+            filter: { structureType: STRUCTURE_FACTORY }
         });
         console.log(Factory[0]);
         tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
