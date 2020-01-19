@@ -8,11 +8,11 @@ var factory=
                 filter: { structureType: STRUCTURE_FACTORY }
             });
             var warehouse = creep.room.find(FIND_STRUCTURE,{
-                filter:(stru)=>{
+                filter:(stru)=>
                     stru.stuctureType == STRUCTURE_STORAGE ||
                     stru.stuctureType == STRUCTURE_TERMINAL&&
                     stru.store.getUsedCapacity(tradegoods)>0
-                }
+                
             });
             if (creep.store.getFreeCapacity()>0)
             {
