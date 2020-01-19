@@ -105,6 +105,7 @@ else if (tower_t&&creep.memory.done)
     }
 }
     }
+    creep.memory.func = true;
 }
 };
 module.exports = roleTransport_i;
