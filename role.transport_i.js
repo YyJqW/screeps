@@ -11,6 +11,11 @@ var roleTransport_i =
         var struc = FS_unfull.run(creep);
         var storage_ = Game.rooms[creep.memory.home.room.name].storage;
         var terminal_ = Game.rooms[creep.memory.home.room.name].terminal;
+        var Factory = creep.room.find(FIND_STRUCTURE,{
+            filter:(stru)=>{
+                stru.stuctureType == STRUCTURE_FACTORY
+            }
+        });
         tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_TOWER }
         });
@@ -80,6 +85,11 @@ else if (tower_t&&creep.memory.done)
     else if (creep.memory.done&&terminal_.store.getUsedCapacity(RESOURCE_ENERGY)<70000)
     {
         creep.memory.goal = terminal_;
+        creep.memory.done = false;
+    }
+    else if (creep.memory.done&&Factory[0].store.getUsedCapacity(RESOURCE_ENERGY)<50000)
+    {
+        creep.memory.goal = Factory[0];
         creep.memory.done = false;
     }
     else if (creep.memory.done)
