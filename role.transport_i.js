@@ -42,7 +42,7 @@ var roleTransport_i =
             {
                 if (creep.withdraw(Game.getObjectById(creep.memory.link.id),RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(Game.getObjectById(creep.memory.link.id)),{ visualizePathStyle: { stroke: '#FFFF00'}};
+                    creep.moveTo(Game.getObjectById(creep.memory.link.id),{ visualizePathStyle: { stroke: '#FFFF00'},reusePath: 3});
                 }
             }
         }
@@ -56,11 +56,11 @@ var roleTransport_i =
             {
                 if (creep.withdraw(storage_,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
                 {
-                    creep.moveTo(storage_),{ visualizePathStyle: { stroke: '#FFFF00'}};
+                    creep.moveTo(storage_,{ visualizePathStyle: { stroke: '#FFFF00'},reusePath: 3});
                 }
             }
             else if (creep.withdraw(s_c[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
-            creep.moveTo(s_c[0]),{ visualizePathStyle: { stroke: '#FFFF00'}};
+            creep.moveTo(s_c[0],{ visualizePathStyle: { stroke: '#FFFF00'},reusePath: 3});
         }
         }
         else
@@ -99,7 +99,7 @@ else if (tower_t&&creep.memory.done)
     if (!creep.memory.done&&creep.memory.goal!=undefined&&creep.memory.goal!=-10)
     {
         if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==ERR_NOT_IN_RANGE)
-        creep.moveTo(Game.getObjectById(creep.memory.goal.id));
+        creep.moveTo(Game.getObjectById(creep.memory.goal.id),{reusePath: 3});
         else if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==OK)
         creep.memory.done = true;
     }

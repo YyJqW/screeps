@@ -18,13 +18,13 @@ var factory=
             {
                 if (creep.withdraw(warehouse[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
-                creep.moveTo(warehouse[0],{reusePath: 5});
+                creep.moveTo(warehouse[0],{reusePath: 10});
                 creep.memory.goods=tradegoods;
                 }
             }
             
             else if (creep.transfer(Factory[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
-                creep.moveTo(Factory[0],{reusePath: 5});
+                creep.moveTo(Factory[0],{reusePath: 10});
         }
     }
 }

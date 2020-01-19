@@ -28,7 +28,7 @@ var roleBuild =
             else 
             {
             if(creep.build(Game.getObjectById(important_target[name])) == ERR_NOT_IN_RANGE)
-            creep.moveTo(Game.getObjectById(important_target[name]), {visualizePathStyle: {stroke: '#ffffff'}});
+            creep.moveTo(Game.getObjectById(important_target[name]), {visualizePathStyle: {stroke: '#ffffff'},reusePath: 3});
             break;
             }
         }
@@ -48,7 +48,7 @@ var roleBuild =
             }
              if(targets.length) {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'},reusePath: 3});
                 }
             }
             else roleUp.run(creep,li,s_c);
@@ -58,19 +58,19 @@ var roleBuild =
 	        if (storage_!=undefined&&storage_.store.getUsedCapacity(RESOURCE_ENERGY))
 	        {
 	            if(creep.withdraw(storage_,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
-                      creep.moveTo(storage_, {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
+                      creep.moveTo(storage_, {visualizePathStyle: {stroke: '#ffaa00'},reusePath: 3});//采矿
                    }
 	        }
 	        else if (fcontainer!=undefined&&fcontainer.store.getUsedCapacity(RESOURCE_ENERGY)>400)
 	        {
 	            if(creep.withdraw(fcontainer,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
-                      creep.moveTo(fcontainer, {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
+                      creep.moveTo(fcontainer, {visualizePathStyle: {stroke: '#ffaa00'},reusePath: 3});//采矿
                    }
                 }
 
                 else if(s_c[0].store.getUsedCapacity(RESOURCE_ENERGY)>0){
                    if(creep.withdraw(s_c[0],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)   {
-                      creep.moveTo(s_c[0], {visualizePathStyle: {stroke: '#ffaa00'}});//采矿
+                      creep.moveTo(s_c[0], {visualizePathStyle: {stroke: '#ffaa00'},reusePath: 3});//采矿
                    }
                 }
             }

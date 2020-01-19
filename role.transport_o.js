@@ -41,7 +41,7 @@ var roleTransport_o ={
             creep.moveTo(dropped_source[0], {visualizePathStyle: {stroke: '#FFD700'}});
             }
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
-            creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'},reusePath: 5});
+            creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'},reusePath: 10});
     }
     console.log(creep,'at',creep.pos,'transportiing',Game.getObjectById(creep.memory.target).room.name);
 }
@@ -54,7 +54,7 @@ var roleTransport_o ={
             }
             var st = Game.getObjectById(creep.memory.backgoal.id);
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(st,creep.memory.goods)==ERR_NOT_IN_RANGE)
-            creep.moveTo(st,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
+            creep.moveTo(st,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 10});
             else if (creep.transfer(st,creep.memory.goods)==OK)
             creep.memory.done=true;
             console.log(creep,'at',creep.pos,'backing to ',creep.memory.backgoal.structureType,creep.memory.backgoal.room.name);
@@ -71,7 +71,7 @@ var roleTransport_o ={
             var sc = Game.getObjectById(creep.memory.backgoal.id);
                 if(creep.transfer(sc,creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
-                creep.moveTo(sc,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
+                creep.moveTo(sc,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 10});
             }//待修改
             else if (creep.transfer(sc,creep.memory.goods)==OK)
             creep.memory.done=true;
@@ -89,7 +89,7 @@ var roleTransport_o ={
             var tm = Game.getObjectById(creep.memory.backgoal.id);
              if(creep.transfer(tm,creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
-                creep.moveTo(tm,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
+                creep.moveTo(tm,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 10});
             }//待修改
             else if (creep.transfer(tm,creep.memory.goods)==OK)
             creep.memory.done=true;

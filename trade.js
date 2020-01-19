@@ -8,13 +8,13 @@ var trade=
             {
                 if (creep.withdraw(Game.rooms[creep.memory.home.room.name].storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
-                creep.moveTo(Game.rooms[creep.memory.home.room.name].storage,{reusePath: 5});
+                creep.moveTo(Game.rooms[creep.memory.home.room.name].storage,{reusePath: 10});
                 creep.memory.goods=tradegoods;
                 }
             }
             
             else if (creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==ERR_NOT_IN_RANGE)
-                creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal,{reusePath: 5});
+                creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal,{reusePath: 10});
         }
     }
 }

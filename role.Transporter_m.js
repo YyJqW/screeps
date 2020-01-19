@@ -10,20 +10,20 @@ var roleTransport_m ={
             if (mine_c[0]!=undefined)
             creep.memory.target=mine_c[0].id;
             if (creep.withdraw(Game.getObjectById(creep.memory.target),creep.memory.goods)==ERR_NOT_IN_RANGE){
-                creep.moveTo(Game.getObjectById(creep.memory.target),{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
+                creep.moveTo(Game.getObjectById(creep.memory.target),{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 10});
             }
 }
 else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
         {
             if (creep.room.storage.store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(creep.room.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
-            creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
+            creep.moveTo(creep.room.storage,{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 10});
         }
 else
         {
             s_c.sort((a,b)=>b.store.getFreeCapacity()-a.store.getFreeCapacity());
                 if(s_c[0].store.getFreeCapacity(creep.memory.goods)>0&&creep.transfer(s_c[0],creep.memory.goods)==ERR_NOT_IN_RANGE) //运输到仓库
             {
-                creep.moveTo(s_c[0],{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 5});
+                creep.moveTo(s_c[0],{ visualizePathStyle: { stroke: '#FFD700'},reusePath: 10});
             }
         }
     }

@@ -28,7 +28,7 @@ var roleHar = {
         {
                 creep.memory.container = closestcontainer;
         if (creep.pos.x!=closestcontainer.pos.x||creep.pos.y!=closestcontainer.pos.y)
-        creep.moveTo(closestcontainer,{ visualizePathStyle: { stroke: '#FFFFFF'},reusePath: 5});
+        creep.moveTo(closestcontainer,{ visualizePathStyle: { stroke: '#FFFFFF'},reusePath: 10});
         else {
             var sources = creep.pos.findClosestByRange(FIND_SOURCES);
             creep.harvest(sources);
@@ -57,7 +57,7 @@ var roleHar = {
             creep.moveTo(Contain, {
                 visualizePathStyle: {
                     stroke: '#ffaa00'
-                },reusePath: 5
+                },reusePath: 10
             }); //前往箱子
         } 
         else if(creep.store.getFreeCapacity()>0)

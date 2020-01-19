@@ -25,17 +25,17 @@ var lab=
             if (creep[0].store.getFreeCapacity()>0)
             {
                 if (creep[0].withdraw(container1[0],reactant1)==ERR_NOT_IN_RANGE)
-                creep[0].moveTo(container1[0]);
+                creep[0].moveTo(container1[0],{reusePath: 3});
             }
             else if (creep[0].store.getUsedCapacity(reactant2)>0)
             {
                 if (creep[0].transfer(container2[0],reactant2)==ERR_NOT_IN_RANGE)
-                creep[0].moveTo(container2[0]);
+                creep[0].moveTo(container2[0],{reusePath: 3});
             }
             else
             {
                 if (creep[0].transfer(lab[1],reactant1)==ERR_NOT_IN_RANGE)
-                creep[0].moveTo(lab[1]);
+                creep[0].moveTo(lab[1],{reusePath: 3});
                 else if (creep[0].transfer(lab[1],reactant1)==OK)
                 {
                 creep[0].memory.done = true;
@@ -53,17 +53,17 @@ var lab=
             if (creep[0].store.getFreeCapacity()>0)
             {
                 if (creep[0].withdraw(container2[0],reactant2)==ERR_NOT_IN_RANGE)
-                creep[0].moveTo(container2[0]);
+                creep[0].moveTo(container2[0],{reusePath: 3});
             }
             else if (creep[0].store.getUsedCapacity(reactant1)>0)
             {
                 if (creep[0].transfer(container1[0],reactant1)==ERR_NOT_IN_RANGE)
-                creep[0].moveTo(container1[0]);
+                creep[0].moveTo(container1[0],{reusePath: 3});
             }
             else
             {
                 if (creep[0].transfer(lab[2],reactant2)==ERR_NOT_IN_RANGE)
-                creep[0].moveTo(lab[2]);
+                creep[0].moveTo(lab[2],{reusePath: 3});
                 else if (creep[0].transfer(lab[2],reactant2)==OK)
                 {
                 creep[0].memory.done = true;

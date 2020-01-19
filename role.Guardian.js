@@ -73,7 +73,7 @@ var roleGuard=
             else if (creep.memory.target!=-10)
             {
                 var location = Game.rooms[creep.memory.target.roomName].getPositionAt(creep.memory.target.x,creep.memory.target.y);
-                creep.moveTo(location,{ visualizePathStyle: { stroke: '#FF0000'},reusePath: 5});
+                creep.moveTo(location,{ visualizePathStyle: { stroke: '#FF0000'},reusePath: 10});
                 console.log('guardian',creep,'moving to',location);
                 if (creep.pos.x==location.x&&creep.pos.y==location.y) creep.memory.target=-10;
             }

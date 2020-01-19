@@ -47,7 +47,7 @@ var roleOHar = {
         if (creep.store.getFreeCapacity()>0)
         {
              if (creep.harvest(creep.memory.target)==ERR_NOT_IN_RANGE)
-            creep.moveTo(creep.memory.target,{ visualizePathStyle: { stroke: '#FFFFFF'},reusePath: 5});
+            creep.moveTo(creep.memory.target,{ visualizePathStyle: { stroke: '#FFFFFF'},reusePath: 10});
         }
         else if (constructionSite_[0]!=undefined)
         {
@@ -62,7 +62,7 @@ var roleOHar = {
             {
             container.sort((a,b)=>a.store.getUsedCapacity(RESOURCE_ENERGY)-b.store.getUsedCapacity(RESOURCE_ENERGY));
             if(creep.transfer(container[0],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE)
-            creep.moveTo(container[0],{ visualizePathStyle: { stroke: '#FFFFFF'},reusePath: 5});
+            creep.moveTo(container[0],{ visualizePathStyle: { stroke: '#FFFFFF'},reusePath: 10});
             }
         }
         if (road[0]!=undefined&&road[0].hits<road[0].hitsMax)
