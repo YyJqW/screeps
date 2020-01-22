@@ -24,8 +24,9 @@ var factory=
             }
             else if (creep.transfer(Factory[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 creep.moveTo(Factory[0],{reusePath: 10});
+            else if (creep.transfer(Factory[0],creep.memory.goods)==OK)
+            creep.memory.func = false;
         }
-        creep.memory.func = false;
     }
 }
 

@@ -1,8 +1,14 @@
 var FS_unfull = require('findstructure_energy_unfull');
 var roleTransport_i =
 {
-    run:function(creep,lo,tower,s_c)
+    run:function(creep,lo,tower,s_c,factorytrriger,tradetrriger,tradegoods,factorygoods,goodsnum_t,goodsnum_f)
     {
+        if (factorytrriger||tradetrriger)
+            facilities.run(creep,tradegoods,factorygoods,goodsnum_t,goodsnum_f);
+            if (creep.memory.factory&&factorytrriger&&creep.memory.func)
+            factory.run(creep,factorygoods)
+            else if (creep.memory.trade&&tradetrriger&&creep.memory.func)
+            trade.run(creep,tradegoods);
         if (creep.memory.goal==-10||creep.memory.goal==undefined||Game.getObjectById(creep.memory.goal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
         creep.memory.goods=RESOURCE_ENERGY;

@@ -15,8 +15,9 @@ var trade=
             
             else if (creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==ERR_NOT_IN_RANGE)
                 creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal,{reusePath: 10});
+            else if(creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==OK)
+            creep.memory.func = false;
         }
-        creep.memory.func = false;
     }
 }
 
