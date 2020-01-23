@@ -12,6 +12,8 @@ var roleTransport_i =
             factory.run(creep,factorygoods)
             else if (creep.memory.trade&&tradetrriger&&creep.memory.func)
             trade.run(creep,tradegoods);
+            else
+            {
         if (creep.memory.goal==-10||creep.memory.goal==undefined||Game.getObjectById(creep.memory.goal.id).store.getFreeCapacity()==0)
         creep.memory.done = true;
         creep.memory.goods=RESOURCE_ENERGY;
@@ -117,6 +119,7 @@ else if (tower_t&&creep.memory.done)
     }
 }
     }
+}
 }
 };
 module.exports = roleTransport_i;
