@@ -4,7 +4,7 @@ var FP=
     {
         var Factory = spawn.room.find(FIND_STRUCTURES,{
             filter:(stru)=>
-                stru.stuctureType == STRUCTURE_FACTORY&&
+                stru.structureType == STRUCTURE_FACTORY&&
                 stru.store.getUsedCapacity(material)>0
             
         });
