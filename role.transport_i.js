@@ -1,4 +1,7 @@
 var FS_unfull = require('findstructure_energy_unfull');
+var factory = require('factory');
+var facilities = require('facilities');
+var trade = require('trade');
 var roleTransport_i =
 {
     run:function(creep,lo,tower,s_c,factorytrriger,tradetrriger,tradegoods,factorygoods,goodsnum_t,goodsnum_f)
