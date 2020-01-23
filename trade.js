@@ -6,15 +6,23 @@ var trade=
         {
             if (creep.store.getFreeCapacity()>0)
             {
+                var warehouse = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
+                    filter:(stru)=>
+                        stru.structureType==STRUCTURE_STORAGE ||
+                        stru.structureType==STRUCTURE_TERMINAL||
+                        stru.structureType==STRUCTURE_FACTORY&&
+                        stru.store.getUsedCapacity(tradegoods)>0
+                    
+                });
                 creep.memory.goods=tradegoods;
-                if (creep.withdraw(Game.rooms[creep.memory.home.room.name].storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
+                if (creep.withdraw(warehouse.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
-                creep.moveTo(Game.rooms[creep.memory.home.room.name].storage,{reusePath: 10});
+                creep.moveTo(warehouse,{reusePath: 3});
                 }
             }
             
             else if (creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==ERR_NOT_IN_RANGE)
-                creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal,{reusePath: 10});
+                creep.moveTo(Game.rooms[creep.memory.home.room.name].terminal,{reusePath: 3});
             else if(creep.transfer(Game.rooms[creep.memory.home.room.name].terminal,creep.memory.goods)==OK)
             creep.memory.func = false;
         }
