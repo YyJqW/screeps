@@ -7,10 +7,10 @@ var factory=
             var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
                 filter: { structureType: STRUCTURE_FACTORY }
             });
-            var warehouse = creep.room.find(FIND_STRUCTURES,{
+            var warehouse = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
                 filter:(stru)=>
-                    stru.stuctureType == STRUCTURE_STORAGE ||
-                    stru.stuctureType == STRUCTURE_TERMINAL&&
+                    stru.structureType==STRUCTURE_STORAGE ||
+                    stru.structureType==STRUCTURE_TERMINAL&&
                     stru.store.getUsedCapacity(tradegoods)>0
                 
             });
