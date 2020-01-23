@@ -4,10 +4,10 @@ var facilities = require('facilities');
 var trade = require('trade');
 var roleTransport_i =
 {
-    run:function(creep,lo,tower,s_c,factorytrriger,tradetrriger,tradegoods,factorygoods,goodsnum_t,goodsnum_f)
+    run:function(creep,lo,tower,s_c,factorytrriger,tradetrriger,tradegoods,factorygoods,goodsnum_t,goodsnum_f,production)
     {
         if (factorytrriger||tradetrriger)
-            facilities.run(creep,tradegoods,factorygoods,goodsnum_t,goodsnum_f);
+            facilities.run(creep,tradegoods,factorygoods,goodsnum_t,goodsnum_f,production);
             if (creep.memory.factory&&factorytrriger&&creep.memory.func)
             factory.run(creep,factorygoods)
             else if (creep.memory.trade&&tradetrriger&&creep.memory.func)

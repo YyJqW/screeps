@@ -16,12 +16,9 @@ var roleTransport_m = require('role.Transporter_m');
 var NS = require('new spawn');
 var war = require('war');
 var CNC = require('CNC');
-var trade = require('trade');
 var GSBI = require('GetStructuresById');
 var CS = require('container sort');
 var lab = require('lab');
-var factory = require('factory');
-var facilities = require('facilities');
 var FP = require('factory produce');
 var reaction = false;
 var resultantnum = 3000;
@@ -88,7 +85,7 @@ module.exports.loop = function () {
     {
     var creep = Game.creeps[name];
             if(creep.memory.role == 'transport_i') {
-            roleTransport_i.run(creep,lo,tower,s_c,factorytrriger,tradetrriger,tradegoods,factorygoods,goodsnum_t,goodsnum_f);
+            roleTransport_i.run(creep,lo,tower,s_c,factorytrriger,tradetrriger,tradegoods,factorygoods,goodsnum_t,goodsnum_f,production);
          }
         if(creep.memory.role == 'transport') {
             if (!creep.memory.lab)
