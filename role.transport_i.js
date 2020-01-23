@@ -107,11 +107,13 @@ else if (tower_t&&creep.memory.done)
         if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==ERR_NOT_IN_RANGE)
         creep.moveTo(Game.getObjectById(creep.memory.goal.id),{reusePath: 3});
         else if (creep.transfer(Game.getObjectById(creep.memory.goal.id),creep.memory.goods)==OK)
+        {
         creep.memory.done = true;
+        creep.memory.func = true;
+        }
     }
 }
     }
-    creep.memory.func = true;
 }
 };
 module.exports = roleTransport_i;
