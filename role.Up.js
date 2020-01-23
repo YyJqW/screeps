@@ -41,6 +41,7 @@ var roleUp = {
         }
                 }
             }
+        creep.signController(Game.rooms[creep.memory.home.room.name].controller,'Dont be rude,we will be good neighbor.Have auto hostile creep search.Avoiding this room if u are not hostile');
         }
 };
 
