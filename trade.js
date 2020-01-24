@@ -8,12 +8,13 @@ var trade=
             {
                 var warehouse = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
                     filter:(stru)=>
-                        stru.structureType==STRUCTURE_STORAGE ||
+                        (stru.structureType==STRUCTURE_STORAGE ||
                         stru.structureType==STRUCTURE_TERMINAL||
-                        stru.structureType==STRUCTURE_FACTORY&&
+                        stru.structureType==STRUCTURE_FACTORY)&&
                         stru.store.getUsedCapacity(tradegoods)>0
                     
                 });
+                console.log(warehouse);
                 creep.memory.goods=tradegoods;
                 if (creep.withdraw(warehouse[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
