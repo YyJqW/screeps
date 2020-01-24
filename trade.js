@@ -15,9 +15,9 @@ var trade=
                     
                 });
                 creep.memory.goods=tradegoods;
-                if (creep.withdraw(warehouse.storage,creep.memory.goods)==ERR_NOT_IN_RANGE)
+                if (creep.withdraw(warehouse[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {
-                creep.moveTo(warehouse,{reusePath: 3});
+                creep.moveTo(warehouse[0],{reusePath: 3});
                 }
             }
             
