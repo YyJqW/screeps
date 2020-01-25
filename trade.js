@@ -13,7 +13,6 @@ var trade=
                         stru.store.getUsedCapacity(tradegoods)>0
                     
                 });
-                console.log(warehouse);
                 creep.memory.goods=tradegoods;
                 if (creep.withdraw(warehouse[0],creep.memory.goods)==ERR_NOT_IN_RANGE)
                 {

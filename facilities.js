@@ -5,7 +5,6 @@ var facilities=
         var warehouse = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter:(stru)=>
                 (stru.structureType==STRUCTURE_STORAGE ||
-                stru.structureType==STRUCTURE_TERMINAL||
                 stru.structureType==STRUCTURE_FACTORY)&&
                 stru.store.getUsedCapacity(tradegoods)>0
             
