@@ -20,6 +20,7 @@ var GSBI = require('GetStructuresById');
 var CS = require('container sort');
 var lab = require('lab');
 var FP = require('factory produce');
+var AT = require('auto trade');
 var reaction = false;
 var resultantnum = 3000;
 var reactant1 = RESOURCE_LEMERGIUM;
@@ -34,6 +35,8 @@ var factorygoods = RESOURCE_ZYNTHIUM;
 var goodsnum_f = 0;
 var production = RESOURCE_ZYNTHIUM_BAR;
 var material = RESOURCE_ZYNTHIUM;
+var tradegoods_AT = RESOURCE_OXYGEN;
+var Price = 0.033;
 var MemoryClean = true;
 var labtrriger = false;
 module.exports.loop = function () {
@@ -77,6 +80,7 @@ module.exports.loop = function () {
     if (labtrriger&&!reaction&&Game.spawns[name].name==LAB_SPAWN)
     lab.run(resultantnum,reactant1,reactant2,Game.spawns[name],reaction);
     FP.run(Game.spawns[name],production,material);
+    AT.run(Game.spawns[name],tradegoods_AT,Price);
     }
     TC.run(tower,m_c);
     LK.run(lo,li,lc);
