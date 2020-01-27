@@ -15,6 +15,6 @@ var AT=
             }
         }
     }
-}
+};
 
 module.exports = AT;

@@ -26,6 +26,6 @@ var trade=
             creep.memory.func = false;
         }
     }
-}
+};
 
 module.exports = trade;

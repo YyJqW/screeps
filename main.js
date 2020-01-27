@@ -37,6 +37,7 @@ var production = RESOURCE_ZYNTHIUM_BAR;
 var material = RESOURCE_ZYNTHIUM;
 var tradegoods_AT = RESOURCE_OXYGEN;
 var Price = 0.033;
+var ATtrriger = true;
 var MemoryClean = true;
 var labtrriger = false;
 module.exports.loop = function () {
@@ -80,6 +81,7 @@ module.exports.loop = function () {
     if (labtrriger&&!reaction&&Game.spawns[name].name==LAB_SPAWN)
     lab.run(resultantnum,reactant1,reactant2,Game.spawns[name],reaction);
     FP.run(Game.spawns[name],production,material);
+    if (ATtrriger)
     AT.run(Game.spawns[name],tradegoods_AT,Price);
     }
     TC.run(tower,m_c);
