@@ -9,7 +9,10 @@ var AT=
         {
             var terminal = spawn.room.terminal;
             if (terminal.store.getUsedCapacity(tradegoods_AT)>=order[0].amount&&terminal.cooldown==0)
+            {
             Game.market.deal(order[0].id,order[0].amount,spawn.room.name);
+            console.log('auto trade',order[0].amount,order[0].resourceType,'gained credit',order[0].amount*order[0].price);
+            }
         }
     }
 }
