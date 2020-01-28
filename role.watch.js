@@ -1,4 +1,4 @@
-var FLAG = [Game.flags.Watch1,Game.flags.Watch2,Game.flags.Watch3];
+var FLAG = [Game.flags.Watch1,Game.flags.Watch2];
 var roleWatch=
 {
     run:function()
