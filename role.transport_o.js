@@ -34,6 +34,7 @@ var roleTransport_o ={
                 if (!busy) {check=name;break;}
                 }
             }
+            if (m_c[check]!=undefined)
             creep.memory.target = m_c[check].id;
             if (dropped_source[0]!=undefined&&dropped_source[0].amount>=1000){
                 creep.memory.goods=dropped_source.resourceType;
@@ -43,6 +44,7 @@ var roleTransport_o ={
            else if (creep.withdraw(m_c[check],RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
             creep.moveTo(m_c[check],{visualizePathStyle: { stroke: '#0000FF'},reusePath: 5});
     }
+    if (Game.getObjectById(creep.memory.target)!=null)
     console.log(creep,'at',creep.pos,'transportiing',Game.getObjectById(creep.memory.target).room.name);
 }
         else if (creep.room.storage!=undefined&&creep.room.storage.store.getFreeCapacity()>0)
