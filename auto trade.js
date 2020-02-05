@@ -4,7 +4,8 @@ var AT=
     {
         var order = Game.market.getAllOrders(o=>o.type==ORDER_BUY&&
             o.resourceType==tradegoods_AT&&
-            o.price>=Price);
+            o.price>=Price&&
+            o.amount>0);
         if (order[0]!=undefined)
         {
             var terminal = spawn.room.terminal;
