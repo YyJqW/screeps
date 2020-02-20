@@ -4,7 +4,7 @@ var miner_container_o = [
 '5e304b7900ecb4c41257e82a','5e304f9877034e80dd9bd345','5e30618a5f7370504a700552','5e306de2fee5cc43b29e763a','5e30fa74b69a55eeeaa9dc4c',
 '5e304b873561283576aa0301','5e305fc54ef265627d6ec037','5e30675708309985402e7315','5e307534e5a31b98304c7f03','5e306dbffee5cc16489e761c'];
 var storage_container = ['5dcd01d5fbe41e2919f2de3c','5dd14b4d8b1d9b586a08b4e6','5de2c45198f152653b03e0c9','5e000e2bca55d7509867bac7','5e0f52ba29303d2a68445395'];
-var mineral_container = ['5dde4a3d26efdb785b8cef38','5dde676abca74326c19ee604','5df1d6e37cdbdb534abff006','5e1ddf5a2d333a9a7e742658','5e0ef23fd8f1f2c24b5d3aed'];
+var mineral_container = ['5dde4a3d26efdb785b8cef38','5dde676abca74326c19ee604','5df1d6e37cdbdb534abff006','5e1ddf5a2d333a9a7e742658','5e4eb2fbdfffdf3a260bc4b4'];
 var miner_container_unlinked = ['5e00a8c3fb940e97e46bfd08'];
 var CS=
 {
