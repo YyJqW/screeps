@@ -1,6 +1,6 @@
 var important_target = [];
 var myrooms = ['E22S38','E21S38','E23S39','E22S37','E22S36','E22S39','E21S37'];
-var fcontainerID = '5dfc508bd705e4988589d3af';
+var fcontainerID = '';
 var roleUp = require('role.Up');
 var CS = require('container sort');
 var roleBuild =

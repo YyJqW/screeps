@@ -1,9 +1,9 @@
 var CS = require('container sort');
 var Harnum = 7;
 var Transnum_m = 1;
-var Transnum = 1;
+var Transnum = 0;
 var Upnum = 1;
-var buildnum = 1;
+var buildnum = 2;
 var Transnum_i = 1;
 var Minernum = 1;
 var Harnum_o =3;
