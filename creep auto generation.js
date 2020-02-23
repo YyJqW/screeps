@@ -209,7 +209,7 @@ var CAG = {
         var spawn_p=Game.rooms[spawn.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_POWER_SPAWN }
         });
-        if (spawn_p[0]!=undefined&&spawn_p[0].getUsedCapacity(RESOURCE_ENERGY)>0)
+        if (spawn_p[0]!=undefined&&spawn_p[0].store.getUsedCapacity(RESOURCE_ENERGY)>0)
         spawn_p[0].processPower();
     }
 };
