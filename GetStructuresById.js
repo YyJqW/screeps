@@ -10,7 +10,7 @@ var towers = ['5dcb80c9b272c27f9ad4889f','5dce10c0080252ca761c99b2','5dd0be2aa85
 '5dfe41609f4c7d93393cff05','5dfe084edc7f996ea0e365f9','5e034b5fd705e495bf8c8e3b','5e0e1f9f48a65b00882824bd','5e129611ea8896835b84e99e','5e14c2cffb142056bc7c70d4'];
 var GSBI=
 {
-    run :function(lo,li,lc,tower,)
+    run :function(lo,li,lc,tower)
     {
         for (var name in link_o)
             {lo[name]=Game.getObjectById(link_o[name]);}

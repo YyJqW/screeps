@@ -3,7 +3,7 @@ var Harnum = 7;
 var Transnum_m = 1;
 var Transnum = 0;
 var Upnum = 1;
-var buildnum = 2;
+var buildnum = 1;
 var Transnum_i = 1;
 var Minernum = 1;
 var Harnum_o =3;
@@ -206,6 +206,11 @@ var CAG = {
             }
         }
         }
+        var spawn_p=Game.rooms[spawn.room.name].find(FIND_MY_STRUCTURES,{
+            filter: { structureType: STRUCTURE_POWER_SPAWN }
+        });
+        if (spawn_p[0]!=undefined&&spawn_p[0].getUsedCapacity(RESOURCE_ENERGY)>0)
+        spawn_p[0].processPower();
     }
 };
 module.exports = CAG;

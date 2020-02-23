@@ -25,6 +25,12 @@ var roleTransport_i =
         var Factory = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_FACTORY }
         });
+        var spawn_p=Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
+            filter: { structureType: STRUCTURE_POWER_SPAWN }
+        });
+        var nuke = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
+            filter: { structureType: STRUCTURE_NUKER }
+        });
         tower = Game.rooms[creep.memory.home.room.name].find(FIND_MY_STRUCTURES,{
             filter: { structureType: STRUCTURE_TOWER }
         });
@@ -96,9 +102,19 @@ else if (tower_t&&creep.memory.done)
         creep.memory.goal = terminal_;
         creep.memory.done = false;
     }
+    else if (creep.memory.done&&spawn_p[0]!=undefined&&Factory[0].store.getFreeCapacity(RESOURCE_ENERGY)>0)
+    {
+        creep.memory.goal = spawn_p[0];
+        creep.memory.done = false;
+    }
     else if (creep.memory.done&&Factory[0]!=undefined&&Factory[0].store.getUsedCapacity(RESOURCE_ENERGY)<10000)
     {
         creep.memory.goal = Factory[0];
+        creep.memory.done = false;
+    }
+    else if (creep.memory.done&&nuke[0]!=undefined&&nuke[0].store.getFreeCapacity(RESOURCE_ENERGY)>0)
+    {
+        creep.memory.goal = nuke[0];
         creep.memory.done = false;
     }
     else if (creep.memory.done)
